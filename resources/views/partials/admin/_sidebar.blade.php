@@ -1,0 +1,28 @@
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-logo">AK</div>
+        <div>
+            <div class="sidebar-title">Alpha Kids Football</div>
+            <div class="sidebar-subtitle">Quản trị website</div>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="{{ route('admin.dashboard') }}"
+            class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+            Tổng quan
+        </a>
+        <a href="{{ route('admin.branch.index') }}"
+            class="nav-item {{ request()->routeIs('admin.branch.*') ? 'active' : '' }}">
+            Hệ thống cơ sở
+        </a>
+        <a href="{{ route('admin.registration.index') }}"
+            class="nav-item {{ request()->routeIs('admin.registration.*') ? 'active' : '' }}">
+            Đăng ký học thử
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        Đăng nhập: {{ auth('admin')->user()->email ?? '—' }}
+    </div>
+</aside>
