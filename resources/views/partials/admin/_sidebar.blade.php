@@ -23,6 +23,6 @@
     </nav>
 
     <div class="sidebar-footer">
-        Đăng nhập: {{ auth('admin')->user()->email ?? '—' }}
+        Đăng nhập: admin@alphakidsfootball.vn
     </div>
 </aside>
