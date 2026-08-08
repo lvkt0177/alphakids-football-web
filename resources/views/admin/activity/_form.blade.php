@@ -69,6 +69,7 @@
         </div>
 
         <div class="field">
+            <input type="hidden" name="is_featured" value="0">
             <label style="display:flex;align-items:center;gap:8px;font-weight:400;">
                 <input type="checkbox" name="is_featured" value="1" style="width:auto;"
                     {{ old('is_featured', $activity->is_featured) ? 'checked' : '' }}>
@@ -77,6 +78,7 @@
         </div>
 
         <div class="field">
+            <input type="hidden" name="is_active" value="0">
             <label style="display:flex;align-items:center;gap:8px;font-weight:400;">
                 <input type="checkbox" name="is_active" value="1" style="width:auto;"
                     {{ old('is_active', $activity->is_active ?? true) ? 'checked' : '' }}>

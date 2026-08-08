@@ -81,6 +81,7 @@
         </div>
 
         <div class="field">
+            <input type="hidden" name="is_active" value="0">
             <label style="display:flex;align-items:center;gap:8px;font-weight:400;">
                 <input type="checkbox" name="is_active" value="1" style="width:auto;"
                     {{ old('is_active', $branch->is_active ?? true) ? 'checked' : '' }}>
