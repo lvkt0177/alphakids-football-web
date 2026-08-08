@@ -16,6 +16,10 @@
             class="nav-item {{ request()->routeIs('admin.branch.*') ? 'active' : '' }}">
             Hệ thống cơ sở
         </a>
+        <a href="{{ route('admin.activity.index') }}"
+            class="nav-item {{ request()->routeIs('admin.activity.*') ? 'active' : '' }}">
+            Hoạt động & Sự kiện
+        </a>
         <a href="{{ route('admin.registration.index') }}"
             class="nav-item {{ request()->routeIs('admin.registration.*') ? 'active' : '' }}">
             Đăng ký học thử
