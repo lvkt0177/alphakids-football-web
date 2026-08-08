@@ -17,7 +17,7 @@ class VideoSettingRequest extends FormRequest
         return [
             'video_mode' => ['required', Rule::in(['youtube', 'upload'])],
             'video_youtube_url' => ['nullable', 'url'],
-            'video_file' => ['nullable', 'file', 'mimetypes:video/mp4', 'max:204800'],
+            'video_file' => ['nullable', 'file', 'mimetypes:video/mp4', 'max:307200'],
         ];
     }
 
@@ -26,7 +26,7 @@ class VideoSettingRequest extends FormRequest
         return [
             'video_youtube_url.url' => 'Link YouTube không hợp lệ.',
             'video_file.mimetypes' => 'File video phải là định dạng MP4.',
-            'video_file.max' => 'File video không được vượt quá 200MB.',
+            'video_file.max' => 'File video không được vượt quá 300MB.',
         ];
     }
 }

@@ -9,6 +9,9 @@ Route::prefix('setting')->name('setting.')->group(function () {
     Route::post('/home/video', [SettingController::class, 'updateVideo'])->name('home.video.update');
     Route::post('/home/activities', [SettingController::class, 'updateFeaturedActivities'])->name('home.activities.update');
 
+    Route::get('/other-pages', [SettingController::class, 'otherPages'])->name('other-pages');
+    Route::post('/other-pages/images', [SettingController::class, 'updateImages'])->name('other-pages.images.update');
+
     Route::get('/general', [SettingController::class, 'general'])->name('general');
     Route::post('/general', [SettingController::class, 'updateGeneral'])->name('general.update');
 });

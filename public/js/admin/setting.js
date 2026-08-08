@@ -15,3 +15,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.image-card input[type=file]').forEach(function (input) {
+        input.addEventListener('change', function () {
+            const file = input.files && input.files[0];
+            if (!file) return;
+
+            const card = input.closest('.image-card');
+            const previewBox = card.querySelector('.image-preview');
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewBox.innerHTML = `<img src="${e.target.result}" alt="Xem trước ảnh">`;
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+});

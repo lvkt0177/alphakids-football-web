@@ -14,7 +14,7 @@ class ImageSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'images.*' => ['nullable', 'image', 'max:2048'],
+            'images.*' => ['nullable', 'image', 'max:6144'],
         ];
     }
 
@@ -22,7 +22,7 @@ class ImageSettingRequest extends FormRequest
     {
         return [
             'images.*.image' => 'File tải lên phải là hình ảnh.',
-            'images.*.max' => 'Ảnh không được vượt quá 2MB.',
+            'images.*.max' => 'Ảnh không được vượt quá 6MB.',
         ];
     }
 }

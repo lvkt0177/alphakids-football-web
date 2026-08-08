@@ -16,6 +16,10 @@
             class="nav-item {{ request()->routeIs('admin.setting.home') ? 'active' : '' }}">
             Nội dung Trang chủ
         </a>
+        <a href="{{ route('admin.setting.other-pages') }}"
+            class="nav-item {{ request()->routeIs('admin.setting.other-pages') ? 'active' : '' }}">
+            Nội dung Trang khác
+        </a>
         <a href="{{ route('admin.setting.general') }}"
             class="nav-item {{ request()->routeIs('admin.setting.general') ? 'active' : '' }}">
             Thông tin chung

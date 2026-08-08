@@ -10,6 +10,7 @@ use App\Http\Requests\Admin\Setting\VideoSettingRequest;
 use App\Models\Activity;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
+use App\Support\OtherPagesImageGroups;
 
 class SettingController extends Controller
 {
@@ -50,7 +51,7 @@ class SettingController extends Controller
         $files = $request->file('images', []);
 
         foreach ($files as $key => $file) {
-            if (! $file) {
+            if (! $file || ! $file->isValid()) {
                 continue;
             }
 
@@ -63,7 +64,7 @@ class SettingController extends Controller
             Setting::set($key, $path);
         }
 
-        return redirect()->route('admin.setting.home')->with('success', 'Đã lưu ảnh.');
+        return back()->with('success', 'Đã lưu ảnh.');
     }
 
     public function updateVideo(VideoSettingRequest $request)
@@ -100,6 +101,20 @@ class SettingController extends Controller
         }
 
         return redirect()->route('admin.setting.home')->with('success', 'Đã lưu hoạt động nổi bật.');
+    }
+
+    public function otherPages()
+    {
+        $images = [];
+        foreach (OtherPagesImageGroups::PAGES as $page) {
+            foreach ($page['groups'] as $keys) {
+                foreach (array_keys($keys) as $key) {
+                    $images[$key] = Setting::get($key);
+                }
+            }
+        }
+
+        return view('admin.setting.other-pages', compact('images'));
     }
 
     public function general()
