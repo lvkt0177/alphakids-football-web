@@ -23,19 +23,17 @@
             @include('partials.admin._topbar')
 
             <main class="content">
-                @if (session('success'))
-                    <div class="toast show"
-                        style="position:static;transform:none;opacity:1;margin-bottom:16px;display:inline-flex;">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
                 @yield('content')
             </main>
         </div>
     </div>
 
+    @include('partials.admin._toast')
+    @include('partials.admin._confirm-modal')
+
     <script src="{{ asset('js/admin/app.js') }}?v={{ filemtime(public_path('js/admin/app.js')) }}"></script>
+    <script src="{{ asset('js/admin/toast.js') }}?v={{ filemtime(public_path('js/admin/toast.js')) }}"></script>
+    <script src="{{ asset('js/admin/confirm.js') }}?v={{ filemtime(public_path('js/admin/confirm.js')) }}"></script>
     @stack('scripts')
 </body>
 

@@ -94,7 +94,8 @@
     </form>
 
     <form method="POST" action="{{ route('admin.registration.destroy', $registration) }}"
-        onsubmit="return confirm('Bạn chắc chắn muốn xóa đăng ký này?');">
+        data-confirm="Bạn chắc chắn muốn xóa đăng ký của bé &quot;{{ $registration->child_name }}&quot;? Hành động này không thể hoàn tác."
+        data-confirm-title="Xóa đăng ký">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger btn-sm">Xóa đăng ký</button>

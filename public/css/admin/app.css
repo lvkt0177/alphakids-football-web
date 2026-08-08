@@ -627,3 +627,136 @@ tbody tr:hover {
         align-items: stretch;
     }
 }
+
+/* ---------- Toast (góc phải dưới) ---------- */
+.toast-container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+    pointer-events: none;
+}
+
+.toast-item {
+    background: #183531;
+    color: #fff;
+    padding: 13px 18px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    box-shadow: 0 10px 30px rgba(14, 43, 41, .28);
+    opacity: 0;
+    transform: translateX(24px);
+    transition: opacity .25s ease, transform .25s ease;
+    max-width: 340px;
+    pointer-events: auto;
+}
+
+.toast-item.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-item.toast-error {
+    background: #4A1616;
+}
+
+.toast-item svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.toast-item.toast-success svg {
+    color: #4ADE9B;
+}
+
+.toast-item.toast-error svg {
+    color: #F87171;
+}
+
+/* ---------- Confirm modal ---------- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(14, 26, 25, .5);
+    z-index: 150;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-box {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    max-width: 380px;
+    width: 100%;
+    padding: 28px 26px 24px;
+    text-align: center;
+    box-shadow: 0 20px 46px rgba(14, 43, 41, .18);
+    animation: modalIn .2s cubic-bezier(.16, .8, .4, 1) both;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-icon-danger {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: var(--danger-bg);
+    color: var(--danger);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+
+.modal-icon-danger svg {
+    width: 26px;
+    height: 26px;
+}
+
+.modal-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.modal-desc {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 22px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.modal-actions .btn {
+    flex: 1;
+}
