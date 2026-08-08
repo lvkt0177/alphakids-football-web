@@ -12,6 +12,14 @@
             class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
             Tổng quan
         </a>
+        <a href="{{ route('admin.setting.home') }}"
+            class="nav-item {{ request()->routeIs('admin.setting.home') ? 'active' : '' }}">
+            Nội dung Trang chủ
+        </a>
+        <a href="{{ route('admin.setting.general') }}"
+            class="nav-item {{ request()->routeIs('admin.setting.general') ? 'active' : '' }}">
+            Thông tin chung
+        </a>
         <a href="{{ route('admin.branch.index') }}"
             class="nav-item {{ request()->routeIs('admin.branch.*') ? 'active' : '' }}">
             Hệ thống cơ sở

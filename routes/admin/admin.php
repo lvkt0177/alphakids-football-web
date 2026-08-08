@@ -10,5 +10,6 @@ Route::middleware('auth')->group(function () {
     include 'branch.php';
     include 'registration.php';
     include 'activity.php';
+    include 'setting.php';
 
 });
