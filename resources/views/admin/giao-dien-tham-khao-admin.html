@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — CLB Giáo Dục</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#0D9488;
+    --accent-dark:#0B7A70;
+    --accent-darker:#095F58;
+    --accent-light:#E6F7F5;
+    --accent-100:#CFF3EE;
+    --sidebar-bg:#2A3042;
+    --sidebar-bg-elev:#353C52;
+    --sidebar-text:#9CA3BC;
+    --sidebar-text-active:#FFFFFF;
+    --sidebar-border:#3C4358;
+    --sidebar-active-bg:#1F2433;
+    --bg:#F6F8F8;
+    --surface:#FFFFFF;
+    --border:#E3E9E8;
+    --border-strong:#D3DCDA;
+    --text:#1F2A2E;
+    --text-secondary:#5B6B6E;
+    --text-muted:#8A9799;
+    --success:#1E8E5A;
+    --success-bg:#E5F6ED;
+    --warning:#B7791F;
+    --warning-bg:#FDF3DD;
+    --danger:#C0392B;
+    --danger-bg:#FCEAE8;
+    --neutral-bg:#EEF2F1;
+    --neutral-text:#5B6B6E;
+    --radius:14px;
+    --radius-sm:9px;
+    --radius-lg:18px;
+    --shadow-sm:0 1px 2px rgba(14,43,41,0.06);
+    --shadow-md:0 6px 20px rgba(14,43,41,0.08);
+    --font-body:'Be Vietnam Pro',-apple-system,BlinkMacSystemFont,sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--font-body);
+    background:var(--bg);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    font-size:14.5px;
+    line-height:1.5;
+  }
+  h1,h2,h3,h4,p,ul{margin:0;}
+  ul{list-style:none;padding:0;}
+  button{font-family:inherit;cursor:pointer;}
+  input,select,textarea{font-family:inherit;font-size:inherit;color:inherit;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+  /* ---------- Layout ---------- */
+  .app{display:flex;min-height:100vh;}
+
+  .sidebar-overlay{
+    display:none;position:fixed;inset:0;background:rgba(14,26,25,0.45);
+    z-index:40;opacity:0;pointer-events:none;transition:opacity .2s ease;
+  }
+  .sidebar-overlay.show{display:block;opacity:1;pointer-events:auto;}
+
+  .sidebar{
+    width:268px;flex-shrink:0;background:var(--sidebar-bg);
+    color:var(--sidebar-text);display:flex;flex-direction:column;
+    position:fixed;top:0;left:0;bottom:0;z-index:50;
+    transform:translateX(-100%);transition:transform .25s ease;
+  }
+  .sidebar.open{transform:translateX(0);}
+
+  .sidebar-header{
+    padding:22px 22px 18px;display:flex;align-items:center;gap:12px;
+    border-bottom:1px solid var(--sidebar-border);
+  }
+  .sidebar-logo{
+    width:38px;height:38px;border-radius:10px;background:var(--accent);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    color:#fff;font-weight:700;font-size:16px;
+  }
+  .sidebar-title{color:#fff;font-weight:700;font-size:15px;line-height:1.25;}
+  .sidebar-subtitle{font-size:11.5px;color:var(--sidebar-text);margin-top:2px;}
+
+  .sidebar-nav{padding:16px 12px;display:flex;flex-direction:column;gap:4px;flex:1;overflow-y:auto;}
+  .nav-item{
+    display:flex;align-items:center;gap:12px;width:100%;
+    padding:11px 12px;border:none;background:transparent;color:var(--sidebar-text);
+    border-radius:var(--radius-sm);font-size:14px;font-weight:500;text-align:left;
+    transition:background .15s ease,color .15s ease;position:relative;
+  }
+  .nav-item svg{flex-shrink:0;width:19px;height:19px;}
+  .nav-item:hover{background:var(--sidebar-bg-elev);color:#fff;}
+  .nav-item.active{background:var(--sidebar-active-bg);color:#fff;}
+  .nav-item.active::before{
+    content:"";position:absolute;left:-12px;top:50%;transform:translateY(-50%);
+    width:4px;height:22px;background:var(--accent);border-radius:0 4px 4px 0;
+  }
+
+  .sidebar-footer{
+    padding:16px 20px;border-top:1px solid var(--sidebar-border);
+    font-size:12px;color:var(--sidebar-text);
+  }
+
+  .main{flex:1;display:flex;flex-direction:column;min-width:0;}
+
+  .topbar{
+    position:sticky;top:0;z-index:20;background:var(--surface);
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;gap:14px;
+    padding:14px 20px;min-height:64px;
+  }
+  .icon-btn{
+    background:transparent;border:1px solid var(--border);width:38px;height:38px;
+    border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;
+    color:var(--text);flex-shrink:0;
+  }
+  .icon-btn:hover{background:var(--neutral-bg);}
+  #hamburger{display:flex;}
+  .topbar h1{font-size:18px;font-weight:700;flex:1;min-width:0;}
+  .topbar-desc{font-size:12.5px;color:var(--text-muted);display:none;}
+  .avatar{
+    width:36px;height:36px;border-radius:50%;background:var(--accent-light);
+    color:var(--accent-darker);display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:13px;flex-shrink:0;
+  }
+
+  .content{padding:22px 20px 60px;flex:1;}
+  .page{display:none;}
+  .page.active{display:block;}
+  .page-lead{color:var(--text-secondary);font-size:13.5px;margin-top:6px;margin-bottom:22px;max-width:640px;}
+
+  /* ---------- Card / Section ---------- */
+  .card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);
+    padding:22px;margin-bottom:20px;
+  }
+  .card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap;}
+  .card-title{font-size:15px;font-weight:700;}
+  .card-subtitle{font-size:12.5px;color:var(--text-muted);margin-top:3px;}
+
+  /* ---------- Tabs ---------- */
+  .tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:22px;overflow-x:auto;}
+  .tab-btn{
+    background:transparent;border:none;padding:11px 16px;font-size:13.5px;
+    font-weight:600;color:var(--text-muted);border-bottom:2px solid transparent;
+    white-space:nowrap;margin-bottom:-1px;
+  }
+  .tab-btn:hover{color:var(--text);}
+  .tab-btn.active{color:var(--accent-darker);border-bottom-color:var(--accent);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:10px 18px;border-radius:var(--radius-sm);font-size:13.5px;font-weight:600;
+    border:1px solid transparent;transition:background .15s ease,border-color .15s ease;
+    white-space:nowrap;
+  }
+  .btn svg{width:16px;height:16px;flex-shrink:0;}
+  .btn-primary{background:var(--accent);color:#fff;}
+  .btn-primary:hover{background:var(--accent-dark);}
+  .btn-secondary{background:var(--surface);color:var(--text);border-color:var(--border-strong);}
+  .btn-secondary:hover{background:var(--neutral-bg);}
+  .btn-sm{padding:7px 12px;font-size:12.5px;}
+  .btn-block{width:100%;}
+  .form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;padding-top:20px;border-top:1px solid var(--border);}
+
+  /* ---------- Form fields ---------- */
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;}
+  .field input[type=text],
+  .field input[type=email],
+  .field input[type=tel],
+  .field input[type=url],
+  .field input[type=date],
+  .field textarea,
+  .field select{
+    width:100%;padding:10px 12px;border:1px solid var(--border-strong);
+    border-radius:var(--radius-sm);background:var(--surface);font-size:13.5px;color:var(--text);
+  }
+  .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent);}
+  .field textarea{resize:vertical;min-height:70px;}
+  .field-hint{font-size:11.5px;color:var(--text-muted);margin-top:5px;}
+  .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 18px;}
+
+  .section-note{
+    display:flex;gap:10px;background:var(--accent-light);border:1px solid var(--accent-100);
+    border-radius:var(--radius-sm);padding:11px 13px;margin-bottom:18px;font-size:12.5px;
+    color:var(--accent-darker);align-items:flex-start;
+  }
+  .section-note svg{flex-shrink:0;width:16px;height:16px;margin-top:1px;}
+  .divider{border:none;border-top:1px solid var(--border);margin:24px 0;}
+
+  /* ---------- Image grid (Tab Hình ảnh) ---------- */
+  .image-group-title{font-size:12.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin:20px 0 12px;}
+  .image-group-title:first-child{margin-top:0;}
+  .image-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;}
+  .image-card{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface);}
+  .image-preview{
+    aspect-ratio:16/9;background:var(--neutral-bg);display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .image-preview img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+  .image-placeholder{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--text-muted);}
+  .image-placeholder svg{width:26px;height:26px;}
+  .image-placeholder span{font-size:11px;}
+  .image-card-body{padding:12px 13px 14px;}
+  .image-card-label{font-size:13px;font-weight:600;margin-bottom:2px;}
+  .image-card-hint{font-size:11.5px;color:var(--text-muted);margin-bottom:10px;}
+  .image-card-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .file-tag{font-size:11px;color:var(--accent-darker);background:var(--accent-light);padding:3px 8px;border-radius:20px;display:none;}
+  .file-tag.show{display:inline-block;}
+  .btn-file{position:relative;overflow:hidden;}
+  .btn-file input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;}
+
+  /* ---------- Video tab ---------- */
+  .radio-toggle{display:flex;gap:8px;margin-bottom:18px;}
+  .radio-toggle label{
+    flex:1;text-align:center;padding:10px 14px;border:1px solid var(--border-strong);
+    border-radius:var(--radius-sm);font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;
+  }
+  .radio-toggle input{display:none;}
+  .radio-toggle input:checked + span{color:var(--accent-darker);}
+  .radio-toggle label:has(input:checked){border-color:var(--accent);background:var(--accent-light);color:var(--accent-darker);}
+  .video-input-mode{display:none;}
+  .video-input-mode.active{display:block;}
+  .video-preview-box{
+    margin-top:14px;border:1px solid var(--border);border-radius:var(--radius);
+    overflow:hidden;background:var(--neutral-bg);max-width:400px;
+  }
+  .video-preview-box .image-preview{aspect-ratio:16/9;}
+  .video-preview-box video{width:100%;display:block;}
+  .video-meta{padding:10px 13px;font-size:12px;color:var(--text-muted);}
+
+  /* ---------- Activities tab ---------- */
+  .activity-list{display:flex;flex-direction:column;gap:8px;}
+  .activity-row{
+    display:flex;align-items:center;gap:12px;padding:12px 14px;
+    border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);
+  }
+  .activity-row.dragging{opacity:.4;}
+  .drag-handle{cursor:grab;color:var(--text-muted);flex-shrink:0;width:18px;height:18px;touch-action:none;}
+  .activity-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent);flex-shrink:0;}
+  .activity-info{flex:1;min-width:0;}
+  .activity-name{font-size:13.5px;font-weight:600;}
+  .activity-date{font-size:11.5px;color:var(--text-muted);font-family:var(--font-mono);margin-top:2px;}
+  .order-input{
+    width:56px;padding:7px 8px;border:1px solid var(--border-strong);border-radius:8px;
+    text-align:center;font-family:var(--font-mono);font-size:13px;flex-shrink:0;
+  }
+  .order-label{font-size:11px;color:var(--text-muted);flex-shrink:0;}
+
+  /* ---------- Table page (Đăng ký học thử) ---------- */
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;align-items:center;}
+  .search-box{position:relative;flex:1;min-width:200px;}
+  .search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--text-muted);}
+  .search-box input{width:100%;padding:10px 12px 10px 36px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);font-size:13.5px;}
+  .toolbar select,.toolbar input[type=date]{
+    padding:10px 12px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);font-size:13px;background:var(--surface);
+  }
+  .toolbar .date-group{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-muted);}
+
+  .table-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);}
+  table{width:100%;border-collapse:collapse;min-width:820px;}
+  thead th{
+    text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;
+    color:var(--text-muted);background:var(--neutral-bg);padding:11px 14px;font-weight:700;
+    border-bottom:1px solid var(--border);white-space:nowrap;
+  }
+  tbody td{padding:12px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:var(--accent-light);}
+  .cell-name{font-weight:600;}
+  .cell-sub{font-size:11.5px;color:var(--text-muted);margin-top:2px;}
+  .cell-mono{font-family:var(--font-mono);font-size:12.5px;color:var(--text-secondary);}
+
+  .badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11.5px;font-weight:600;white-space:nowrap;}
+  .badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;}
+  .badge-pending{background:var(--warning-bg);color:var(--warning);}
+  .badge-confirmed{background:var(--accent-light);color:var(--accent-darker);}
+  .badge-attended{background:var(--success-bg);color:var(--success);}
+  .badge-cancelled{background:var(--danger-bg);color:var(--danger);}
+
+  .table-footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:12.5px;color:var(--text-muted);flex-wrap:wrap;gap:8px;}
+  .empty-row td{text-align:center;padding:40px 14px;color:var(--text-muted);}
+
+  /* ---------- Toast ---------- */
+  .toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);
+    background:#183531;color:#fff;padding:13px 20px;border-radius:12px;
+    display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;
+    box-shadow:0 10px 30px rgba(14,43,41,0.28);opacity:0;pointer-events:none;
+    transition:opacity .2s ease,transform .2s ease;z-index:100;max-width:90vw;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0);}
+  .toast svg{width:18px;height:18px;color:#4ADE9B;flex-shrink:0;}
+
+  /* ---------- Responsive ---------- */
+  @media (min-width:1024px){
+    .sidebar{position:sticky;transform:none;}
+    #hamburger{display:none;}
+    .topbar-desc{display:block;}
+    .content{padding:26px 32px 60px;}
+    .topbar{padding:16px 32px;}
+  }
+  @media (max-width:640px){
+    .form-grid{grid-template-columns:1fr;}
+    .card{padding:16px;}
+    .toolbar{flex-direction:column;align-items:stretch;}
+    .toolbar select,.toolbar input[type=date]{width:100%;}
+    .table-footer{flex-direction:column;align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">CLB</div>
+      <div>
+        <div class="sidebar-title">CLB Giáo Dục</div>
+        <div class="sidebar-subtitle">Quản trị website</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-page="home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+        Nội dung Trang chủ
+      </button>
+      <button class="nav-item" data-page="general">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><path d="M12 7.5h.01"/></svg>
+        Thông tin chung
+      </button>
+      <button class="nav-item" data-page="trial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M7.5 9h9M7.5 13h9M7.5 17h5"/></svg>
+        Đăng ký học thử
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">Đăng nhập: admin@clb.vn</div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn" id="hamburger" aria-label="Mở menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <div style="flex:1;min-width:0;">
+        <h1 id="pageTitle">Nội dung Trang chủ</h1>
+        <div class="topbar-desc" id="pageDesc">Quản lý hình ảnh, video và hoạt động nổi bật hiển thị trên trang chủ.</div>
+      </div>
+      <div class="avatar">A</div>
+    </header>
+
+    <main class="content">
+
+      <!-- ================= PAGE 1: NỘI DUNG TRANG CHỦ ================= -->
+      <section class="page active" id="page-home">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="images">Hình ảnh</button>
+          <button class="tab-btn" data-tab="video">Video</button>
+          <button class="tab-btn" data-tab="activities">Hoạt động nổi bật</button>
+        </div>
+
+        <!-- Tab: Hình ảnh -->
+        <div class="tab-panel active" id="tab-images">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Quản lý ảnh hiển thị</div>
+                <div class="card-subtitle">Thay ảnh cho từng vị trí trên trang chủ và các trang khác của website.</div>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="saveImages()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                Lưu ảnh
+              </button>
+            </div>
+            <div id="imageGridContainer"></div>
+          </div>
+        </div>
+
+        <!-- Tab: Video -->
+        <div class="tab-panel" id="tab-video">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Video mục Trang chủ</div>
+                <div class="card-subtitle">Dán link YouTube hoặc tải file video lên để hiển thị ở mục Video trang chủ.</div>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="saveVideo()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                Lưu video
+              </button>
+            </div>
+
+            <div class="radio-toggle">
+              <label><input type="radio" name="videoMode" value="youtube" checked onchange="switchVideoMode('youtube')"><span>Dán link YouTube</span></label>
+              <label><input type="radio" name="videoMode" value="upload" onchange="switchVideoMode('upload')"><span>Tải file video lên</span></label>
+            </div>
+
+            <div class="video-input-mode active" id="mode-youtube">
+              <div class="field">
+                <label for="youtubeUrl">Link video YouTube</label>
+                <input type="url" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=..." oninput="updateYoutubePreview()">
+                <div class="field-hint">Dán đường dẫn video công khai hoặc không công khai (unlisted) trên YouTube.</div>
+              </div>
+              <div class="video-preview-box" id="youtubePreviewBox" style="display:none;">
+                <div class="image-preview"><img id="youtubeThumb" alt="Ảnh thumbnail video"></div>
+                <div class="video-meta">Xem trước ảnh đại diện video</div>
+              </div>
+            </div>
+
+            <div class="video-input-mode" id="mode-upload">
+              <div class="field">
+                <label for="videoFile">Tải file video</label>
+                <div class="btn btn-secondary btn-file" style="max-width:220px;">
+                  <input type="file" id="videoFile" accept="video/*" onchange="handleVideoUpload(event)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 0 4 4m-4-4-4 4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+                  Chọn file video
+                </div>
+                <div class="field-hint">Định dạng MP4, tối đa 200MB.</div>
+              </div>
+              <div class="video-preview-box" id="uploadPreviewBox" style="display:none;">
+                <video id="uploadPreviewVideo" controls muted></video>
+                <div class="video-meta" id="uploadFileMeta"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Hoạt động nổi bật -->
+        <div class="tab-panel" id="tab-activities">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Hoạt động hiển thị trên Trang chủ</div>
+                <div class="card-subtitle">Danh sách lấy từ trang Hoạt động. Chọn hoạt động và sắp xếp thứ tự hiển thị bằng cách kéo-thả hoặc nhập số.</div>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="saveActivities()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                Lưu thay đổi
+              </button>
+            </div>
+            <ul class="activity-list" id="activityList"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 2: THÔNG TIN CHUNG ================= -->
+      <section class="page" id="page-general">
+        <form class="card" id="generalForm" onsubmit="return saveGeneralInfo(event)">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Thông tin liên hệ</div>
+              <div class="card-subtitle">Thông tin liên hệ chính của CLB.</div>
+            </div>
+          </div>
+          <div class="section-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+            Các trường này đồng bộ hiển thị ở: Footer, trang Liên hệ và trang Đăng ký học thử.
+          </div>
+          <div class="form-grid">
+            <div class="field"><label for="hotline">Hotline</label><input type="tel" id="hotline" value="0909 123 456" placeholder="0909 123 456"></div>
+            <div class="field"><label for="zaloContact">Zalo</label><input type="tel" id="zaloContact" value="0909 123 456" placeholder="Số Zalo tư vấn"></div>
+            <div class="field"><label for="email">Email</label><input type="email" id="email" value="lienhe@clbgiaoduc.vn" placeholder="lienhe@clbgiaoduc.vn"></div>
+            <div class="field"><label for="consultTime">Thời gian tư vấn</label><input type="text" id="consultTime" value="Thứ 2 – Thứ 7, 8:00 – 17:30" placeholder="Thứ 2 – Thứ 7, 8:00 – 17:30"></div>
+          </div>
+          <div class="field">
+            <label for="address">Địa chỉ</label>
+            <textarea id="address" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành">123 Đường Nguyễn Văn A, Phường 5, Quận 3, TP. Hồ Chí Minh</textarea>
+          </div>
+
+          <hr class="divider">
+
+          <div class="card-header">
+            <div>
+              <div class="card-title">Mạng xã hội</div>
+              <div class="card-subtitle">Đường dẫn tới các kênh mạng xã hội của CLB.</div>
+            </div>
+          </div>
+          <div class="section-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+            Các trường này hiển thị ở Footer.
+          </div>
+          <div class="form-grid">
+            <div class="field"><label for="facebookLink">Facebook</label><input type="url" id="facebookLink" placeholder="https://facebook.com/..." value="https://facebook.com/clbgiaoduc"></div>
+            <div class="field"><label for="tiktokLink">TikTok</label><input type="url" id="tiktokLink" placeholder="https://tiktok.com/@..." value="https://tiktok.com/@clbgiaoduc"></div>
+            <div class="field"><label for="zaloLink">Zalo (link)</label><input type="url" id="zaloLink" placeholder="https://zalo.me/..." value="https://zalo.me/0909123456"></div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+              Lưu chung
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ================= PAGE 3: ĐĂNG KÝ HỌC THỬ ================= -->
+      <section class="page" id="page-trial">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Danh sách đăng ký học thử</div>
+              <div class="card-subtitle">Dữ liệu từ Form đăng ký ở trang Đăng ký học thử.</div>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="exportExcel()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 0 4 4m-4-4-4 4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+              Xuất Excel
+            </button>
+          </div>
+
+          <div class="toolbar">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+              <input type="text" id="searchInput" placeholder="Tìm theo tên phụ huynh, tên bé, số điện thoại..." oninput="renderTrialTable()">
+            </div>
+            <div class="date-group">
+              <input type="date" id="dateFrom" onchange="renderTrialTable()">
+              <span>đến</span>
+              <input type="date" id="dateTo" onchange="renderTrialTable()">
+            </div>
+            <select id="statusFilter" onchange="renderTrialTable()">
+              <option value="all">Tất cả trạng thái</option>
+              <option value="pending">Chờ xác nhận</option>
+              <option value="confirmed">Đã xác nhận</option>
+              <option value="attended">Đã tham gia</option>
+              <option value="cancelled">Đã hủy</option>
+            </select>
+          </div>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Phụ huynh</th>
+                  <th>Tên bé</th>
+                  <th>Số điện thoại</th>
+                  <th>Ngày đăng ký</th>
+                  <th>Buổi học thử</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody id="trialTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <span id="trialCount">0 kết quả</span>
+            <button class="btn btn-secondary btn-sm" onclick="resetTrialFilters()">Đặt lại bộ lọc</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+  <span id="toastMsg">Đã lưu thành công</span>
+</div>
+
+<script>
+/* ============================================================
+   NAVIGATION: sidebar + mobile drawer
+   ============================================================ */
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+const hamburger = document.getElementById('hamburger');
+
+hamburger.addEventListener('click', () => {
+  sidebar.classList.add('open');
+  overlay.classList.add('show');
+});
+overlay.addEventListener('click', closeSidebar);
+function closeSidebar(){
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+}
+
+const pageMeta = {
+  home:   { title:'Nội dung Trang chủ', desc:'Quản lý hình ảnh, video và hoạt động nổi bật hiển thị trên trang chủ.' },
+  general:{ title:'Thông tin chung',    desc:'Thông tin liên hệ và mạng xã hội, đồng bộ tới Footer và các trang liên quan.' },
+  trial:  { title:'Đăng ký học thử',    desc:'Danh sách phụ huynh đã đăng ký học thử từ website.' }
+};
+
+document.querySelectorAll('.nav-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const page = btn.dataset.page;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.getElementById('pageTitle').textContent = pageMeta[page].title;
+    document.getElementById('pageDesc').textContent = pageMeta[page].desc;
+    closeSidebar();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+/* Tabs within page-home */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+const toastEl = document.getElementById('toast');
+const toastMsgEl = document.getElementById('toastMsg');
+let toastTimer;
+function showToast(msg){
+  toastMsgEl.textContent = msg || 'Đã lưu thành công';
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2600);
+}
+
+/* ============================================================
+   TAB 1: HÌNH ẢNH
+   ============================================================ */
+const imagePositions = [
+  { id:'home-banner',  group:'Trang chủ',   label:'Banner trang chủ',              hint:'Kích thước đề xuất 1920 × 800px' },
+  { id:'about-banner',  group:'Về CLB',      label:'Banner trang Về CLB',           hint:'Kích thước đề xuất 1920 × 600px' },
+  { id:'about-team',    group:'Về CLB',      label:'Ảnh đội ngũ giáo viên',         hint:'Kích thước đề xuất 1200 × 800px' },
+  { id:'method-banner', group:'Phương pháp', label:'Banner trang Phương pháp',      hint:'Kích thước đề xuất 1920 × 600px' },
+  { id:'method-1',      group:'Phương pháp', label:'Ảnh minh họa phương pháp 1',    hint:'Kích thước đề xuất 800 × 600px' },
+  { id:'method-2',      group:'Phương pháp', label:'Ảnh minh họa phương pháp 2',    hint:'Kích thước đề xuất 800 × 600px' },
+];
+
+function renderImageGrid(){
+  const container = document.getElementById('imageGridContainer');
+  const groups = [...new Set(imagePositions.map(p => p.group))];
+  container.innerHTML = groups.map(group => `
+    <div class="image-group-title">${group}</div>
+    <div class="image-grid">
+      ${imagePositions.filter(p => p.group === group).map(p => `
+        <div class="image-card">
+          <div class="image-preview" id="preview-${p.id}">
+            <div class="image-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m3 16 5-5 4 4 5-5 4 4"/><circle cx="8.5" cy="9" r="1.4"/></svg>
+              <span>Chưa có ảnh</span>
+            </div>
+          </div>
+          <div class="image-card-body">
+            <p class="image-card-label">${p.label}</p>
+            <p class="image-card-hint">${p.hint}</p>
+            <div class="image-card-actions">
+              <label class="btn btn-secondary btn-sm btn-file">
+                <input type="file" accept="image/*" onchange="handleImageChange(event,'${p.id}')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 0 4 4m-4-4-4 4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+                Thay ảnh
+              </label>
+              <span class="file-tag" id="filetag-${p.id}"></span>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+renderImageGrid();
+
+function handleImageChange(event, id){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const preview = document.getElementById('preview-' + id);
+    preview.innerHTML = `<img src="${e.target.result}" alt="Ảnh đã chọn">`;
+    const tag = document.getElementById('filetag-' + id);
+    tag.textContent = file.name.length > 22 ? file.name.slice(0,19) + '...' : file.name;
+    tag.classList.add('show');
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveImages(){
+  showToast('Đã lưu thành công');
+}
+
+/* ============================================================
+   TAB 2: VIDEO
+   ============================================================ */
+function switchVideoMode(mode){
+  document.getElementById('mode-youtube').classList.toggle('active', mode === 'youtube');
+  document.getElementById('mode-upload').classList.toggle('active', mode === 'upload');
+}
+
+function extractYoutubeId(url){
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=)([\w-]{11})/,
+    /(?:youtu\.be\/)([\w-]{11})/,
+    /(?:youtube\.com\/embed\/)([\w-]{11})/,
+    /(?:youtube\.com\/shorts\/)([\w-]{11})/
+  ];
+  for(const p of patterns){
+    const m = url.match(p);
+    if(m) return m[1];
+  }
+  return null;
+}
+
+function updateYoutubePreview(){
+  const url = document.getElementById('youtubeUrl').value.trim();
+  const box = document.getElementById('youtubePreviewBox');
+  const id = extractYoutubeId(url);
+  if(id){
+    document.getElementById('youtubeThumb').src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+    box.style.display = 'block';
+  } else {
+    box.style.display = 'none';
+  }
+}
+
+function handleVideoUpload(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const url = URL.createObjectURL(file);
+  const video = document.getElementById('uploadPreviewVideo');
+  video.src = url;
+  document.getElementById('uploadPreviewBox').style.display = 'block';
+  document.getElementById('uploadFileMeta').textContent = `${file.name} — ${(file.size / (1024*1024)).toFixed(1)} MB`;
+}
+
+function saveVideo(){
+  showToast('Đã lưu thành công');
+}
+
+/* ============================================================
+   TAB 3: HOẠT ĐỘNG NỔI BẬT (drag & drop + số thứ tự)
+   ============================================================ */
+let activities = [
+  { id:1, name:'Trại hè kỹ năng 2026',        date:'2026-06-15', selected:true,  order:1 },
+  { id:2, name:'Lớp học kỹ năng sống',        date:'2026-05-02', selected:true,  order:2 },
+  { id:3, name:'Ngày hội đọc sách',           date:'2026-04-20', selected:false, order:3 },
+  { id:4, name:'Cuộc thi hùng biện nhí',      date:'2026-07-10', selected:true,  order:4 },
+  { id:5, name:'Workshop STEM cuối tuần',     date:'2026-04-28', selected:false, order:5 },
+  { id:6, name:'Giao lưu tiếng Anh với GV bản ngữ', date:'2026-03-30', selected:false, order:6 },
+];
+let dragSourceId = null;
+
+function renderActivityList(){
+  activities.sort((a,b) => a.order - b.order);
+  activities.forEach((a,i) => a.order = i + 1);
+  const list = document.getElementById('activityList');
+  list.innerHTML = activities.map(a => `
+    <li class="activity-row" draggable="true" data-id="${a.id}"
+        ondragstart="onDragStart(event,${a.id})" ondragover="onDragOver(event)"
+        ondrop="onDrop(event,${a.id})" ondragend="onDragEnd(event)">
+      <svg class="drag-handle" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.4"/><circle cx="15" cy="6" r="1.4"/><circle cx="9" cy="12" r="1.4"/><circle cx="15" cy="12" r="1.4"/><circle cx="9" cy="18" r="1.4"/><circle cx="15" cy="18" r="1.4"/></svg>
+      <input type="checkbox" ${a.selected ? 'checked' : ''} onchange="toggleActivity(${a.id}, this.checked)">
+      <div class="activity-info">
+        <div class="activity-name">${a.name}</div>
+        <div class="activity-date">${formatDate(a.date)}</div>
+      </div>
+      <span class="order-label">Vị trí</span>
+      <input type="number" class="order-input" min="1" value="${a.order}" onchange="setActivityOrder(${a.id}, this.value)">
+    </li>
+  `).join('');
+}
+renderActivityList();
+
+function toggleActivity(id, checked){
+  const a = activities.find(x => x.id === id);
+  if(a) a.selected = checked;
+}
+
+function setActivityOrder(id, value){
+  const newOrder = Math.min(Math.max(parseInt(value) || 1, 1), activities.length);
+  const a = activities.find(x => x.id === id);
+  if(!a) return;
+  activities.forEach(x => {
+    if(x.id === id) return;
+    if(newOrder <= a.order && x.order >= newOrder && x.order < a.order) x.order++;
+    else if(newOrder > a.order && x.order <= newOrder && x.order > a.order) x.order--;
+  });
+  a.order = newOrder;
+  renderActivityList();
+}
+
+function onDragStart(e, id){
+  dragSourceId = id;
+  e.currentTarget.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+function onDragOver(e){
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+}
+function onDrop(e, targetId){
+  e.preventDefault();
+  if(dragSourceId === null || dragSourceId === targetId) return;
+  const source = activities.find(a => a.id === dragSourceId);
+  const target = activities.find(a => a.id === targetId);
+  if(!source || !target) return;
+  const sourceOrder = source.order;
+  const targetOrder = target.order;
+  activities.forEach(a => {
+    if(a.id === source.id){ a.order = targetOrder; return; }
+    if(sourceOrder < targetOrder && a.order > sourceOrder && a.order <= targetOrder) a.order--;
+    else if(sourceOrder > targetOrder && a.order >= targetOrder && a.order < sourceOrder) a.order++;
+  });
+  renderActivityList();
+}
+function onDragEnd(e){
+  e.currentTarget.classList.remove('dragging');
+  dragSourceId = null;
+}
+
+function saveActivities(){
+  showToast('Đã lưu thay đổi hiển thị');
+}
+
+function formatDate(iso){
+  const [y,m,d] = iso.split('-');
+  return `${d}/${m}/${y}`;
+}
+
+/* ============================================================
+   PAGE 2: THÔNG TIN CHUNG
+   ============================================================ */
+function saveGeneralInfo(e){
+  e.preventDefault();
+  showToast('Đã lưu thành công');
+  return false;
+}
+
+/* ============================================================
+   PAGE 3: ĐĂNG KÝ HỌC THỬ
+   ============================================================ */
+const trialData = [
+  { parent:'Nguyễn Thị Hồng',  child:'Bé Minh Anh',  phone:'0901 234 567', date:'2026-08-01', session:'Chủ nhật, 9:00 – 10:00',  status:'confirmed' },
+  { parent:'Trần Văn Hùng',    child:'Bé Gia Bảo',   phone:'0912 345 678', date:'2026-08-02', session:'Thứ 7, 14:00 – 15:00',    status:'pending' },
+  { parent:'Lê Thị Mai',       child:'Bé Bảo Ngọc',  phone:'0987 654 321', date:'2026-08-02', session:'Chủ nhật, 9:00 – 10:00',  status:'attended' },
+  { parent:'Phạm Quốc Anh',    child:'Bé Khôi Nguyên',phone:'0933 112 233', date:'2026-08-03', session:'Thứ 7, 10:00 – 11:00',   status:'cancelled' },
+  { parent:'Đỗ Thị Thu Hà',    child:'Bé An Nhiên',  phone:'0977 888 999', date:'2026-08-03', session:'Chủ nhật, 14:00 – 15:00', status:'pending' },
+  { parent:'Vũ Minh Đức',      child:'Bé Gia Hân',   phone:'0909 555 111', date:'2026-08-04', session:'Thứ 7, 9:00 – 10:00',     status:'confirmed' },
+  { parent:'Bùi Thị Ngọc',     child:'Bé Bảo Anh',   phone:'0918 222 444', date:'2026-08-05', session:'Chủ nhật, 10:00 – 11:00', status:'attended' },
+  { parent:'Ngô Văn Sơn',      child:'Bé Hoàng Long',phone:'0966 333 555', date:'2026-08-06', session:'Thứ 7, 14:00 – 15:00',    status:'pending' },
+  { parent:'Trịnh Thị Lan',    child:'Bé Thảo Vy',   phone:'0944 777 222', date:'2026-08-06', session:'Chủ nhật, 9:00 – 10:00',  status:'confirmed' },
+  { parent:'Hoàng Anh Tuấn',   child:'Bé Đăng Khoa',  phone:'0922 666 888', date:'2026-08-07', session:'Thứ 7, 10:00 – 11:00',   status:'cancelled' },
+  { parent:'Đặng Thị Kim Oanh',child:'Bé Yến Nhi',   phone:'0955 111 999', date:'2026-08-08', session:'Chủ nhật, 14:00 – 15:00', status:'pending' },
+  { parent:'Lý Văn Phát',      child:'Bé Tấn Phát',  phone:'0988 444 666', date:'2026-08-08', session:'Thứ 7, 9:00 – 10:00',     status:'attended' },
+];
+
+const statusLabel = { pending:'Chờ xác nhận', confirmed:'Đã xác nhận', attended:'Đã tham gia', cancelled:'Đã hủy' };
+
+function normalize(str){
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+}
+
+function renderTrialTable(){
+  const q = normalize(document.getElementById('searchInput').value.trim());
+  const from = document.getElementById('dateFrom').value;
+  const to = document.getElementById('dateTo').value;
+  const status = document.getElementById('statusFilter').value;
+
+  const filtered = trialData.filter(r => {
+    const matchesQuery = !q || normalize(r.parent).includes(q) || normalize(r.child).includes(q) || r.phone.replace(/\s/g,'').includes(q.replace(/\s/g,''));
+    const matchesFrom = !from || r.date >= from;
+    const matchesTo = !to || r.date <= to;
+    const matchesStatus = status === 'all' || r.status === status;
+    return matchesQuery && matchesFrom && matchesTo && matchesStatus;
+  });
+
+  const body = document.getElementById('trialTableBody');
+  if(filtered.length === 0){
+    body.innerHTML = `<tr class="empty-row"><td colspan="6">Không tìm thấy đăng ký phù hợp với bộ lọc hiện tại.</td></tr>`;
+  } else {
+    body.innerHTML = filtered.map(r => `
+      <tr>
+        <td class="cell-name">${r.parent}</td>
+        <td>${r.child}</td>
+        <td class="cell-mono">${r.phone}</td>
+        <td class="cell-mono">${formatDate(r.date)}</td>
+        <td>${r.session}</td>
+        <td><span class="badge badge-${r.status}">${statusLabel[r.status]}</span></td>
+      </tr>
+    `).join('');
+  }
+  document.getElementById('trialCount').textContent = `${filtered.length} kết quả`;
+  return filtered;
+}
+renderTrialTable();
+
+function resetTrialFilters(){
+  document.getElementById('searchInput').value = '';
+  document.getElementById('dateFrom').value = '';
+  document.getElementById('dateTo').value = '';
+  document.getElementById('statusFilter').value = 'all';
+  renderTrialTable();
+}
+
+function exportExcel(){
+  const rows = renderTrialTable();
+  const headers = ['Phụ huynh','Tên bé','Số điện thoại','Ngày đăng ký','Buổi học thử','Trạng thái'];
+  const tableRows = rows.map(r => `
+    <tr>
+      <td>${r.parent}</td>
+      <td>${r.child}</td>
+      <td>${r.phone}</td>
+      <td>${formatDate(r.date)}</td>
+      <td>${r.session}</td>
+      <td>${statusLabel[r.status]}</td>
+    </tr>
+  `).join('');
+  const html = `
+    <html><head><meta charset="UTF-8"></head>
+    <body>
+      <table border="1">
+        <thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+        <tbody>${tableRows}</tbody>
+      </table>
+    </body></html>`;
+  const blob = new Blob(['\ufeff' + html], { type: 'application/vnd.ms-excel;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'danh-sach-dang-ky-hoc-thu.xls';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  showToast('Đã xuất file Excel');
+}
+</script>
+</body>
+</html>
