@@ -1,6 +1,5 @@
 @php
     // Nguồn dữ liệu menu duy nhất, dùng lại cho cả menu desktop và menu mobile.
-    // "Dành cho phụ huynh" trỏ sang trang Câu hỏi thường gặp (đã xác nhận).
     $navItems = [
         ['label' => 'Trang chủ', 'route' => 'home'],
         ['label' => 'Về CLB', 'route' => 'about'],
@@ -8,7 +7,7 @@
         ['label' => 'Chương trình dạy', 'route' => 'program'],
         ['label' => 'Hoạt động & Sự kiện', 'route' => 'activity.index'],
         ['label' => 'Hệ thống cơ sở', 'route' => 'branch.index'],
-        ['label' => 'Dành cho phụ huynh', 'route' => 'faq'],
+        ['label' => 'Câu hỏi thường gặp', 'route' => 'faq'],
     ];
 @endphp
 

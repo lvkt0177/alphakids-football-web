@@ -6,7 +6,8 @@
 
 <footer class="site-footer">
     <div class="site-footer__top container">
-        <div class="site-footer__brand">
+        {{-- Cột 1: Logo + giới thiệu + social --}}
+        <div class="site-footer__col">
             <a href="{{ route('home') }}" class="site-footer__logo">
                 <img src="{{ asset('images/logo/logo.jpg') }}" alt="Alpha Kids Football Club">
                 <span>
@@ -14,58 +15,11 @@
                     <small>FOOTBALL CLUB</small>
                 </span>
             </a>
-            <p class="site-footer__slogan">Bóng đá tư duy cho trẻ từ 3 tuổi</p>
-        </div>
-
-        <div class="site-footer__col">
-            <h3>Về CLB</h3>
-            <ul>
-                <li><a href="{{ route('method') }}">Phương pháp giáo dục</a></li>
-                <li><a href="{{ route('program') }}">Chương trình dạy</a></li>
-                <li><a href="{{ route('about') }}">Tầm nhìn &amp; Sứ mệnh</a></li>
-                <li><a href="{{ route('about') }}">Phương châm giáo dục</a></li>
-                <li><a href="{{ route('about') }}">Giá trị cốt lõi</a></li>
-            </ul>
-        </div>
-
-        <div class="site-footer__col">
-            <h3>Chương trình</h3>
-            <ul>
-                <li><a href="{{ route('activity.index') }}">Hoạt động &amp; Sự kiện</a></li>
-                <li><a href="{{ route('branch.index') }}">Hệ thống cơ sở</a></li>
-                <li><a href="{{ route('faq') }}">Dành cho phụ huynh</a></li>
-            </ul>
-        </div>
-
-        <div class="site-footer__col">
-            <h3>Liên hệ</h3>
-            <ul class="site-footer__contact">
-                @if ($siteSettings['hotline'] ?? null)
-                    <li><a href="tel:{{ $siteSettings['hotline'] }}">{{ $siteSettings['hotline'] }} (Zalo CLB)</a></li>
-                @endif
-                @if ($siteSettings['zalo_contact'] ?? null)
-                    <li><a href="tel:{{ $siteSettings['zalo_contact'] }}">{{ $siteSettings['zalo_contact'] }} (Thầy Lập)</a></li>
-                @endif
-                @if ($siteSettings['address'] ?? null)
-                    <li>{{ $siteSettings['address'] }}</li>
-                @endif
-            </ul>
-        </div>
-
-        <div class="site-footer__col site-footer__quick">
-            <h3>Đăng ký tư vấn/học thử</h3>
-            <form action="{{ route('registration.quick-store') }}" method="POST" class="site-footer__quick-form">
-                @csrf
-                <input type="text" name="child_name" placeholder="Họ và tên phụ huynh" maxlength="255" required>
-                <input type="tel" name="phone" placeholder="Số điện thoại" maxlength="20" required>
-                <button type="submit" class="btn btn--accent btn--sm btn--block">Đăng ký ngay</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="site-footer__bottom">
-        <div class="container site-footer__bottom-inner">
-            <p>&copy; {{ date('Y') }} Alpha Kids Football Club. All rights reserved.</p>
+            <p class="site-footer__tagline">Bóng đá tư duy</p>
+            <p class="site-footer__intro">
+                Alpha Kids Football Club sử dụng bóng đá như một công cụ giáo dục để giúp trẻ phát triển thể chất, tư duy,
+                kỹ năng sống và những phẩm chất cần thiết cho tương lai.
+            </p>
 
             @if (($siteSettings['facebook_url'] ?? null) || ($siteSettings['tiktok_url'] ?? null) || ($siteSettings['zalo_url'] ?? null))
                 <div class="site-footer__social">
@@ -86,6 +40,79 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        {{-- Cột 2: Về CLB --}}
+        <div class="site-footer__col">
+            <h3>Về CLB</h3>
+            <ul>
+                <li><a href="{{ route('method') }}">Phương pháp giáo dục</a></li>
+                <li><a href="{{ route('program') }}">Chương trình dạy</a></li>
+                <li><a href="{{ route('about') }}">Tầm nhìn &amp; Sứ mệnh</a></li>
+                <li><a href="{{ route('about') }}">Phương châm giáo dục</a></li>
+                <li><a href="{{ route('about') }}">Giá trị cốt lõi</a></li>
+            </ul>
+        </div>
+
+        {{-- Cột 3: Chương trình --}}
+        <div class="site-footer__col">
+            <h3>Chương trình</h3>
+            <ul>
+                <li><a href="{{ route('activity.index') }}">Hoạt động &amp; Sự kiện</a></li>
+                <li><a href="{{ route('branch.index') }}">Hệ thống cơ sở</a></li>
+                <li><a href="{{ route('faq') }}">Câu hỏi thường gặp</a></li>
+            </ul>
+        </div>
+
+        {{-- Cột 4: Liên hệ + Box đăng ký nhanh --}}
+        <div class="site-footer__col">
+            <h3>Liên hệ</h3>
+            <ul class="site-footer__contact" id="footerContactInfo">
+                @if ($siteSettings['hotline'] ?? null)
+                    <li id="footerHotline1">
+                        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
+                        <a href="tel:{{ $siteSettings['hotline'] }}">{{ $siteSettings['hotline'] }} (Zalo CLB)</a>
+                    </li>
+                @endif
+                @if ($siteSettings['zalo_contact'] ?? null)
+                    <li id="footerHotline2">
+                        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
+                        <a href="tel:{{ $siteSettings['zalo_contact'] }}">{{ $siteSettings['zalo_contact'] }} (Thầy Lập)</a>
+                    </li>
+                @endif
+                @if ($siteSettings['email'] ?? null)
+                    <li id="footerEmail">
+                        <svg viewBox="0 0 24 24"><path d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm16 3.2-8 5.6-8-5.6V18h16V7.2zM4.4 6l7.6 5.3L19.6 6H4.4z"/></svg>
+                        <a href="mailto:{{ $siteSettings['email'] }}">{{ $siteSettings['email'] }}</a>
+                    </li>
+                @endif
+                @if ($siteSettings['address'] ?? null)
+                    <li id="footerAddress">
+                        <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+                        <span>{{ $siteSettings['address'] }}</span>
+                    </li>
+                @endif
+            </ul>
+
+            <div class="site-footer__quick">
+                <h4>Đăng ký tư vấn / học thử</h4>
+                <p>Để lại thông tin để được tư vấn miễn phí</p>
+                <form action="{{ route('registration.quick-store') }}" method="POST" class="site-footer__quick-form">
+                    @csrf
+                    <input type="text" name="child_name" placeholder="Họ tên" maxlength="255" required>
+                    <input type="tel" name="phone" placeholder="Số điện thoại" maxlength="20" required>
+                    <button type="submit" class="btn btn--accent btn--sm btn--block">
+                        Đăng ký ngay
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-footer__bottom">
+        <div class="container site-footer__bottom-inner">
+            <p>&copy; {{ date('Y') }} Alpha Kids Football Club. All rights reserved.</p>
         </div>
     </div>
 </footer>

@@ -1,19 +1,19 @@
 :root {
-    /* Màu thương hiệu */
-    --color-primary: #3A1568;
-    --color-primary-dark: #260B49;
-    --color-primary-light: #5B2E9E;
-    --color-accent: #F5B914;
-    --color-accent-dark: #DE9F0A;
-    --color-accent-light: #FFE9B3;
+    /* Màu thương hiệu chính thức (navy + gold) — không đổi sang bảng màu khác */
+    --color-primary: #14144A;
+    --color-primary-dark: #0E0E38;
+    --color-primary-light: #23236B;
+    --color-accent: #F5A623;
+    --color-accent-dark: #D98F14;
+    --color-accent-light: #FBD98A;
 
     /* Màu văn bản & nền */
-    --color-text: #221B33;
-    --color-text-muted: #6B6478;
+    --color-text: #1A1A3D;
+    --color-text-muted: #6B6B85;
     --color-text-invert: #FFFFFF;
     --color-bg: #FFFFFF;
-    --color-bg-alt: #F8F6FC;
-    --color-border: #E7E1F0;
+    --color-bg-alt: #F5F5FA;
+    --color-border: #E5E5F0;
 
     /* Trạng thái */
     --color-success: #1E8E5A;
@@ -29,9 +29,9 @@
     --section-gap: 96px;
     --section-gap-mobile: 56px;
 
-    --shadow-sm: 0 2px 8px rgba(34, 27, 51, .06);
-    --shadow-md: 0 8px 24px rgba(34, 27, 51, .1);
-    --shadow-lg: 0 16px 40px rgba(34, 27, 51, .14);
+    --shadow-sm: 0 2px 10px rgba(20, 20, 74, .08);
+    --shadow-md: 0 8px 24px rgba(20, 20, 74, .12);
+    --shadow-lg: 0 16px 40px rgba(20, 20, 74, .16);
 
     --transition-base: .25s ease;
 
