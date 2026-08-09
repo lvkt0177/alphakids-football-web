@@ -7,13 +7,7 @@
     width: 100%;
 }
 
-/* Trang chủ: nền trong suốt, đè lên banner hero — thêm shadow để chữ/logo
-   vẫn đọc được trên mọi nền ảnh */
-.site-header--transparent .site-header__brand,
-.site-header--transparent .site-header__nav a {
-    color: var(--color-text-invert);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, .35);
-}
+
 
 /* Các trang khác: nền trắng, dính khi cuộn */
 .site-header--solid {
@@ -73,8 +67,8 @@
 .site-header__nav a {
     position: relative;
     display: inline-block;
-    font-size: 14.5px;
-    font-weight: 600;
+    font-size: 11.5px;
+    font-weight: 900;
     padding-block: 8px;
     transition: opacity var(--transition-base);
 }
@@ -101,7 +95,7 @@
 }
 
 .site-header__cta {
-    padding: 12px 24px;
+    padding: 7px 24px;
     font-size: 14px;
 }
 
@@ -245,15 +239,15 @@
 .site-footer__logo {
     display: flex;
     align-items: flex-start;
-    gap: 16px;
+    gap: 12px;
     color: #fff;
     font-family: var(--font-heading);
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .site-footer__logo img {
-    width: 104px;
-    height: 104px;
+    width: 85px;
+    height: 68px;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
@@ -261,18 +255,18 @@
 
 .site-footer__logo strong {
     display: block;
-    font-size: 25px;
+    font-size: 19px;
     font-weight: 800;
-    letter-spacing: .005em;
-    line-height: 1.1;
+    letter-spacing: 0;
+    line-height: 1.15;
 }
 
 .site-footer__logo small {
     display: block;
-    font-size: 22px;
+    font-size: 17px;
     font-weight: 800;
-    letter-spacing: .005em;
-    line-height: 1.1;
+    letter-spacing: 0;
+    line-height: 1.15;
     color: var(--color-accent);
 }
 
@@ -283,11 +277,11 @@
     font-style: normal;
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: 13px;
-    letter-spacing: .06em;
+    font-size: 11px;
+    letter-spacing: .05em;
     text-transform: uppercase;
-    color: white;
-    margin-top: 4px;
+    color: #fff;
+    margin-top: 3px;
 }
 
 .site-footer__intro {
@@ -302,13 +296,13 @@
 .site-footer__social {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .site-footer__social a {
-    height: 48px;
-    min-width: 48px;
-    padding-inline: 12px;
+    height: 38px;
+    min-width: 38px;
+    padding-inline: 10px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -324,13 +318,17 @@
 }
 
 .site-footer__social svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     fill: #fff;
 }
 
 .site-footer__social a:hover svg {
     fill: var(--color-primary-dark);
+}
+
+.site-footer__social a.is-text {
+    font-size: 13px;
 }
 
 /* Nút Zalo dùng chữ thay icon (đúng ảnh mẫu, Zalo không có icon glyph riêng) */

@@ -1,13 +1,12 @@
 @php
-    // Nguồn dữ liệu menu duy nhất, dùng lại cho cả menu desktop và menu mobile.
     $navItems = [
-        ['label' => 'Trang chủ', 'route' => 'home'],
-        ['label' => 'Về CLB', 'route' => 'about'],
-        ['label' => 'Phương pháp', 'route' => 'method'],
-        ['label' => 'Chương trình dạy', 'route' => 'program'],
-        ['label' => 'Hoạt động & Sự kiện', 'route' => 'activity.index'],
-        ['label' => 'Hệ thống cơ sở', 'route' => 'branch.index'],
-        ['label' => 'Câu hỏi thường gặp', 'route' => 'faq'],
+        ['label' => 'TRANG CHỦ', 'route' => 'home'],
+        ['label' => 'VỀ CLB', 'route' => 'about'],
+        ['label' => 'PHƯƠNG PHÁP', 'route' => 'method'],
+        ['label' => 'CHƯƠNG TRÌNH DẠY', 'route' => 'program'],
+        ['label' => 'HOẠT ĐỘNG & SỰ KIỆN', 'route' => 'activity.index'],
+        ['label' => 'HỆ THỐNG CƠ SỞ', 'route' => 'branch.index'],
+        ['label' => 'CÂU HỎI THƯỜNG GẶP', 'route' => 'faq'],
     ];
 @endphp
 

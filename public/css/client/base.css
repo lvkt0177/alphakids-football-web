@@ -3,8 +3,8 @@
     --color-primary: #14144A;
     --color-primary-dark: #0E0E38;
     --color-primary-light: #23236B;
-    --color-accent: #F5A623;
-    --color-accent-dark: #D98F14;
+    --color-accent: #f5d123;
+    --color-accent-dark: #f8de6a;
     --color-accent-light: #FBD98A;
 
     /* Màu văn bản & nền */
@@ -35,7 +35,7 @@
 
     --transition-base: .25s ease;
 
-    --font-heading: 'Baloo 2', 'Be Vietnam Pro', sans-serif;
+    --font-heading: 'Montserrat', 'Be Vietnam Pro', sans-serif;
     --font-body: 'Be Vietnam Pro', sans-serif;
 }
 
