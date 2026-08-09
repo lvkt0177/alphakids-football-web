@@ -78,10 +78,15 @@
             <div class="pillar-card pillar-card--teal">
                 <div class="pillar-card__icon">
                     <svg viewBox="0 0 24 24">
-                        <path d="M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9l-4.4 3.6A1 1 0 0 1 3 19.8V5a1 1 0 0 1 1-1z" />
+                        <path
+                            d="M10.6 3c-4.14 0-7.5 2.8-7.5 6.25 0 2 1.13 3.78 2.9 4.94-.12 1-.5 1.9-1.14 2.66a.4.4 0 0 0 .4.65c1.4-.3 2.6-.87 3.58-1.6.58.1 1.17.16 1.76.16 4.14 0 7.5-2.8 7.5-6.25S14.74 3 10.6 3z" />
+                        <path class="cutout"
+                            d="M8.2 9.9a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm2.6 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm2.6 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                        <path
+                            d="M20.4 12.2c1.02.72 1.6 1.72 1.6 2.8 0 1.13-.62 2.16-1.66 2.9-.05.72.16 1.4.6 1.98a.32.32 0 0 1-.33.5 5.2 5.2 0 0 1-2.05-.87c-.4.08-.82.12-1.26.12-2.2 0-4.06-1.02-4.77-2.44 2.9-.42 5.2-2.2 5.85-4.5.02.05.7.24 2.02-.49z" />
                     </svg>
                 </div>
-                <h3>Tư duy giao tiếp</h3>
+                <h3><span class="pillar-card__title-base">Tư duy giao</span> <span class="pillar-card__title-accent">tiếp</span></h3>
                 <p>Biết lắng nghe và chia sẻ.</p>
             </div>
 
@@ -89,32 +94,50 @@
                 <div class="pillar-card__icon">
                     <svg viewBox="0 0 24 24">
                         <path
-                            d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2zM9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z" />
+                            d="M12.3 2.8c-4.32 0-7.8 3.24-7.8 7.24 0 2.9 1.83 5.4 4.46 6.6-.1.92-.42 1.76-1 2.46a.35.35 0 0 0 .34.57c1.2-.24 2.24-.72 3.05-1.35.3.04.6.06.95.06 4.3 0 7.8-3.24 7.8-7.34s-3.5-7.24-7.8-7.24z" />
+                        <circle class="cutout" cx="10.3" cy="9.6" r="1.3" />
+                        <circle class="cutout" cx="13.7" cy="9.6" r="1.3" />
+                        <path class="cutout" d="M10.4 11.6c0 .95.8 1.7 1.7 1.7s1.7-.75 1.7-1.7"
+                            fill="none" stroke="currentColor" stroke-width="1.1" />
                     </svg>
                 </div>
-                <h3>Tư duy đánh giá</h3>
+                <h3><span class="pillar-card__title-base">Tư duy đánh</span> <span class="pillar-card__title-accent">giá</span></h3>
                 <p>Biết nhìn lại bản thân và kiểm soát cảm xúc.</p>
             </div>
 
             <div class="pillar-card pillar-card--orange">
                 <div class="pillar-card__icon">
                     <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="6.3" r="2.15" />
+                        <circle cx="6.1" cy="7.9" r="1.7" />
+                        <circle cx="17.9" cy="7.9" r="1.7" />
                         <path
-                            d="M16 11a3.5 3.5 0 1 0-3.4-4.3A3.5 3.5 0 0 0 16 11zm-8 0a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zm0 2c-2.7 0-8 1.3-8 4v2h9.3a5.9 5.9 0 0 1-.3-2c0-1.6.7-3 1.8-4A13 13 0 0 0 8 13zm8 0c-.4 0-.8 0-1.3.1a6 6 0 0 1 2.3 4.9c0 .7-.1 1.4-.3 2H24v-2c0-2.7-5.3-4-8-4z" />
+                            d="M12 9.3c-2.28 0-4.1 1.72-4.1 3.98v3.13c0 .5.4.9.9.9h6.4c.5 0 .9-.4.9-.9v-3.13c0-2.26-1.82-3.98-4.1-3.98z" />
+                        <path opacity=".92"
+                            d="M6.1 10.3c-1.87 0-3.35 1.4-3.35 3.2v2.55c0 .4.32.72.72.72h2.03v-3.27c0-1 .28-1.9.77-2.66a3.2 3.2 0 0 0-.17-.54z" />
+                        <path opacity=".92"
+                            d="M17.9 10.3c1.87 0 3.35 1.4 3.35 3.2v2.55c0 .4-.32.72-.72.72h-2.03v-3.27c0-1-.28-1.9-.77-2.66.06-.19.11-.36.17-.54z" />
                     </svg>
                 </div>
-                <h3>Tư duy ứng xử</h3>
+                <h3><span class="pillar-card__title-base">Tư duy ứng</span> <span class="pillar-card__title-accent">xử</span></h3>
                 <p>Biết hợp tác và giúp đỡ người khác.</p>
             </div>
 
             <div class="pillar-card pillar-card--purple">
                 <div class="pillar-card__icon">
                     <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="5.7" r="2.3" />
+                        <circle cx="6" cy="8.3" r="1.8" />
+                        <circle cx="18" cy="8.3" r="1.8" />
                         <path
-                            d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4zm0 4.5 4.5 2.2v3.3c0 3.3-2.2 5.9-4.5 6.7-2.3-.8-4.5-3.4-4.5-6.7V8.7L12 6.5z" />
+                            d="M12 9.1c-2.5 0-4.5 1.87-4.5 4.18v3.32c0 .5.4.9.9.9h7.2c.5 0 .9-.4.9-.9v-3.32C16.5 10.97 14.5 9.1 12 9.1z" />
+                        <path opacity=".92"
+                            d="M6 10.8c-1.93 0-3.5 1.45-3.5 3.24v2.63c0 .4.32.72.72.72H5v-3.44c0-.96.27-1.86.75-2.6-.2-.36-.46-.55-.75-.55z" />
+                        <path opacity=".92"
+                            d="M18 10.8c1.93 0 3.5 1.45 3.5 3.24v2.63c0 .4-.32.72-.72.72H19v-3.44c0-.96-.27-1.86-.75-2.6.2-.36.46-.55.75-.55z" />
                     </svg>
                 </div>
-                <h3>Tư duy lãnh đạo</h3>
+                <h3><span class="pillar-card__title-base">Tư duy lãnh</span> <span class="pillar-card__title-accent">đạo</span></h3>
                 <p>Biết chịu trách nhiệm và truyền cảm hứng.</p>
             </div>
         </div>

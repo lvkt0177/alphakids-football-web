@@ -228,19 +228,18 @@
 
 .pillars {
     padding-block: 56px;
-    background: var(--color-bg);
     border-top: 2px solid #79797917;
 }
 
 .pillars__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 45px;
 }
 
 .pillar-card {
     background: #fff;
-    border-radius: var(--radius-card);
+    border-radius: 100px 100px 32px 32px / 80px 80px 32px 32px;
     padding: 28px 22px;
     text-align: center;
     box-shadow: var(--shadow-sm);
@@ -266,28 +265,57 @@
     width: 26px;
     height: 26px;
     fill: #fff;
+    /* color kế thừa từ .pillar-card__icon (mỗi biến thể 1 màu) để phần
+       .cutout bên trong icon (currentColor) hiện đúng màu nền vòng tròn */
+}
+
+/* Phần "khoét lỗ" bên trong icon (mắt não, chấm chat...) hiện lại đúng màu
+   nền của vòng tròn icon, tạo hiệu ứng 2 lớp giống ảnh gốc */
+.pillar-card__icon svg .cutout {
+    fill: currentColor;
 }
 
 .pillar-card--teal .pillar-card__icon {
     background: var(--pillar-teal);
+    color: var(--pillar-teal);
 }
 
 .pillar-card--blue .pillar-card__icon {
     background: var(--pillar-blue);
+    color: var(--pillar-blue);
 }
 
 .pillar-card--orange .pillar-card__icon {
     background: var(--pillar-orange);
+    color: var(--pillar-orange);
 }
 
 .pillar-card--purple .pillar-card__icon {
     background: var(--pillar-purple);
+    color: var(--pillar-purple);
 }
 
 .pillar-card h3 {
     font-size: 15.5px;
-    color: var(--color-primary);
+    font-weight: 700;
+    text-transform: uppercase;
     margin-bottom: 6px;
+}
+
+.pillar-card--teal h3 {
+    color: var(--pillar-teal);
+}
+
+.pillar-card--blue h3 {
+    color: var(--pillar-blue);
+}
+
+.pillar-card--orange h3 {
+    color: var(--pillar-orange);
+}
+
+.pillar-card--purple h3 {
+    color: var(--pillar-purple);
 }
 
 .pillar-card p {
