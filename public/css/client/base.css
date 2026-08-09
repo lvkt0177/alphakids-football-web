@@ -3,8 +3,8 @@
     --color-primary: #14144A;
     --color-primary-dark: #0E0E38;
     --color-primary-light: #23236B;
-    --color-accent: #f5d123;
-    --color-accent-dark: #f8de6a;
+    --color-accent: #efb81c;
+    --color-accent-dark: #f7c65c;
     --color-accent-light: #FBD98A;
 
     /* Màu văn bản & nền */
@@ -34,6 +34,12 @@
     --shadow-lg: 0 16px 40px rgba(20, 20, 74, .16);
 
     --transition-base: .25s ease;
+
+    /* 4 màu "tư duy cốt lõi" — dùng chung ở Trang chủ (A) và Phương pháp (C) */
+    --pillar-teal: #22A06B;
+    --pillar-blue: #2276D9;
+    --pillar-orange: #E8792C;
+    --pillar-purple: #6D3FC4;
 
     --font-heading: 'Montserrat', 'Be Vietnam Pro', sans-serif;
     --font-body: 'Be Vietnam Pro', sans-serif;
@@ -224,4 +230,18 @@ p {
     opacity: 0;
     transform: translateY(-12px);
     pointer-events: none;
+}
+
+/* Theme các phần trình duyệt tự vẽ theo đúng bộ nhận diện, không để mặc định */
+::selection {
+    background: var(--color-accent);
+    color: var(--color-primary-dark);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
 }

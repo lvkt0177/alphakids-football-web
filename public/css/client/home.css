@@ -1,0 +1,309 @@
+/* ==========================================================================
+   Trang chủ (A) — Hero section + 4 tư duy cốt lõi.
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+.hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-bg);
+    min-height: 680px;
+    display: flex;
+    align-items: center;
+}
+
+/* Vệt sơn chiếm trọn chiều cao Hero + phần lớn bên trái — dùng fill để ép
+   đủ 100% chiều cao khung (cover sẽ dừng giữa chừng vì file gốc chỉ vẽ ở
+   phần trên, phần dưới là khoảng trống) */
+.hero__paint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 85%;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+}
+
+/* Ảnh banner (Admin) giờ phủ FULL toàn bộ Hero làm nền — không còn chiếm
+   riêng 1 khối bên phải. Lớp gradient trắng mờ dần (.hero__photo-overlay)
+   giúp chữ bên trái vẫn đọc được, bên phải ảnh hiện rõ hoàn toàn. */
+.hero__photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero__photo img {
+    width: 100%;
+    /* height: 100%; */
+    object-fit: cover;
+    display: block;
+}
+
+.hero__photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, .97) 0%,
+        rgba(255, 255, 255, .93) 30%,
+        rgba(255, 255, 255, .5) 48%,
+        rgba(255, 255, 255, 0) 66%);
+}
+
+.hero__photo-empty {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px;
+    background: var(--color-bg-alt);
+    border: 2px dashed var(--color-border);
+    box-sizing: border-box;
+}
+
+.hero__photo-empty .hero__photo-note {
+    color: var(--color-text-muted);
+}
+
+.hero__inner {
+    position: relative;
+    z-index: 3;
+    padding-block: calc(var(--header-height) + 56px) 72px;
+}
+
+.hero__content {
+    max-width: 540px;
+}
+
+/* Heading nghiêng — đúng phong cách năng động của ảnh mẫu. Chỉ nghiêng dòng
+   tiêu đề lớn, các phần chữ còn lại (mô tả, checklist, nút) giữ thẳng để dễ
+   đọc. */
+.hero__title {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: clamp(2.25rem, 4.4vw, 4.4rem);
+    line-height: 1.05;
+    letter-spacing: -.01em;
+    color: var(--color-primary);
+    margin-bottom: 14px;
+    transform: rotate(-4deg);
+    transform-origin: left center;
+}
+
+.hero__title span {
+    display: block;
+    color: var(--color-accent);
+}
+
+.hero__subtitle {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    font-size: clamp(1.05rem, 1.8vw, 2.3rem);
+    color: var(--color-primary);
+    margin-bottom: 18px;
+}
+
+.hero__desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-primary);
+    max-width: 46ch;
+    font-weight: 500;
+    margin-bottom: 24px;
+}
+
+.hero__checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.hero__checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--color-text);
+}
+
+.hero__checklist svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    fill: var(--pillar-teal);
+}
+
+.hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    text-transform: uppercase;
+}
+
+.btn--learn-more,
+.btn--register {
+    font-size: 14px;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        min-height: 0;
+        display: block;
+    }
+
+    .hero__paint {
+        display: none;
+    }
+
+    .hero__photo {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: 260px;
+        margin-top: var(--header-height);
+    }
+
+    .hero__photo-overlay {
+        display: none;
+    }
+
+    .hero__inner {
+        padding-block: 32px 56px;
+    }
+
+    .hero__content {
+        max-width: none;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .hero__title,
+    .hero__subtitle,
+    .hero__desc,
+    .hero__checklist,
+    .hero__actions {
+        animation: hero-rise .6s cubic-bezier(.16, 1, .3, 1) both;
+    }
+
+    .hero__subtitle {
+        animation-delay: .05s;
+    }
+
+    .hero__desc {
+        animation-delay: .1s;
+    }
+
+    .hero__checklist {
+        animation-delay: .15s;
+    }
+
+    .hero__actions {
+        animation-delay: .2s;
+    }
+}
+
+@keyframes hero-rise {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- 4 tư duy cốt lõi ---------- */
+.pillars {
+    padding-block: 56px;
+    background: var(--color-bg);
+}
+
+.pillars__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.pillar-card {
+    background: #fff;
+    border-radius: var(--radius-card);
+    padding: 28px 22px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.pillar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.pillar-card__icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+
+.pillar-card__icon svg {
+    width: 26px;
+    height: 26px;
+    fill: #fff;
+}
+
+.pillar-card--teal .pillar-card__icon {
+    background: var(--pillar-teal);
+}
+
+.pillar-card--blue .pillar-card__icon {
+    background: var(--pillar-blue);
+}
+
+.pillar-card--orange .pillar-card__icon {
+    background: var(--pillar-orange);
+}
+
+.pillar-card--purple .pillar-card__icon {
+    background: var(--pillar-purple);
+}
+
+.pillar-card h3 {
+    font-size: 15.5px;
+    color: var(--color-primary);
+    margin-bottom: 6px;
+}
+
+.pillar-card p {
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 0;
+    color: var(--color-text-muted);
+}
+
+@media (max-width: 768px) {
+    .pillars__grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .pillars__grid {
+        grid-template-columns: 1fr;
+    }
+}

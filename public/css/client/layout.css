@@ -7,18 +7,18 @@
     width: 100%;
 }
 
-
+/* Chữ/logo Header luôn màu navy — áp dụng cho cả 2 biến thể (transparent lẫn
+   solid), vì nền các trang (kể cả Hero Trang chủ) đều sáng. */
+.site-header__brand,
+.site-header__nav a {
+    color: var(--color-primary);
+}
 
 /* Các trang khác: nền trắng, dính khi cuộn */
 .site-header--solid {
     position: sticky;
     background: var(--color-bg);
     box-shadow: var(--shadow-sm);
-}
-
-.site-header--solid .site-header__brand,
-.site-header--solid .site-header__nav a {
-    color: var(--color-primary);
 }
 
 .site-header__inner {
