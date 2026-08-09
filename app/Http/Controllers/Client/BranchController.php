@@ -11,6 +11,6 @@ class BranchController extends Controller
     {
         $branches = Branch::active()->ordered()->get();
 
-        return view('branch.index', compact('branches'));
+        return view('client.branch.index', compact('branches'));
     }
 }
