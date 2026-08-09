@@ -11,11 +11,11 @@
             <a href="{{ route('home') }}" class="site-footer__logo">
                 <img src="{{ asset('images/logo/logo.jpg') }}" alt="Alpha Kids Football Club">
                 <span>
-                    <strong>ALPHA KIDS</strong><br>
+                    <strong>ALPHA KIDS</strong>
                     <small>FOOTBALL CLUB</small>
+                    <em class="site-footer__tagline">Bóng đá tư duy</em>
                 </span>
             </a>
-            <p class="site-footer__tagline">Bóng đá tư duy</p>
             <p class="site-footer__intro">
                 Alpha Kids Football Club sử dụng bóng đá như một công cụ giáo dục để giúp trẻ phát triển thể chất, tư duy,
                 kỹ năng sống và những phẩm chất cần thiết cho tương lai.
@@ -34,9 +34,7 @@
                         </a>
                     @endif
                     @if ($siteSettings['zalo_url'] ?? null)
-                        <a href="{{ $siteSettings['zalo_url'] }}" target="_blank" rel="noopener" aria-label="Zalo">
-                            <svg viewBox="0 0 24 24"><path d="M4 4h16v12.4l-3.2-1.8H4V4zm3 4.5v1.4h4.6V8.5H7zm0 3v1.4h7V11.5H7z"/></svg>
-                        </a>
+                        <a href="{{ $siteSettings['zalo_url'] }}" target="_blank" rel="noopener" aria-label="Zalo" class="is-text">Zalo</a>
                     @endif
                 </div>
             @endif
@@ -45,7 +43,7 @@
         {{-- Cột 2: Về CLB --}}
         <div class="site-footer__col">
             <h3>Về CLB</h3>
-            <ul>
+            <ul class="site-footer__links">
                 <li><a href="{{ route('method') }}">Phương pháp giáo dục</a></li>
                 <li><a href="{{ route('program') }}">Chương trình dạy</a></li>
                 <li><a href="{{ route('about') }}">Tầm nhìn &amp; Sứ mệnh</a></li>
@@ -57,7 +55,7 @@
         {{-- Cột 3: Chương trình --}}
         <div class="site-footer__col">
             <h3>Chương trình</h3>
-            <ul>
+            <ul class="site-footer__links">
                 <li><a href="{{ route('activity.index') }}">Hoạt động &amp; Sự kiện</a></li>
                 <li><a href="{{ route('branch.index') }}">Hệ thống cơ sở</a></li>
                 <li><a href="{{ route('faq') }}">Câu hỏi thường gặp</a></li>
