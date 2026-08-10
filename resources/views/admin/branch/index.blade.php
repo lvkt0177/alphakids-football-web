@@ -11,7 +11,10 @@
                 <div class="card-title">Danh sách cơ sở</div>
                 <div class="card-subtitle">{{ $branches->total() }} cơ sở</div>
             </div>
-            <a href="{{ route('admin.branch.create') }}" class="btn btn-primary btn-sm">Thêm cơ sở</a>
+            <a href="{{ route('admin.branch.create') }}" class="btn btn-primary btn-sm">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                Thêm cơ sở
+            </a>
         </div>
 
         <div class="table-scroll">
@@ -28,7 +31,7 @@
                 <tbody>
                     @forelse ($branches as $branch)
                         <tr>
-                            <td>{{ $branch->name }}</td>
+                            <td class="cell-name">{{ $branch->name }}</td>
                             <td>{{ $branch->address }}</td>
                             <td class="cell-mono">{{ $branch->schedule_weekday }} / {{ $branch->schedule_weekend }}</td>
                             <td>
@@ -49,7 +52,15 @@
                         </tr>
                     @empty
                         <tr class="empty-row">
-                            <td colspan="5">Chưa có cơ sở nào.</td>
+                            <td colspan="5">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.4"/></svg>
+                                    </div>
+                                    <div class="empty-state-title">Chưa có cơ sở nào</div>
+                                    <div class="empty-state-desc">Thêm cơ sở đầu tiên để hiển thị ở trang Hệ thống cơ sở.</div>
+                                </div>
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>

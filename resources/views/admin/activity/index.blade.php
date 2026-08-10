@@ -11,7 +11,10 @@
                 <div class="card-title">Danh sách hoạt động</div>
                 <div class="card-subtitle">{{ $activities->total() }} hoạt động</div>
             </div>
-            <a href="{{ route('admin.activity.create') }}" class="btn btn-primary btn-sm">Thêm hoạt động</a>
+            <a href="{{ route('admin.activity.create') }}" class="btn btn-primary btn-sm">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                Thêm hoạt động
+            </a>
         </div>
 
         <div class="table-scroll">
@@ -28,11 +31,11 @@
                 <tbody>
                     @forelse ($activities as $activity)
                         <tr>
-                            <td>{{ $activity->name }}</td>
+                            <td class="cell-name">{{ $activity->name }}</td>
                             <td>{{ $activity->category->getLabel() }}</td>
                             <td>
                                 @if ($activity->is_featured)
-                                    <span class="badge badge-purple">Nổi bật #{{ $activity->featured_order }}</span>
+                                    <span class="badge badge-featured">Nổi bật #{{ $activity->featured_order }}</span>
                                 @else
                                     <span class="badge badge-gray">Không</span>
                                 @endif
@@ -56,7 +59,15 @@
                         </tr>
                     @empty
                         <tr class="empty-row">
-                            <td colspan="5">Chưa có hoạt động nào.</td>
+                            <td colspan="5">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="3"/></svg>
+                                    </div>
+                                    <div class="empty-state-title">Chưa có hoạt động nào</div>
+                                    <div class="empty-state-desc">Thêm hoạt động đầu tiên để hiển thị ở trang Hoạt động &amp; Sự kiện.</div>
+                                </div>
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>

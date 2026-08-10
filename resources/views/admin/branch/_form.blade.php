@@ -64,6 +64,8 @@
             </div>
         </div>
 
+        <hr class="divider">
+
         <div class="field">
             <label>Đặc điểm nổi bật (tối đa 4)</label>
             @php $features = old('features', $branch->features ?? ['', '', '', '']); @endphp
@@ -82,8 +84,8 @@
 
         <div class="field">
             <input type="hidden" name="is_active" value="0">
-            <label style="display:flex;align-items:center;gap:8px;font-weight:400;">
-                <input type="checkbox" name="is_active" value="1" style="width:auto;"
+            <label class="field-check-label">
+                <input type="checkbox" name="is_active" value="1"
                     {{ old('is_active', $branch->is_active ?? true) ? 'checked' : '' }}>
                 Đang hoạt động (hiển thị ra trang Client)
             </label>
@@ -91,7 +93,10 @@
 
         <div class="form-actions">
             <a href="{{ route('admin.branch.index') }}" class="btn btn-secondary">Hủy</a>
-            <button type="submit" class="btn btn-primary">{{ $branch->exists ? 'Lưu thay đổi' : 'Thêm cơ sở' }}</button>
+            <button type="submit" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                {{ $branch->exists ? 'Lưu thay đổi' : 'Thêm cơ sở' }}
+            </button>
         </div>
     </form>
 @endsection

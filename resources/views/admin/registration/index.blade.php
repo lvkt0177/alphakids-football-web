@@ -28,7 +28,7 @@
                 <tbody>
                     @forelse ($registrations as $registration)
                         <tr>
-                            <td>{{ $registration->child_name }}</td>
+                            <td class="cell-name">{{ $registration->child_name }}</td>
                             <td>{{ $registration->birth_year }}</td>
                             <td class="cell-mono">{{ $registration->phone }}</td>
                             <td class="cell-mono">{{ $registration->trial_date?->format('d/m/Y') }}</td>
@@ -44,7 +44,15 @@
                         </tr>
                     @empty
                         <tr class="empty-row">
-                            <td colspan="6">Chưa có đăng ký nào.</td>
+                            <td colspan="6">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M7.5 9h9M7.5 13h9M7.5 17h5"/></svg>
+                                    </div>
+                                    <div class="empty-state-title">Chưa có đăng ký nào</div>
+                                    <div class="empty-state-desc">Lượt đăng ký học thử mới từ website sẽ hiển thị ở đây.</div>
+                                </div>
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>

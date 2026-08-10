@@ -68,11 +68,13 @@
             </div>
         </div>
 
+        <hr class="divider">
+
         <div class="field">
             <label>Cơ sở đăng ký</label>
             @foreach ($branches as $branch)
-                <label style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:400;">
-                    <input type="checkbox" name="branches[]" value="{{ $branch->id }}" style="width:auto;"
+                <label class="field-check-label" style="margin-bottom:8px;">
+                    <input type="checkbox" name="branches[]" value="{{ $branch->id }}"
                         {{ in_array($branch->id, old('branches', $registration->branches->pluck('id')->toArray())) ? 'checked' : '' }}>
                     {{ $branch->name }}
                 </label>
@@ -89,15 +91,24 @@
 
         <div class="form-actions">
             <a href="{{ route('admin.registration.index') }}" class="btn btn-secondary">Hủy</a>
-            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            <button type="submit" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                Lưu thay đổi
+            </button>
         </div>
     </form>
 
-    <form method="POST" action="{{ route('admin.registration.destroy', $registration) }}"
-        data-confirm="Bạn chắc chắn muốn xóa đăng ký của bé &quot;{{ $registration->child_name }}&quot;? Hành động này không thể hoàn tác."
-        data-confirm-title="Xóa đăng ký">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger btn-sm">Xóa đăng ký</button>
-    </form>
+    <div class="danger-zone">
+        <div>
+            <div class="danger-zone-title">Xóa đăng ký này</div>
+            <div class="danger-zone-desc">Hành động không thể hoàn tác. Toàn bộ thông tin đăng ký sẽ bị xóa vĩnh viễn.</div>
+        </div>
+        <form method="POST" action="{{ route('admin.registration.destroy', $registration) }}"
+            data-confirm="Bạn chắc chắn muốn xóa đăng ký của bé &quot;{{ $registration->child_name }}&quot;? Hành động này không thể hoàn tác."
+            data-confirm-title="Xóa đăng ký">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger btn-sm">Xóa đăng ký</button>
+        </form>
+    </div>
 @endsection

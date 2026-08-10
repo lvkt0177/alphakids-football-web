@@ -13,7 +13,8 @@
         </div>
 
         <div class="section-note">
-            Các trường này đồng bộ hiển thị ở: Footer, trang Câu hỏi thường gặp, trang Liên hệ & Đăng ký học thử.
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+            Các trường này đồng bộ hiển thị ở: Footer, trang Câu hỏi thường gặp, trang Liên hệ &amp; Đăng ký học thử.
         </div>
 
         <div class="form-grid">
@@ -61,10 +62,15 @@
             </div>
         </div>
 
-        <hr class="divider" style="border:none;border-top:1px solid var(--border);margin:24px 0;">
+        <hr class="divider">
 
         <div class="card-header">
             <div class="card-title">Mạng xã hội</div>
+        </div>
+
+        <div class="section-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+            Các trường này hiển thị ở Footer.
         </div>
 
         <div class="form-grid">
@@ -97,7 +103,10 @@
         </div>
 
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            <button type="submit" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                Lưu thay đổi
+            </button>
         </div>
     </form>
 @endsection

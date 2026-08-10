@@ -10,7 +10,10 @@
 
 @section('content')
     <div class="tabs">
-        <button type="button" class="tab-btn active" data-tab="images">Hình ảnh</button>
+        <button type="button" class="tab-btn active" data-tab="images">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-right:5px;"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m3 16 5-5 4 4 5-5 4 4"/><circle cx="8.5" cy="9" r="1.4"/></svg>
+            Hình ảnh
+        </button>
         <button type="button" class="tab-btn" data-tab="video">Video</button>
         <button type="button" class="tab-btn" data-tab="activities">Hoạt động nổi bật</button>
     </div>
@@ -26,7 +29,10 @@
                     <div class="card-title">Quản lý ảnh hiển thị</div>
                     <div class="card-subtitle">Thay ảnh cho từng vị trí trên trang chủ và các trang khác.</div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm">Lưu ảnh</button>
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                    Lưu ảnh
+                </button>
             </div>
 
             @foreach (\App\Http\Controllers\Admin\SettingController::IMAGE_GROUPS as $group => $keys)
@@ -39,6 +45,7 @@
                                     <img src="{{ asset('storage/' . $images[$key]) }}" alt="{{ $label }}">
                                 @else
                                     <div class="image-placeholder">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m3 16 5-5 4 4 5-5 4 4"/><circle cx="8.5" cy="9" r="1.4"/></svg>
                                         <span>Chưa có ảnh</span>
                                     </div>
                                 @endif
@@ -47,6 +54,7 @@
                                 <div class="image-card-label">{{ $label }}</div>
                                 <div class="btn btn-secondary btn-sm btn-file">
                                     <input type="file" name="images[{{ $key }}]" accept="image/*">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 0 4 4m-4-4-4 4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
                                     Chọn ảnh mới
                                 </div>
                                 @error('images.' . $key)
@@ -71,7 +79,10 @@
                     <div class="card-title">Video mục Trang chủ</div>
                     <div class="card-subtitle">Dán link YouTube hoặc tải file video lên.</div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm">Lưu video</button>
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                    Lưu video
+                </button>
             </div>
 
             <div class="radio-toggle">
@@ -102,6 +113,7 @@
                     <label for="video_file">Tải file video</label>
                     <div class="btn btn-secondary btn-file" style="max-width:220px;">
                         <input type="file" id="video_file" name="video_file" accept="video/mp4">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 0 4 4m-4-4-4 4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
                         Chọn file video
                     </div>
                     <div class="field-hint">Định dạng MP4, tối đa 200MB.</div>
@@ -128,7 +140,10 @@
                     <div class="card-title">Hoạt động hiển thị trên Trang chủ</div>
                     <div class="card-subtitle">Chọn tối đa 6 hoạt động, nhập số thứ tự hiển thị.</div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm">Lưu thay đổi</button>
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                    Lưu thay đổi
+                </button>
             </div>
 
             @error('activities')
@@ -148,7 +163,15 @@
                             readonly>
                     </li>
                 @empty
-                    <li>Chưa có hoạt động nào để chọn.</li>
+                    <li>
+                        <div class="empty-state">
+                            <div class="empty-state-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="3"/></svg>
+                            </div>
+                            <div class="empty-state-title">Chưa có hoạt động nào để chọn</div>
+                            <div class="empty-state-desc">Thêm hoạt động ở mục Hoạt động &amp; Sự kiện trước.</div>
+                        </div>
+                    </li>
                 @endforelse
             </ul>
         </form>
