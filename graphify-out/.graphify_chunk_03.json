@@ -1,0 +1,124 @@
+{
+  "nodes": [
+    {
+      "id": "public_images_home_background_image",
+      "label": "Homepage Background Image (background.png)",
+      "file_type": "image",
+      "source_file": "C:\\Users\\Admin\\Desktop\\Project - Marketing - Alphazone\\alphakids-football\\public\\images\\home\\background.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "watercolor_brush_stroke_style",
+      "label": "Watercolor Brush-Stroke Visual Style",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\Admin\\Desktop\\Project - Marketing - Alphazone\\alphakids-football\\public\\images\\home\\background.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "alphakids_purple_orange_color_palette",
+      "label": "AlphaKids Purple/Lavender + Orange Accent Palette",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\Admin\\Desktop\\Project - Marketing - Alphazone\\alphakids-football\\public\\images\\home\\background.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "homepage_hero_section_decorative_background",
+      "label": "Homepage Hero Section Decorative Background Purpose",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\Admin\\Desktop\\Project - Marketing - Alphazone\\alphakids-football\\public\\images\\home\\background.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "kids_football_marketing_site_branding",
+      "label": "Kids Football (Soccer) Marketing Site Branding",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\Admin\\Desktop\\Project - Marketing - Alphazone\\alphakids-football\\public\\images\\home\\background.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "public_images_home_background_image",
+      "target": "watercolor_brush_stroke_style",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\Admin\\Desktop\\Project - Marketing - Alphazone\\alphakids-football\\public\\images\\home\\background.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "public_images_home_background_image",
+      "target": "alphakids_purple_orange_color_palette",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\Admin\\Desktop\\Project - Marketing - Alphazone\\alphakids-football\\public\\images\\home\\background.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "public_images_home_background_image",
+      "target": "homepage_hero_section_decorative_background",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\Admin\\Desktop\\Project - Marketing - Alphazone\\alphakids-football\\public\\images\\home\\background.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "alphakids_purple_orange_color_palette",
+      "target": "kids_football_marketing_site_branding",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "C:\\Users\\Admin\\Desktop\\Project - Marketing - Alphazone\\alphakids-football\\public\\images\\home\\background.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "watercolor_brush_stroke_style",
+      "target": "kids_football_marketing_site_branding",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "C:\\Users\\Admin\\Desktop\\Project - Marketing - Alphazone\\alphakids-football\\public\\images\\home\\background.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "homepage_hero_section_decorative_background",
+      "target": "kids_football_marketing_site_branding",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "C:\\Users\\Admin\\Desktop\\Project - Marketing - Alphazone\\alphakids-football\\public\\images\\home\\background.png",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}
