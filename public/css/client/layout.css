@@ -1,18 +1,61 @@
-/* ---------- Header ---------- */
 .site-header {
     position: absolute;
     inset-inline: 0;
     top: 0;
     z-index: 100;
     width: 100%;
+    transition: background-color .35s ease, box-shadow .35s ease;
 }
 
 .site-header__brand,
 .site-header__nav a {
     color: var(--color-primary);
+    transition: color .35s ease;
 }
 
-/* Các trang khác: nền trắng, dính khi cuộn */
+.site-header--transparent {
+    position: fixed;
+}
+
+.site-header--transparent .site-header__brand,
+.site-header--transparent .site-header__nav a {
+    color: #fff;
+}
+
+.site-header--transparent .site-header__nav a.is-active::after {
+    background: var(--color-accent);
+}
+
+.site-header--transparent::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    height: 180px;
+    background: linear-gradient(180deg, rgba(16, 16, 16, .62) 0%, rgba(16, 16, 16, .32) 55%, rgba(16, 16, 16, 0) 100%);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity .35s ease;
+    z-index: -1;
+}
+
+.site-header--transparent.is-scrolled {
+    background: var(--color-bg);
+    box-shadow: var(--shadow-sm);
+}
+
+.site-header--transparent.is-scrolled::before {
+    opacity: 0;
+}
+
+.site-header--transparent.is-scrolled .site-header__brand,
+.site-header--transparent.is-scrolled .site-header__nav a {
+    color: var(--color-primary);
+}
+
+.site-header--transparent.is-scrolled .site-header__toggle {
+    color: var(--color-primary);
+}
+
 .site-header--solid {
     position: sticky;
     background: var(--color-bg);
@@ -138,7 +181,6 @@
     }
 }
 
-/* ---------- Mobile menu (offcanvas) ---------- */
 .mobile-menu {
     position: fixed;
     inset: 0;
@@ -220,7 +262,6 @@
     margin-top: auto;
 }
 
-/* ---------- Footer ---------- */
 .site-footer {
     background: var(--color-primary-dark);
     color: rgba(255, 255, 255, .75);
@@ -233,7 +274,6 @@
     padding-block: 64px 40px;
 }
 
-/* Cột 1: Logo + giới thiệu + social */
 .site-footer__logo {
     display: flex;
     align-items: flex-start;
@@ -268,8 +308,6 @@
     color: var(--color-accent);
 }
 
-/* Tagline nằm ngay dưới "FOOTBALL CLUB", thụt vào cùng cột chữ (không phải
-   dòng riêng full-width dưới logo) */
 .site-footer__tagline {
     display: inline-block;
     font-style: normal;
@@ -290,7 +328,6 @@
     max-width: 30ch;
 }
 
-/* Social: viền mỏng, nền trong suốt — đúng kiểu ảnh mẫu (không nền đặc) */
 .site-footer__social {
     display: flex;
     align-items: center;
@@ -329,7 +366,6 @@
     font-size: 13px;
 }
 
-/* Nút Zalo dùng chữ thay icon (đúng ảnh mẫu, Zalo không có icon glyph riêng) */
 .site-footer__social a.is-text {
     font-family: var(--font-heading);
     font-weight: 700;
@@ -341,7 +377,6 @@
     color: var(--color-primary-dark);
 }
 
-/* Cột "Về CLB" / "Chương trình" */
 .site-footer__col h3 {
     position: relative;
     color: #fff;
@@ -379,8 +414,6 @@
     color: var(--color-accent);
 }
 
-/* Danh sách link có dấu chevron vàng (Về CLB, Chương trình) — không áp dụng
-   cho danh sách Liên hệ (dùng icon SVG riêng, xem .site-footer__contact) */
 .site-footer__links li {
     display: flex;
     align-items: center;
@@ -395,7 +428,6 @@
     line-height: 1;
 }
 
-/* Cột "Liên hệ" + box đăng ký nhanh */
 .site-footer__contact {
     margin-bottom: 24px;
 }
@@ -473,7 +505,6 @@
     height: 16px;
 }
 
-/* Dòng cuối: chỉ còn copyright, căn giữa */
 .site-footer__bottom {
     border-top: 1px solid rgba(255, 255, 255, .12);
 }

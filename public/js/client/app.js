@@ -1,7 +1,62 @@
 document.addEventListener('DOMContentLoaded', function () {
     initMobileMenu();
     initFlashToast();
+    initAccordions();
+    initHeaderScroll();
+    initRevealOnScroll();
 });
+
+function initRevealOnScroll() {
+    var groups = document.querySelectorAll('[data-reveal-group]');
+
+    if (!groups.length) {
+        return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+        groups.forEach(function (group) {
+            group.classList.add('is-inview');
+        });
+        return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-inview');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+
+    groups.forEach(function (group) {
+        observer.observe(group);
+    });
+}
+
+function initHeaderScroll() {
+    var header = document.getElementById('siteHeader');
+
+    if (!header) {
+        return;
+    }
+
+    var ticking = false;
+
+    function update() {
+        ticking = false;
+        header.classList.toggle('is-scrolled', window.scrollY > 48);
+    }
+
+    window.addEventListener('scroll', function () {
+        if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    update();
+}
 
 function initMobileMenu() {
     var toggle = document.getElementById('menuToggle');
@@ -45,6 +100,26 @@ function initMobileMenu() {
         if (event.key === 'Escape') {
             closeMenu();
         }
+    });
+}
+
+function initAccordions() {
+    var accordions = document.querySelectorAll('[data-accordion]');
+
+    accordions.forEach(function (accordion) {
+        var triggers = accordion.querySelectorAll('[data-accordion-trigger]');
+
+        triggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function () {
+                var alreadyOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+                triggers.forEach(function (other) {
+                    other.setAttribute('aria-expanded', 'false');
+                });
+
+                trigger.setAttribute('aria-expanded', alreadyOpen ? 'false' : 'true');
+            });
+        });
     });
 }
 

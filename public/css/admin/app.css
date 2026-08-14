@@ -1,47 +1,36 @@
-/* ==========================================================================
-   Alpha Kids Football — Admin Design System
-   Brand-locked palette: Navy (primary) + Gold (single accent), pulled from
-   the club crest and public site tokens (resources/css/client/base.css).
-   Shape rule: all-soft radius scale (10 / 16 / 22) applied everywhere.
-   ========================================================================== */
 
 :root {
-    /* Brand — navy scale (primary, used broadly: sidebar, headings, primary actions) */
-    --navy-950: #0E0E38;
-    --navy-900: #14144A;
-    --navy-800: #1B1B57;
-    --navy-700: #23236B;
-    --navy-600: #33337F;
-    --navy-100: #E9E9F5;
+    --navy-950: #141414;
+    --navy-900: #1D1D1D;
+    --navy-800: #262626;
+    --navy-700: #333333;
+    --navy-600: #404040;
+    --navy-100: #ECECEC;
 
-    /* Brand — gold scale (single accent, used sparingly & with intent) */
-    --gold-600: #A97A0B;
-    --gold-500: #C6960F;
-    --gold-400: #EFB81C;
-    --gold-300: #F7C65C;
-    --gold-100: #FCEFC7;
-    --gold-50: #FDF6E3;
+    --accent-600: #A84D18;
+    --accent-500: #C05F22;
+    --accent-400: #E8722E;
+    --accent-300: #F2955E;
+    --accent-100: #FBE6D6;
+    --accent-50: #FDF2E9;
 
-    /* Neutrals (cool, tinted toward navy hue — not warm gray) */
-    --bg: #F6F6FB;
+    --bg: #F6F6F5;
     --surface: #FFFFFF;
-    --surface-sunken: #FBFBFE;
-    --border: #E6E6F1;
-    --border-strong: #D3D3E4;
-    --text: #1A1A3D;
-    --text-secondary: #5B5B78;
-    --text-muted: #8D8DA9;
+    --surface-sunken: #FBFBFA;
+    --border: #E8E8E4;
+    --border-strong: #D6D6D0;
+    --text: #141414;
+    --text-secondary: #5C5C5C;
+    --text-muted: #8C8C8C;
     --text-invert: #FFFFFF;
 
-    /* Sidebar (deep navy, distinct elevation steps) */
-    --sidebar-bg: var(--navy-950);
-    --sidebar-bg-elev: #191948;
-    --sidebar-text: #A6A6C6;
-    --sidebar-text-active: #FFFFFF;
-    --sidebar-border: #24244F;
-    --sidebar-active-bg: #1E1E52;
+    --sidebar-bg: #FFFFFF;
+    --sidebar-bg-elev: #F6F6F5;
+    --sidebar-text: #5C5C5C;
+    --sidebar-text-active: #141414;
+    --sidebar-border: #E8E8E4;
+    --sidebar-active-bg: var(--accent-100);
 
-    /* Semantic status */
     --success: #1E8E5A;
     --success-bg: #E5F6ED;
     --warning: #B7791F;
@@ -49,33 +38,29 @@
     --danger: #C0392B;
     --danger-bg: #FCEAE8;
     --danger-strong: #A5281D;
-    --featured: var(--gold-600);
-    --featured-bg: var(--gold-100);
-    --neutral-text: #5B5B78;
-    --neutral-bg: #EFEFF6;
+    --featured: var(--accent-600);
+    --featured-bg: var(--accent-100);
+    --neutral-text: #6B6B6B;
+    --neutral-bg: #EFEFEC;
 
-    /* Shape scale — locked: inputs/buttons 10px, cards 16px, large surfaces 22px, pills 999px */
     --radius-sm: 10px;
     --radius: 14px;
     --radius-lg: 16px;
     --radius-xl: 22px;
     --radius-pill: 999px;
 
-    /* Shadows — tinted to navy hue, never pure black */
-    --shadow-xs: 0 1px 2px rgba(20, 20, 74, 0.05);
-    --shadow-sm: 0 2px 8px rgba(20, 20, 74, 0.06);
-    --shadow-md: 0 10px 28px rgba(20, 20, 74, 0.10);
-    --shadow-lg: 0 20px 48px rgba(20, 20, 74, 0.16);
-    --shadow-focus: 0 0 0 4px rgba(239, 184, 28, 0.28);
+    --shadow-xs: 0 1px 2px rgba(20, 20, 20, 0.05);
+    --shadow-sm: 0 2px 8px rgba(20, 20, 20, 0.06);
+    --shadow-md: 0 10px 28px rgba(20, 20, 20, 0.10);
+    --shadow-lg: 0 20px 48px rgba(20, 20, 20, 0.16);
+    --shadow-focus: 0 0 0 4px rgba(232, 114, 46, 0.28);
 
-    /* Type */
     --font-body: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
     --ease: cubic-bezier(.2, .7, .2, 1);
 }
 
-/* ---------- Reset ---------- */
 *,
 *::before,
 *::after {
@@ -141,11 +126,10 @@ img {
 }
 
 ::selection {
-    background: var(--gold-100);
+    background: var(--accent-100);
     color: var(--navy-900);
 }
 
-/* ---------- App shell ---------- */
 .app {
     display: flex;
     min-height: 100vh;
@@ -155,7 +139,7 @@ img {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(14, 14, 56, 0.55);
+    background: rgba(20, 20, 20, 0.55);
     backdrop-filter: blur(2px);
     z-index: 40;
     opacity: 0;
@@ -169,11 +153,10 @@ img {
     pointer-events: auto;
 }
 
-/* ---------- Sidebar ---------- */
 .sidebar {
     width: 272px;
     flex-shrink: 0;
-    background: linear-gradient(185deg, var(--sidebar-bg) 0%, #101040 100%);
+    background: var(--sidebar-bg);
     color: var(--sidebar-text);
     display: flex;
     flex-direction: column;
@@ -184,6 +167,7 @@ img {
     z-index: 50;
     transform: translateX(-100%);
     transition: transform .28s var(--ease);
+    border-right: 1px solid var(--sidebar-border);
     box-shadow: var(--shadow-lg);
 }
 
@@ -205,11 +189,11 @@ img {
     border-radius: var(--radius-sm);
     flex-shrink: 0;
     overflow: hidden;
-    background: var(--gold-400);
+    background: var(--accent-400);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 0 1px rgba(239, 184, 28, .35), 0 4px 14px rgba(239, 184, 28, .18);
+    box-shadow: 0 0 0 1px rgba(232, 114, 46, .35), 0 4px 14px rgba(232, 114, 46, .18);
 }
 
 .sidebar-logo img {
@@ -219,7 +203,7 @@ img {
 }
 
 .sidebar-title {
-    color: #fff;
+    color: var(--text);
     font-weight: 700;
     font-size: 14.5px;
     line-height: 1.3;
@@ -246,7 +230,7 @@ img {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .07em;
-    color: #61618C;
+    color: var(--text-muted);
     padding: 14px 12px 6px;
 }
 
@@ -286,7 +270,7 @@ img {
 
 .nav-item:hover {
     background: var(--sidebar-bg-elev);
-    color: #fff;
+    color: var(--sidebar-text-active);
 }
 
 .nav-item:hover .nav-icon {
@@ -295,13 +279,13 @@ img {
 
 .nav-item.active {
     background: var(--sidebar-active-bg);
-    color: #fff;
+    color: var(--sidebar-text-active);
     font-weight: 600;
 }
 
 .nav-item.active .nav-icon {
     opacity: 1;
-    color: var(--gold-400);
+    color: var(--accent-400);
 }
 
 .nav-item.active::before {
@@ -312,7 +296,7 @@ img {
     transform: translateY(-50%);
     width: 3px;
     height: 20px;
-    background: var(--gold-400);
+    background: var(--accent-400);
     border-radius: 0 4px 4px 0;
 }
 
@@ -329,8 +313,8 @@ img {
     height: 30px;
     border-radius: 50%;
     flex-shrink: 0;
-    background: var(--gold-100);
-    color: var(--gold-600);
+    background: var(--accent-100);
+    color: var(--accent-600);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -345,7 +329,7 @@ img {
 .sidebar-footer-name {
     font-size: 12.5px;
     font-weight: 600;
-    color: #fff;
+    color: var(--text);
 }
 
 .sidebar-footer-email {
@@ -356,7 +340,6 @@ img {
     white-space: nowrap;
 }
 
-/* ---------- Main / Topbar ---------- */
 .main {
     flex: 1;
     display: flex;
@@ -460,7 +443,7 @@ img {
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+    background: linear-gradient(135deg, var(--accent-400), var(--accent-500));
     color: var(--navy-900);
     display: flex;
     align-items: center;
@@ -468,7 +451,7 @@ img {
     font-weight: 700;
     font-size: 13px;
     flex-shrink: 0;
-    box-shadow: 0 0 0 3px var(--gold-100);
+    box-shadow: 0 0 0 3px var(--accent-100);
 }
 
 .content {
@@ -476,7 +459,6 @@ img {
     flex: 1;
 }
 
-/* ---------- Page header ---------- */
 .page-header {
     margin-bottom: 20px;
 }
@@ -486,11 +468,10 @@ img {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .06em;
-    color: var(--gold-600);
+    color: var(--accent-600);
     margin-bottom: 4px;
 }
 
-/* ---------- Stat cards (dashboard) ---------- */
 .stat-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
@@ -532,8 +513,8 @@ img {
 }
 
 .stat-card.is-accent .stat-card-icon {
-    background: var(--gold-100);
-    color: var(--gold-600);
+    background: var(--accent-100);
+    color: var(--accent-600);
 }
 
 .stat-card-value {
@@ -549,7 +530,6 @@ img {
     font-weight: 600;
 }
 
-/* ---------- Quick links (dashboard) ---------- */
 .quick-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -580,7 +560,7 @@ img {
     border-radius: var(--radius-sm);
     flex-shrink: 0;
     background: var(--navy-900);
-    color: var(--gold-400);
+    color: var(--accent-400);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -621,7 +601,6 @@ img {
     height: 16px;
 }
 
-/* ---------- Card / Section ---------- */
 .card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -652,7 +631,6 @@ img {
     margin-top: 3px;
 }
 
-/* ---------- Buttons ---------- */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -690,12 +668,12 @@ img {
 }
 
 .btn-accent {
-    background: var(--gold-400);
+    background: var(--accent-400);
     color: var(--navy-900);
 }
 
 .btn-accent:hover {
-    background: var(--gold-300);
+    background: var(--accent-300);
 }
 
 .btn-secondary {
@@ -748,7 +726,6 @@ img {
     cursor: pointer;
 }
 
-/* ---------- Form fields ---------- */
 .field {
     margin-bottom: 16px;
 }
@@ -868,7 +845,7 @@ img {
     display: flex;
     gap: 10px;
     background: var(--navy-100);
-    border: 1px solid #DADAF0;
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius-sm);
     padding: 12px 14px;
     margin-bottom: 18px;
@@ -886,7 +863,6 @@ img {
     color: var(--navy-700);
 }
 
-/* ---------- Danger zone ---------- */
 .danger-zone {
     border: 1px dashed var(--danger-bg);
     background: #FFFBFA;
@@ -912,7 +888,6 @@ img {
     margin-top: 2px;
 }
 
-/* ---------- Tabs ---------- */
 .tabs {
     display: flex;
     gap: 2px;
@@ -940,7 +915,7 @@ img {
 
 .tab-btn.active {
     color: var(--navy-900);
-    border-bottom-color: var(--gold-400);
+    border-bottom-color: var(--accent-400);
 }
 
 .tab-panel {
@@ -964,7 +939,6 @@ img {
     }
 }
 
-/* ---------- Toolbar / filters ---------- */
 .toolbar {
     display: flex;
     flex-wrap: wrap;
@@ -1014,7 +988,6 @@ img {
     color: var(--text-muted);
 }
 
-/* ---------- Table ---------- */
 .table-scroll {
     overflow-x: auto;
     border: 1px solid var(--border);
@@ -1056,7 +1029,7 @@ tbody tr {
 }
 
 tbody tr:hover {
-    background: var(--gold-50);
+    background: var(--accent-50);
 }
 
 .cell-name {
@@ -1081,7 +1054,6 @@ tbody tr:hover {
     gap: 6px;
 }
 
-/* ---------- Badges ---------- */
 .badge {
     display: inline-flex;
     align-items: center;
@@ -1134,7 +1106,6 @@ tbody tr:hover {
     gap: 8px;
 }
 
-/* ---------- Empty state ---------- */
 .empty-row td {
     padding: 0;
     border-bottom: none;
@@ -1177,7 +1148,6 @@ tbody tr:hover {
     max-width: 320px;
 }
 
-/* ---------- Toast ---------- */
 .toast-container {
     position: fixed;
     right: 20px;
@@ -1224,19 +1194,18 @@ tbody tr:hover {
 }
 
 .toast-item.toast-success svg {
-    color: var(--gold-400);
+    color: var(--accent-400);
 }
 
 .toast-item.toast-error svg {
     color: #F87171;
 }
 
-/* ---------- Confirm modal ---------- */
 .modal-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(14, 14, 56, 0.55);
+    background: rgba(20, 20, 20, 0.55);
     backdrop-filter: blur(2px);
     z-index: 150;
     align-items: center;
@@ -1311,7 +1280,6 @@ tbody tr:hover {
     flex: 1;
 }
 
-/* ---------- Image grid ---------- */
 .image-group-title {
     font-size: 12px;
     font-weight: 700;
@@ -1389,7 +1357,6 @@ tbody tr:hover {
     margin-bottom: 8px;
 }
 
-/* ---------- Video tab ---------- */
 .radio-toggle {
     display: flex;
     gap: 8px;
@@ -1443,7 +1410,6 @@ tbody tr:hover {
     display: block;
 }
 
-/* ---------- Activities tab (featured, drag order) ---------- */
 .activity-list {
     display: flex;
     flex-direction: column;
@@ -1462,8 +1428,8 @@ tbody tr:hover {
 }
 
 .activity-row:has(input:checked) {
-    border-color: var(--gold-300);
-    background: var(--gold-50);
+    border-color: var(--accent-300);
+    background: var(--accent-50);
 }
 
 .activity-row input[type=checkbox] {
@@ -1500,7 +1466,6 @@ tbody tr:hover {
     flex-shrink: 0;
 }
 
-/* ---------- Responsive ---------- */
 @media (min-width: 1024px) {
     .sidebar {
         position: sticky;

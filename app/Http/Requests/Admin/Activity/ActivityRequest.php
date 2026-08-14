@@ -22,7 +22,7 @@ class ActivityRequest extends FormRequest
             'slug' => ['required', 'string', 'max:255', Rule::unique('activities', 'slug')->ignore($activityId)],
             'category' => ['required', Rule::enum(ActivityCategory::class)],
             'description' => ['nullable', 'string'],
-            'image' => ['nullable', 'image', 'max:2048'],
+            'image' => ['nullable', 'image', 'max:7168'],
             'is_featured' => ['boolean'],
             'featured_order' => ['nullable', 'integer', 'min:0'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
@@ -38,7 +38,7 @@ class ActivityRequest extends FormRequest
             'slug.unique' => 'Slug này đã tồn tại.',
             'category.required' => 'Vui lòng chọn danh mục.',
             'image.image' => 'File tải lên phải là hình ảnh.',
-            'image.max' => 'Hình ảnh không được vượt quá 2MB.',
+            'image.max' => 'Hình ảnh không được vượt quá 7MB.',
         ];
     }
 }

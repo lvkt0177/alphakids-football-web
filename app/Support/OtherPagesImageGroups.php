@@ -9,10 +9,13 @@ class OtherPagesImageGroups
             'label' => 'Về CLB',
             'groups' => [
                 'Banner trang' => [
-                    'about_banner' => 'Ảnh banner trang Về CLB',
+                    'about_banner' => 'Ảnh banner trang Về CLB (ngang, tràn viền)',
                 ],
-                'Alpha Kids hiện nay' => [
-                    'about_stats_image' => 'Ảnh đội hình (khối thống kê)',
+                'Đôi lời tâm sự' => [
+                    'about_letter_photo' => 'Ảnh chân dung người chia sẻ',
+                ],
+                'CTA cuối trang' => [
+                    'about_closing_cta_photo' => 'Ảnh nền full-bleed cho khối CTA cuối trang (tùy chọn)',
                 ],
             ],
         ],
@@ -31,6 +34,9 @@ class OtherPagesImageGroups
                 ],
                 'Banner "Giáo dục bằng trái tim"' => [
                     'method_heart_banner' => 'Ảnh banner cuối trang',
+                ],
+                'CTA cuối trang' => [
+                    'method_closing_cta_photo' => 'Ảnh nền full-bleed cho khối CTA cuối trang (tùy chọn)',
                 ],
             ],
         ],

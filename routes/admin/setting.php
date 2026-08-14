@@ -11,6 +11,7 @@ Route::prefix('setting')->name('setting.')->group(function () {
 
     Route::get('/other-pages', [SettingController::class, 'otherPages'])->name('other-pages');
     Route::post('/other-pages/images', [SettingController::class, 'updateImages'])->name('other-pages.images.update');
+    Route::post('/other-pages/about-letter', [SettingController::class, 'updateAboutLetter'])->name('other-pages.about-letter.update');
 
     Route::get('/general', [SettingController::class, 'general'])->name('general');
     Route::post('/general', [SettingController::class, 'updateGeneral'])->name('general.update');

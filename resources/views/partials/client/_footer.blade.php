@@ -1,12 +1,9 @@
 @php
-    // $siteSettings được SiteSettingsComposer tự động gán cho layout Client
-    // và kế thừa xuống partial này (Blade @include chia sẻ chung scope biến).
     $siteSettings = $siteSettings ?? collect();
 @endphp
 
 <footer class="site-footer">
     <div class="site-footer__top container">
-        {{-- Cột 1: Logo + giới thiệu + social --}}
         <div class="site-footer__col">
             <a href="{{ route('home') }}" class="site-footer__logo">
                 <img src="{{ asset('images/logo/logo.jpg') }}" alt="Alpha Kids Football Club">
@@ -40,7 +37,6 @@
             @endif
         </div>
 
-        {{-- Cột 2: Về CLB --}}
         <div class="site-footer__col">
             <h3>Về CLB</h3>
             <ul class="site-footer__links">
@@ -52,7 +48,6 @@
             </ul>
         </div>
 
-        {{-- Cột 3: Chương trình --}}
         <div class="site-footer__col">
             <h3>Chương trình</h3>
             <ul class="site-footer__links">
@@ -62,7 +57,6 @@
             </ul>
         </div>
 
-        {{-- Cột 4: Liên hệ + Box đăng ký nhanh --}}
         <div class="site-footer__col">
             <h3>Liên hệ</h3>
             <ul class="site-footer__contact" id="footerContactInfo">
@@ -92,7 +86,7 @@
                 @endif
             </ul>
 
-            <div class="site-footer__quick">
+            <div class="site-footer__quick" id="siteFooterQuick">
                 <h4>Đăng ký tư vấn / học thử</h4>
                 <p>Để lại thông tin để được tư vấn miễn phí</p>
                 <form action="{{ route('registration.quick-store') }}" method="POST" class="site-footer__quick-form">

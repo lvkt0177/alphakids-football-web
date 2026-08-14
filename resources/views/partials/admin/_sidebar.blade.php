@@ -63,6 +63,20 @@
             </span>
             Đăng ký học thử
         </a>
+        <a href="{{ route('admin.proof-point.index') }}"
+            class="nav-item {{ request()->routeIs('admin.proof-point.*') ? 'active' : '' }}">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h10M7 12h6M4 4h16v11H9l-5 4V4z"/></svg>
+            </span>
+            Vì sao chọn Alpha Kids
+        </a>
+        <a href="{{ route('admin.faq.index') }}"
+            class="nav-item {{ request()->routeIs('admin.faq.*') ? 'active' : '' }}">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2 2-2 3.5"/><path d="M12 17h.01"/></svg>
+            </span>
+            Câu hỏi thường gặp
+        </a>
     </nav>
 
     <div class="sidebar-footer">
