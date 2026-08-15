@@ -47,16 +47,26 @@ class OtherPagesImageGroups
                 'Banner trang' => [
                     'program_banner' => 'Ảnh banner trang Chương trình dạy',
                 ],
+                'Lộ trình 12 tháng' => [
+                    'program_roadmap_1' => 'Ảnh Chuyền & kiểm soát bóng (Tháng 1 & 7)',
+                    'program_roadmap_2' => 'Ảnh Dẫn bóng & qua người (Tháng 2 & 8)',
+                    'program_roadmap_3' => 'Ảnh Sút bóng & tấn công (Tháng 3 & 9)',
+                    'program_roadmap_4' => 'Ảnh Phòng ngự & tranh chấp (Tháng 4 & 10)',
+                    'program_roadmap_5' => 'Ảnh Di chuyển & tổ chức (Tháng 5 & 11)',
+                    'program_roadmap_6' => 'Ảnh Tổng hợp & đánh giá (Tháng 6 & 12)',
+                ],
                 'Cấu trúc mỗi buổi học' => [
                     'program_structure_warmup' => 'Ảnh Khởi động (10 phút)',
                     'program_structure_technique' => 'Ảnh Kỹ thuật & Chủ đề tháng (45 phút)',
                     'program_structure_match' => 'Ảnh Thi đấu ứng dụng (30 phút)',
-                    'program_structure_review' => 'Ảnh Đánh giá - Ghi nhớ - Tổng kết (5 phút)',
                 ],
                 'Chương trình theo độ tuổi' => [
                     'program_age_toddler' => 'Ảnh Mầm non (3-6 tuổi)',
                     'program_age_primary' => 'Ảnh Tiểu học (7-10 tuổi)',
                     'program_age_teen' => 'Ảnh Thiếu niên (11-14 tuổi)',
+                ],
+                'CTA cuối trang' => [
+                    'program_closing_cta_photo' => 'Ảnh nền full-bleed cho khối CTA cuối trang (tùy chọn)',
                 ],
             ],
         ],

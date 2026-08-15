@@ -1,0 +1,446 @@
+/* ---- roadmap: large photo, alternating rows, reveals as you scroll to it
+   (each row is its own [data-reveal-group], reusing the site-wide reveal
+   mechanism already in app.js) — photography carries the "wow" here, not a
+   timed widget, matching the Hero/Closing CTA/Club Intro playbook rather
+   than a SaaS feature-showcase pattern ---- */
+.roadmap-rows {
+    display: grid;
+    padding-top: 40px;
+}
+
+.roadmap-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    padding-block: 56px;
+    border-bottom: 1px solid var(--ink-faint);
+}
+
+.roadmap-rows > .roadmap-row:first-child {
+    padding-top: 0;
+}
+
+.roadmap-rows > .roadmap-row:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.roadmap-row--reverse .roadmap-row__media {
+    order: 2;
+}
+
+.roadmap-row--reverse .roadmap-row__body {
+    order: 1;
+}
+
+.roadmap-row__media {
+    aspect-ratio: 5 / 4;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--paper-alt);
+    position: relative;
+}
+
+.roadmap-row__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.roadmap-row__media-empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px dashed var(--ink-faint);
+    color: var(--ink-soft);
+    opacity: .55;
+}
+
+.roadmap-row__media-empty svg {
+    width: 28px;
+    height: 28px;
+}
+
+.roadmap-row__media-empty span {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.roadmap-row__meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.roadmap-row__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.roadmap-row__icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--accent-text);
+    fill: none;
+    stroke-width: 1.6;
+}
+
+.roadmap-row__months {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent-text);
+}
+
+.roadmap-row__topic {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+    color: var(--ink);
+    margin: 0 0 14px;
+}
+
+.roadmap-row__desc {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 52ch;
+}
+
+@media (max-width: 900px) {
+    .roadmap-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding-block: 40px;
+    }
+
+    .roadmap-row__media,
+    .roadmap-row__body {
+        order: initial;
+    }
+}
+
+/* ---- session structure: 3 blocks + arrows, one true sequence ---- */
+.session-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+}
+
+.session-card {
+    flex: 1;
+    border: 1px solid var(--ink-faint);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+}
+
+.session-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    flex-shrink: 0;
+    color: var(--ink-faint);
+}
+
+.session-arrow svg {
+    width: 22px;
+    height: 22px;
+}
+
+.session-card__head {
+    padding: 24px 24px 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.session-badge {
+    background: var(--ink);
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 17px;
+    border-radius: var(--radius-sm);
+    padding: 6px 14px;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 52px;
+}
+
+.session-badge small {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--accent-text);
+    text-transform: uppercase;
+    margin-top: 3px;
+}
+
+.session-card__head h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15.5px;
+    letter-spacing: .01em;
+    margin: 0;
+    color: var(--ink);
+}
+
+.session-card p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    padding: 12px 24px 0;
+    margin: 0;
+}
+
+.session-card__media {
+    aspect-ratio: 4 / 3;
+    margin: 18px 24px 24px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--paper-alt);
+    position: relative;
+}
+
+.session-card__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.session-card__media-empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px dashed var(--ink-faint);
+    border-radius: var(--radius-md);
+    color: var(--ink-soft);
+    opacity: .55;
+}
+
+.session-card__media-empty svg {
+    width: 26px;
+    height: 26px;
+}
+
+.session-card__media-empty span {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    .session-row {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .session-arrow {
+        width: auto;
+        height: 28px;
+        transform: rotate(90deg);
+    }
+}
+
+/* ---- age cards: named apart from home.css's own .tier-card (homepage
+   carousel teaser) so the two components never get confused in the
+   codebase, even though this page is where that teaser's "Xem chi tiết"
+   button lands ---- */
+.age-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.age-card {
+    border: 1px solid var(--ink-faint);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.age-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.age-card__media {
+    aspect-ratio: 16 / 10;
+    background: var(--paper-alt);
+    position: relative;
+    overflow: hidden;
+}
+
+.age-card__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.age-card__badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 1;
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 12.5px;
+    padding: 6px 12px;
+    letter-spacing: .02em;
+}
+
+.age-card__media-empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-bottom: 1px dashed var(--ink-faint);
+    color: var(--ink-soft);
+    opacity: .55;
+}
+
+.age-card__media-empty svg {
+    width: 26px;
+    height: 26px;
+}
+
+.age-card__media-empty span {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.age-card__body {
+    padding: 26px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.age-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+.age-card__icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--accent-text);
+    fill: none;
+    stroke-width: 1.6;
+}
+
+.age-card h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    margin: 0 0 10px;
+    color: var(--ink);
+}
+
+.age-card__rule {
+    width: 32px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin-bottom: 14px;
+}
+
+.age-card p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+}
+
+.age-card__list {
+    list-style: none;
+    margin: 0 0 22px;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+    flex: 1;
+}
+
+.age-card__list li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink);
+}
+
+.age-card__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.age-card__body .btn {
+    align-self: flex-start;
+}
+
+.age-card:hover .btn--outline {
+    background: var(--ink);
+    color: var(--white);
+}
+
+@media (max-width: 900px) {
+    .age-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .age-grid {
+        grid-template-columns: 1fr;
+    }
+}
