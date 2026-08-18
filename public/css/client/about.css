@@ -1,0 +1,370 @@
+
+
+.pillar-bento {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.pillar-bento__line {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.pillar-bento__line path {
+    fill: none;
+    stroke: var(--accent-text);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.pillar-bento__line circle {
+    fill: var(--accent);
+    opacity: .25;
+    transform-origin: center;
+    transform: scale(.6);
+    transition: opacity .35s ease, transform .35s ease;
+}
+
+.pillar-bento__line circle.is-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.pillar-card {
+    position: relative;
+    z-index: 2;
+    background: var(--paper);
+    border: 1px solid var(--ink-faint);
+    border-radius: var(--radius-lg);
+    padding: 28px 26px 26px;
+    overflow: hidden;
+    transition: border-color .35s ease;
+}
+
+.pillar-card:hover,
+.pillar-card.is-active {
+    border-color: var(--accent);
+}
+
+.pillar-card__ghost {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 72px;
+    line-height: 1;
+    color: var(--ink);
+    opacity: .05;
+    pointer-events: none;
+    transition: opacity .35s ease, color .35s ease;
+}
+
+.pillar-card.is-active .pillar-card__ghost {
+    color: var(--accent-text);
+    opacity: .14;
+}
+
+.pillar-card__icon {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    transition: background .35s ease, color .35s ease;
+}
+
+.pillar-card__icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.pillar-card:hover .pillar-card__icon,
+.pillar-card.is-active .pillar-card__icon {
+    background: var(--accent);
+    color: var(--ink);
+}
+
+.pillar-card h3 {
+    position: relative;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 16.5px;
+    letter-spacing: .01em;
+    margin: 0 0 8px;
+}
+
+.pillar-card p {
+    position: relative;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+@media (max-width: 700px) {
+    .pillar-bento {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Float, not grid: the photo keeps a fixed size and lets the browser's own
+   text-wrap do the rest - paragraphs wrap beside it while it's tall enough
+   to reach them, then take the full column width back the moment they clear
+   its bottom edge. No height-matching logic, no dead space, at any letter
+   length. See DESIGN.md "Đôi lời tâm sự" for the passes that got here. */
+.letter-block {
+    max-width: 970px;
+    margin-inline: auto;
+}
+
+.letter-block::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.letter-visual {
+    float: left;
+    width: 400px;
+    margin: 2px 32px 18px 0;
+}
+
+.letter-visual__stack {
+    position: relative;
+    /* Reserves room for the fanned ghost photos to peek into on both sides -
+       without it they overflow the float's own box and paint over the
+       wrapped text next to it (#found 2026-08-19, real render, not preview). */
+    padding: 0 9%;
+}
+
+.letter-visual__frame {
+    position: relative;
+    z-index: 3;
+    aspect-ratio: 5 / 6;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--paper);
+    transform: translateX(-20%) translateY(0%) rotate(0deg) scale(1);
+}
+
+.letter-visual__frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Two dimmed duplicates of the same photo, fanned out from directly behind
+   the main frame on scroll-in. Deliberately asymmetric (left sheet spreads
+   further and lifts, right sheet spreads less and settles) - a mirrored fan
+   reads as a machine-generated effect, not a stack someone actually laid down. */
+.letter-visual__ghost {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 9%;
+    right: 9%;
+    z-index: 1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--ink-faint);
+    background: var(--paper);
+    opacity: 0;
+    transform: translateX(0) scale(.92);
+    transition: transform .75s cubic-bezier(.16, 1, .3, 1), opacity .5s ease;
+}
+
+.letter-visual__ghost img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.letter-visual__ghost--a {
+    transform-origin: 100% 30%;
+    transition-delay: 0s;
+}
+
+.letter-visual__ghost--b {
+    z-index: 2;
+    transform-origin: 0% 70%;
+    transition-delay: .24s;
+}
+
+.letter-visual.is-inview .letter-visual__ghost--a {
+    opacity: 1;
+    transform: translateX(-75%) translateY(-5%) rotate(-20deg) scale(0.9);
+}
+
+.letter-visual.is-inview .letter-visual__ghost--b {
+    opacity: 1;
+    transform: translateX(12%) translateY(-5%) rotate(11deg) scale(.95);
+}
+
+.letter-body__text {
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--ink);
+}
+
+.letter-body__text p:first-child::first-letter {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 3.4rem;
+    line-height: .78;
+    color: var(--accent-text);
+    float: left;
+    padding-right: 10px;
+    padding-top: 4px;
+}
+
+.letter-body__text p {
+    margin: 0 0 18px;
+}
+
+.letter-body__text p:last-child {
+    margin-bottom: 0;
+}
+
+.letter-body__rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin-top: 26px;
+}
+
+/* Sign-off, like a real letter closes - name and role after the accent
+   rule, not a caption competing with the photo's own fan animation. */
+.letter-body__signature {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.letter-body__signature-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--ink);
+}
+
+.letter-body__signature-role {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+
+.letter-empty {
+    max-width: 580px;
+    margin-inline: auto;
+    text-align: center;
+    padding: 64px 28px;
+    border: 1.5px dashed var(--ink-faint);
+    border-radius: var(--radius-xl);
+    color: var(--ink-soft);
+}
+
+.letter-empty svg {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 18px;
+    opacity: .4;
+}
+
+.letter-empty p {
+    margin: 0;
+    font-size: 15.5px;
+}
+
+/* Was 700px - measured the actual wrapped-text column width across
+   701-1024px and it stayed uncomfortably narrow (~237px, ~28 characters
+   right after the old breakpoint) until ~900px (~420px, ~48 characters),
+   because the 400px float doesn't shrink until this whole block switches
+   to single-column. Moved the threshold to where the column actually
+   becomes comfortable, matching the 900px breakpoint the homepage's own
+   Club Intro split already uses for the same kind of image/text pairing. */
+@media (max-width: 900px) {
+    .letter-visual {
+        float: none;
+        width: 100%;
+        margin: 0 0 24px;
+    }
+
+    /* The desktop fan was tuned to counterbalance the float sitting next to
+       a text column (frame shifted left, ghosts spread wide to fill the
+       gutter). Centered and stacked on mobile, that same math reads as
+       off-kilter and clips against the narrower card - reset the frame to
+       sit centered and pull the spread back in to fit a ~300-360px column. */
+    .letter-visual__frame {
+        transform: translateX(0%) translateY(-1%) rotate(0deg) scale(0.9);
+    }
+
+    .letter-visual.is-inview .letter-visual__ghost--a {
+        transform: translateX(-45%) translateY(4%) rotate(-9deg) scale(0.85);
+    }
+
+    .letter-visual.is-inview .letter-visual__ghost--b {
+        transform: translateX(45%) translateY(-4%) rotate(10deg) scale(0.85);
+    }
+
+    .letter-body__text p:first-child::first-letter {
+        font-size: 2.6rem;
+    }
+}
+
+.about-nudge {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.about-nudge__link {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--ink-faint);
+    text-underline-offset: 4px;
+    transition: text-decoration-color .25s ease;
+}
+
+.about-nudge__link:hover {
+    text-decoration-color: var(--ink);
+}
+
+.about-nudge__link span {
+    display: inline-block;
+    transition: transform .25s cubic-bezier(.16, 1, .3, 1);
+}
+
+.about-nudge__link:hover span {
+    transform: translateX(3px);
+}
+
+.closing-cta__note--about {
+    margin-top: 8px;
+}
+
+.closing-cta__note--about b {
+    font-weight: 800;
+}
+
+.closing-cta__scrim-about {
+    background: rgba(16, 16, 16, 0.781);
+}
+

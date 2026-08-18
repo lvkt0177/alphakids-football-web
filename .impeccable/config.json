@@ -1,0 +1,32 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font-size",
+        "value": "23px",
+        "createdAt": "2026-08-11T08:18:26.340Z",
+        "reason": "User confirmed 23px is intentional for .care-row__text h3 (C.A.R.E manifesto row heading), manually tuned in editor"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(255, 194, 0, .22)",
+        "createdAt": "2026-08-11T09:08:21.749Z",
+        "reason": "User confirmed rgba(255, 194, 0, .22) is intentional - ambient glow for .intro-video__play-hint box-shadow, matches current --accent (#ffc200) at 22% alpha, same technique as the documented hero-mesh-gold ramp"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(255, 194, 0, .15)",
+        "createdAt": "2026-08-11T10:59:38.983Z",
+        "reason": "User confirmed rgba(255, 194, 0, .15) is intentional - .stat-item__icon bg on About page, matches current --accent at 15% alpha, same technique as .proof-card__icon on homepage"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "26px",
+        "createdAt": "2026-08-11T10:59:39.109Z",
+        "reason": "User confirmed 26px is intentional - .stat-item__number on About page stats block, falls under DESIGN.md's documented 'Display accents' range (1.15rem-4.4rem) for numerals scaled to their own container"
+      }
+    ]
+  }
+}

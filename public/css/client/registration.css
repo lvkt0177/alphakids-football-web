@@ -1,0 +1,373 @@
+.section-head h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+    line-height: 1.05;
+    letter-spacing: -.015em;
+    color: var(--ink);
+    margin-bottom: 12px;
+}
+
+.registration-wrap {
+    max-width: 880px;
+    margin-inline: auto;
+}
+
+/* ---------- form card ---------- */
+.form-card {
+    border: 1px solid var(--ink-faint);
+    border-radius: var(--radius-lg);
+    padding: 40px 36px;
+    background: var(--white);
+}
+
+@media (max-width: 560px) {
+    .form-card {
+        padding: 28px 22px;
+    }
+}
+
+.form-card__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 26px;
+}
+
+.form-card__head .icon-roundel {
+    margin-bottom: 0;
+    flex: none;
+}
+
+.form-card__head h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(20px, 2.4vw, 24px);
+    letter-spacing: -.01em;
+    margin: 0 0 6px;
+}
+
+.form-card__head p {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+.form-group__label {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 11.5px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    margin-bottom: 16px;
+}
+
+.form-group--divider {
+    border-top: 1px solid var(--ink-faint);
+    padding-top: 24px;
+    margin-top: 6px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+@media (max-width: 560px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+.form-row .field {
+    margin-bottom: 0;
+}
+
+.field label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 7px;
+}
+
+.field label span {
+    color: var(--accent-text);
+}
+
+.field input[type="text"],
+.field input[type="tel"],
+.field select,
+.field .textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--ink-faint);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 13.5px;
+    font-family: var(--font-body);
+}
+
+.field input::placeholder,
+.field .textarea::placeholder {
+    color: var(--ink-soft);
+    opacity: .6;
+}
+
+.field input:focus,
+.field select:focus,
+.field .textarea:focus {
+    outline: none;
+    border-color: var(--accent-dark);
+}
+
+.field .textarea {
+    min-height: 88px;
+    resize: vertical;
+}
+
+.field-error {
+    font-size: 12px;
+    color: var(--color-danger);
+    margin: 6px 0 0;
+}
+
+/* ---------- select: no-JS fallback (styles the native control/popup as far as CSS is allowed to) ---------- */
+.select {
+    position: relative;
+}
+
+.select select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 40px;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234A4A4A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+}
+
+/* ---------- select: JS-enhanced trigger + custom listbox ---------- */
+.select__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--ink-faint);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 13.5px;
+    font-family: var(--font-body);
+    text-align: left;
+    cursor: pointer;
+    transition: border-color var(--transition-base);
+}
+
+.select__trigger:hover {
+    border-color: var(--ink-soft);
+}
+
+.select__trigger:focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 2px;
+}
+
+.select.is-open .select__trigger {
+    outline: none;
+    border-color: var(--accent-dark);
+}
+
+.select__trigger-label.is-placeholder {
+    color: var(--ink-soft);
+    opacity: .6;
+}
+
+.select__chevron {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    color: var(--ink-soft);
+    transition: color var(--transition-base), transform var(--transition-base);
+}
+
+.select.is-open .select__chevron {
+    color: var(--accent-text);
+    transform: rotate(180deg);
+}
+
+/* Fixed + portalled to <body> by JS (see initCustomSelects) so it can never
+   get trapped behind a sibling's stacking context - .reveal on the fields
+   below sets a non-none transform, which creates one and would otherwise
+   paint over an absolutely-positioned panel regardless of z-index. */
+.select__listbox {
+    position: fixed;
+    z-index: 150;
+    max-height: 260px;
+    overflow-y: auto;
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--white);
+    border: 1px solid var(--ink-faint);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity var(--transition-base), transform var(--transition-base), visibility 0s linear .25s;
+}
+
+.select__listbox.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.select__option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 9px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    color: var(--ink);
+    cursor: pointer;
+    outline: none;
+    transition: background-color var(--transition-base);
+}
+
+.select__option:hover,
+.select__option.is-active {
+    background: var(--accent-soft);
+}
+
+.select__option[aria-selected="true"] {
+    font-weight: 700;
+    background: var(--accent-soft);
+}
+
+.select__check {
+    width: 13px;
+    height: 13px;
+    flex: none;
+    color: var(--accent-text);
+    opacity: 0;
+}
+
+.select__option[aria-selected="true"] .select__check {
+    opacity: 1;
+}
+
+.radio-row {
+    display: flex;
+    gap: 20px;
+    padding-top: 8px;
+}
+
+.radio {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.radio input {
+    accent-color: var(--accent-text);
+    width: 16px;
+    height: 16px;
+}
+
+.check-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 4px;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid var(--ink-faint);
+    border-radius: var(--radius-pill);
+    padding: 9px 16px 9px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color var(--transition-base), background-color var(--transition-base);
+}
+
+.check:hover {
+    border-color: var(--ink-soft);
+}
+
+.check:has(input:checked) {
+    border-color: var(--accent-text);
+    background: var(--accent-soft);
+}
+
+.check input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.check__box {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--ink-faint);
+    border-radius: 5px;
+    background: var(--white);
+    color: transparent;
+    transition: background-color var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+}
+
+.check__tick {
+    width: 11px;
+    height: 11px;
+}
+
+.check input:checked~.check__box {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--ink);
+}
+
+.check input:focus-visible~.check__box {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 2px;
+}
+
+.form-card .btn {
+    margin-top: 8px;
+}
+
+.form-card .btn svg {
+    width: 16px;
+    height: 16px;
+}

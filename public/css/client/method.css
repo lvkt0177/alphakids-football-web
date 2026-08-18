@@ -1,0 +1,148 @@
+.care-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.care-detail-card {
+    border: 1px solid var(--ink-faint);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.care-detail-card__body {
+    padding: 32px 30px 28px;
+    flex: 1 1 auto;
+}
+
+.care-detail-card__letter {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+.care-detail-card h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: .02em;
+    margin: 0 0 4px;
+}
+
+.care-detail-card__subtitle {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    color: var(--accent-text);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.care-detail-card__lead {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.6;
+    margin: 0 0 12px;
+}
+
+.care-detail-card__text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+}
+
+.care-detail-card__list {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+}
+
+.care-detail-card__list li {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-style: italic;
+    padding: 10px 0;
+    border-top: 1px solid var(--ink-faint);
+}
+
+.care-detail-card__punch-rule {
+    width: 32px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 4px 0 10px;
+}
+
+.care-detail-card__punch {
+    color: var(--ink);
+    font-size: 14.5px;
+    line-height: 1.6;
+    font-weight: 700;
+    margin: 0;
+}
+
+.care-detail-card__punch span {
+    display: block;
+}
+
+.care-detail-card__media {
+    aspect-ratio: 4 / 3;
+    background: var(--paper-alt);
+    flex: 0 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.care-detail-card__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.care-detail-card__media-empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-top: 1px dashed var(--ink-faint);
+    color: var(--ink-soft);
+    opacity: .55;
+}
+
+.care-detail-card__media-empty svg {
+    width: 26px;
+    height: 26px;
+}
+
+.care-detail-card__media-empty span {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+@media (max-width: 700px) {
+    .care-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

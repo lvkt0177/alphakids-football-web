@@ -1,0 +1,19 @@
+
+
+.faq-body__inner {
+    max-width: 760px;
+    margin-inline: auto;
+}
+
+.faq-body__accordion .accordion-item__trigger {
+    font-size: 17px;
+    padding-block: 24px;
+}
+
+.faq-body__empty {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--ink-soft);
+    background: var(--paper-alt);
+    border-radius: var(--radius-lg);
+}
