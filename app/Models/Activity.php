@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Enums\ActivityCategory;
+use App\Traits\HasUniqueSlug;
 use App\Traits\SearchableUnaccented;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
-    use HasFactory, SearchableUnaccented;
+    use HasFactory, HasUniqueSlug, SearchableUnaccented;
 
     protected $fillable = [
         'name',

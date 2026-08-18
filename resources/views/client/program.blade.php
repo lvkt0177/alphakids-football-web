@@ -1,6 +1,7 @@
 @extends('layouts.client', [
     'title' => 'Chương trình dạy',
-    'description' => 'Lộ trình huấn luyện 12 tháng, cấu trúc mỗi buổi học và chương trình phù hợp từng độ tuổi tại Alpha Kids Football Club.',
+    'description' => 'Lộ trình huấn luyện bóng đá tư duy 12 tháng, cấu trúc buổi học 3 khối, chương trình theo độ tuổi 3-14. Đăng ký học thử miễn phí tại Alpha Kids Football Club.',
+    'ogImage' => $ogImage,
 ])
 
 @push('styles')
@@ -103,7 +104,7 @@
         ],
         [
             'age' => '11 – 14 tuổi',
-            'name' => 'Thiếu niên',
+            'name' => 'Cấp 2',
             'desc' => 'Nâng cao kỹ thuật, chiến thuật và khả năng lãnh đạo trên sân.',
             'points' => [
                 'Chiến thuật thi đấu nâng cao',
@@ -128,7 +129,7 @@
             <div class="page-hero__scrim" aria-hidden="true"></div>
         @endif
         <div class="container">
-            <h1>Lộ trình học <span class="hl">khoa học, bài bản</span></h1>
+            <h1>Chương trình dạy <span class="hl">khoa học, bài bản</span></h1>
             <p>Chương trình xây dựng theo từng giai đoạn phát triển của trẻ, lặp lại để hình thành thói quen vững chắc.</p>
         </div>
     </section>
@@ -137,7 +138,7 @@
         <div class="container">
             <div class="section-head section-head--center reveal">
                 <h2>Lộ trình chương trình <span class="hl">12 tháng</span></h2>
-                <p>6 chủ đề cốt lõi xuyên suốt năm học, mỗi chủ đề học 2 lần cách nhau 6 tháng để trẻ thực hành đủ sâu.</p>
+                <p>6 chủ đề cốt lõi xuyên suốt năm học, mỗi chủ đề học 2 lần cách nhau 6 tháng để trẻ thực hành đủ sâu, luôn gắn với 4 tư duy trong <a href="{{ route('method') }}" class="inline-link">phương pháp C.A.R.E</a>.</p>
             </div>
 
             <div class="roadmap-rows">
@@ -145,7 +146,7 @@
                     <div class="roadmap-row @if ($i % 2 === 1) roadmap-row--reverse @endif" data-reveal-group>
                         <div class="roadmap-row__media reveal">
                             @if ($images[$node['image_key']] ?? null)
-                                <img src="{{ asset('storage/' . $images[$node['image_key']]) }}" alt="{{ $node['topic'] }}">
+                                <img src="{{ asset('storage/' . $images[$node['image_key']]) }}" alt="{{ $node['topic'] }} - buổi tập tại Alpha Kids Football Club" loading="lazy">
                             @else
                                 <div class="roadmap-row__media-empty">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="9" cy="10.5" r="1.6" /><path d="M21 16l-5.5-5.5L9 17" /></svg>
@@ -158,7 +159,7 @@
                                 <div class="roadmap-row__icon">{!! $node['icon'] !!}</div>
                                 <span class="roadmap-row__months">{{ $node['months'] }}</span>
                             </div>
-                            <h4 class="roadmap-row__topic">{{ $node['topic'] }}</h4>
+                            <h3 class="roadmap-row__topic">{{ $node['topic'] }}</h3>
                             <p class="roadmap-row__desc">{{ $node['desc'] }}</p>
                         </div>
                     </div>
@@ -179,12 +180,12 @@
                     <div class="session-card">
                         <div class="session-card__head">
                             <div class="session-badge">{{ $block['duration'] }}<small>phút</small></div>
-                            <h4>{{ $block['label'] }}</h4>
+                            <h3>{{ $block['label'] }}</h3>
                         </div>
                         <p>{{ $block['desc'] }}</p>
                         <div class="session-card__media">
                             @if ($images[$block['image_key']] ?? null)
-                                <img src="{{ asset('storage/' . $images[$block['image_key']]) }}" alt="">
+                                <img src="{{ asset('storage/' . $images[$block['image_key']]) }}" alt="{{ $block['label'] }} - khối {{ $block['duration'] }} phút trong buổi tập Alpha Kids" loading="lazy">
                             @else
                                 <div class="session-card__media-empty">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="9" cy="10.5" r="1.6" /><path d="M21 16l-5.5-5.5L9 17" /></svg>
@@ -216,7 +217,7 @@
                         <div class="age-card__media">
                             <span class="age-card__badge">{{ $card['age'] }}</span>
                             @if ($images[$card['image_key']] ?? null)
-                                <img src="{{ asset('storage/' . $images[$card['image_key']]) }}" alt="Lớp {{ $card['name'] }}">
+                                <img src="{{ asset('storage/' . $images[$card['image_key']]) }}" alt="Lớp {{ $card['name'] }} {{ $card['age'] }} tại Alpha Kids Football Club" loading="lazy">
                             @else
                                 <div class="age-card__media-empty">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="9" cy="10.5" r="1.6" /><path d="M21 16l-5.5-5.5L9 17" /></svg>
@@ -226,7 +227,7 @@
                         </div>
                         <div class="age-card__body">
                             <div class="age-card__icon">{!! $card['icon'] !!}</div>
-                            <h4>{{ $card['name'] }}</h4>
+                            <h3>{{ $card['name'] }}</h3>
                             <div class="age-card__rule"></div>
                             <p>{{ $card['desc'] }}</p>
                             <ul class="age-card__list">
@@ -234,7 +235,7 @@
                                     <li>{{ $point }}</li>
                                 @endforeach
                             </ul>
-                            <a href="{{ route('registration.create') }}" class="btn btn--outline btn--sm">Xem chi tiết</a>
+                            <a href="{{ route('registration.create') }}" class="btn btn--outline btn--sm">Đăng ký lớp {{ $card['name'] }}</a>
                         </div>
                     </div>
                 @endforeach
@@ -244,7 +245,7 @@
 
     <section class="closing-cta" data-reveal-group>
         @if ($images['program_closing_cta_photo'] ?? null)
-            <img class="closing-cta__photo" src="{{ asset('storage/' . $images['program_closing_cta_photo']) }}" alt="">
+            <img class="closing-cta__photo" src="{{ asset('storage/' . $images['program_closing_cta_photo']) }}" alt="" loading="lazy">
         @endif
         <div class="closing-cta__scrim" aria-hidden="true"></div>
         <div class="container closing-cta__inner reveal">
@@ -255,6 +256,26 @@
             </div>
         </div>
     </section>
+
+    <script type="application/ld+json">
+        {!! json_encode([
+            '@@context' => 'https://schema.org',
+            '@type' => 'Course',
+            'name' => 'Chương trình dạy bóng đá tư duy Alpha Kids',
+            'description' => 'Lộ trình huấn luyện bóng đá tư duy 12 tháng cho trẻ từ 3-14 tuổi, chia theo 3 nhóm độ tuổi tại Alpha Kids Football Club.',
+            'url' => route('program'),
+            'provider' => [
+                '@type' => 'Organization',
+                'name' => 'Alpha Kids Football Club',
+                'sameAs' => url('/'),
+            ],
+            'hasCourseInstance' => collect($ageCards)->map(fn ($card) => [
+                '@type' => 'CourseInstance',
+                'name' => 'Lớp ' . $card['name'] . ' (' . $card['age'] . ')',
+                'courseMode' => 'Onsite',
+            ])->all(),
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+    </script>
 
 </div>
 @endsection

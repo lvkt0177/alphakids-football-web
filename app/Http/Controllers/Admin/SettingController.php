@@ -37,7 +37,7 @@ class SettingController extends Controller
         'Các lớp học tại Alpha Kids' => [
             'home_class_toddler' => 'Ảnh lớp Mầm non (3-6 tuổi)',
             'home_class_primary' => 'Ảnh lớp Tiểu học (7-10 tuổi)',
-            'home_class_teen' => 'Ảnh lớp Thiếu niên (11-14 tuổi)',
+            'home_class_teen' => 'Ảnh lớp Cấp 2 (11-14 tuổi)',
         ],
         'CTA đăng ký học thử (cuối trang)' => [
             'home_closing_cta_photo' => 'Ảnh nền full-bleed cho khối CTA cuối trang (tùy chọn)',
@@ -70,7 +70,7 @@ class SettingController extends Controller
     {
         $files = $request->file('images', []);
         // Mobile falls back to cropping the desktop photo when it has no
-        // dedicated source of its own — capture that BEFORE any new upload
+        // dedicated source of its own - capture that BEFORE any new upload
         // in this request overwrites it, so we know whether the fallback
         // photo is about to change out from under the mobile crop too.
         $mobileHadOwnSourceBefore = (bool) Setting::get('home_banner_mobile_source');
@@ -91,7 +91,7 @@ class SettingController extends Controller
             if ($key === 'home_banner') {
                 $this->clearHeroCropVariant('desktop');
                 if (! $mobileHadOwnSourceBefore) {
-                    // Mobile was relying on this same photo — its crop
+                    // Mobile was relying on this same photo - its crop
                     // coordinates belonged to the old desktop photo.
                     $this->clearHeroCropVariant('mobile');
                 }
@@ -158,7 +158,7 @@ class SettingController extends Controller
 
     /**
      * A freshly uploaded source photo invalidates the matching derivative's
-     * crop (its coordinates belonged to the old photo) — clear it so the
+     * crop (its coordinates belonged to the old photo) - clear it so the
      * client falls back to the new original until Admin re-crops it.
      */
     protected function clearHeroCropVariant(string $variant): void

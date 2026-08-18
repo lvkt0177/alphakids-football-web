@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Faq;
+use App\Models\Setting;
 
 class FaqController extends Controller
 {
@@ -11,6 +12,11 @@ class FaqController extends Controller
     {
         $faqs = Faq::active()->ordered()->get();
 
-        return view('client.faq', compact('faqs'));
+        $images = [
+            'faq_banner' => Setting::get('faq_banner'),
+            'faq_closing_cta_photo' => Setting::get('faq_closing_cta_photo'),
+        ];
+
+        return view('client.faq', compact('faqs', 'images'));
     }
 }

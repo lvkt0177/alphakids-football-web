@@ -39,7 +39,7 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `Controller` - 33 edges
-2. `DESIGN.md — Alpha Kids Design System` - 24 edges
+2. `DESIGN.md - Alpha Kids Design System` - 24 edges
 3. `Branch` - 23 edges
 4. `Activity` - 21 edges
 5. `Faq` - 17 edges
@@ -65,15 +65,15 @@
 - None detected.
 
 ## Hyperedges (group relationships)
-- **Named Design Rules** — design_two_gold_rule, design_color_consistency_lock, design_reserved_strength_exception, design_one_display_face_rule, design_section_layout_repetition_ban, design_no_side_tab_rule, design_hairline_over_shadow_rule [EXTRACTED 1.00]
-- **Signature Components** — design_sticky_scroll_timeline, design_hero_mesh_gradient, design_closing_cta_component [EXTRACTED 1.00]
-- **C.A.R.E Four Thinking Pillars** — product_care_method, product_pillar_giao_tiep, product_pillar_danh_gia, product_pillar_ung_xu, product_pillar_lanh_dao [EXTRACTED 1.00]
+- **Named Design Rules** - design_two_gold_rule, design_color_consistency_lock, design_reserved_strength_exception, design_one_display_face_rule, design_section_layout_repetition_ban, design_no_side_tab_rule, design_hairline_over_shadow_rule [EXTRACTED 1.00]
+- **Signature Components** - design_sticky_scroll_timeline, design_hero_mesh_gradient, design_closing_cta_component [EXTRACTED 1.00]
+- **C.A.R.E Four Thinking Pillars** - product_care_method, product_pillar_giao_tiep, product_pillar_danh_gia, product_pillar_ung_xu, product_pillar_lanh_dao [EXTRACTED 1.00]
 
 ## Communities (94 total, 9 thin omitted)
 
 ### Community 0 - "Homepage Design System & About Page"
 Cohesion: 0.07
-Nodes (45): OtherPagesImageGroups, DESIGN.md — Alpha Kids Design System, Page: Về CLB (About), Accordion (Q&A) Shared Primitive, Signature Component: Closing CTA, Club Intro Section (Split), The Color Consistency Lock, Flexible Proof Grid (+37 more)
+Nodes (45): OtherPagesImageGroups, DESIGN.md - Alpha Kids Design System, Page: Về CLB (About), Accordion (Q&A) Shared Primitive, Signature Component: Closing CTA, Club Intro Section (Split), The Color Consistency Lock, Flexible Proof Grid (+37 more)
 
 ### Community 1 - "Composer Autoload Config"
 Cohesion: 0.04
@@ -150,7 +150,7 @@ Nodes (4): partials.admin._confirm-modal, partials.admin._sidebar, partials.admi
 ## Knowledge Gaps
 - **78 isolated node(s):** `$schema`, `name`, `type`, `description`, `laravel` (+73 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **9 thin communities (<3 nodes) omitted from report** - run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_

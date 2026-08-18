@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Registration;
 
+use App\Enums\Gender;
 use App\Enums\RegistrationStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -18,6 +19,7 @@ class RegistrationRequest extends FormRequest
         return [
             'child_name' => ['required', 'string', 'max:255'],
             'birth_year' => ['nullable', 'integer', 'min:2000', 'max:'.date('Y')],
+            'gender' => ['nullable', Rule::enum(Gender::class)],
             'phone' => ['required', 'string', 'max:20'],
             'trial_date' => ['nullable', 'date'],
             'status' => ['required', Rule::enum(RegistrationStatus::class)],

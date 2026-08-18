@@ -1,6 +1,6 @@
 /* ---- roadmap: large photo, alternating rows, reveals as you scroll to it
    (each row is its own [data-reveal-group], reusing the site-wide reveal
-   mechanism already in app.js) — photography carries the "wow" here, not a
+   mechanism already in app.js) - photography carries the "wow" here, not a
    timed widget, matching the Hero/Closing CTA/Club Intro playbook rather
    than a SaaS feature-showcase pattern ---- */
 .roadmap-rows {
@@ -196,7 +196,7 @@
     margin-top: 3px;
 }
 
-.session-card__head h4 {
+.session-card__head h3 {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: 15.5px;
@@ -373,7 +373,7 @@
     stroke-width: 1.6;
 }
 
-.age-card h4 {
+.age-card h3 {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: 18px;

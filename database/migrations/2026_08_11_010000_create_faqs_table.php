@@ -24,7 +24,7 @@ return new class extends Migration
         DB::table('faqs')->insert([
             [
                 'question' => 'Alpha Kids nhận học viên từ mấy tuổi?',
-                'answer' => 'Alpha Kids Football Club nhận học viên từ 3 tuổi trở lên. Chương trình được thiết kế riêng theo 3 nhóm tuổi: Mầm non, Tiểu học và Thiếu niên, cùng áp dụng chung một phương pháp giáo dục.',
+                'answer' => 'Alpha Kids Football Club nhận học viên từ 3 tuổi trở lên. Chương trình được thiết kế riêng theo 3 nhóm tuổi: Mầm non, Tiểu học và Cấp 2, cùng áp dụng chung một phương pháp giáo dục.',
                 'sort_order' => 1,
                 'is_active' => true,
                 'show_on_home' => true,

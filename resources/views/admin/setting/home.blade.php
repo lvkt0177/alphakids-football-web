@@ -66,7 +66,7 @@
                                     <div class="hero-crop-tools" id="heroCropTools" data-mobile-has-own-source="{{ $mobileHasOwnSource ? '1' : '' }}" @if (! $images[$key]) style="display:none" @endif>
                                         <div class="hero-crop-tool">
                                             <div class="hero-crop-tool__label-row">
-                                                <span class="hero-crop-tool__label">Vùng hiển thị — Desktop (21:9)</span>
+                                                <span class="hero-crop-tool__label">Vùng hiển thị - Desktop (21:9)</span>
                                             </div>
                                             <p class="hero-crop-tool__note">Ảnh chính, dùng cho toàn bộ banner Desktop.</p>
                                             <div class="hero-crop-tool__frame">
@@ -75,7 +75,7 @@
                                         </div>
                                         <div class="hero-crop-tool">
                                             <div class="hero-crop-tool__label-row">
-                                                <span class="hero-crop-tool__label">Vùng hiển thị — Mobile (4:5)</span>
+                                                <span class="hero-crop-tool__label">Vùng hiển thị - Mobile (4:5)</span>
                                                 <div class="btn btn-secondary btn-sm btn-file">
                                                     <input type="file" name="images[home_banner_mobile_source]" id="heroCropMobileSourceInput" accept="image/*">
                                                     Ảnh riêng cho Mobile
@@ -85,7 +85,7 @@
                                                 @if ($mobileHasOwnSource)
                                                     Đang dùng ảnh riêng cho Mobile.
                                                 @else
-                                                    Chưa có ảnh riêng — đang crop tạm trên ảnh Desktop.
+                                                    Chưa có ảnh riêng - đang crop tạm trên ảnh Desktop.
                                                 @endif
                                             </p>
                                             @error('images.home_banner_mobile_source')
@@ -177,7 +177,7 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 0 4 4m-4-4-4 4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
                     Chọn ảnh thumbnail
                 </div>
-                <div class="field-hint">Ảnh JPG/PNG, tối đa 5MB. Chỉ áp dụng cho chế độ "Tải file video lên" — chế độ YouTube tự dùng thumbnail riêng của YouTube.</div>
+                <div class="field-hint">Ảnh JPG/PNG, tối đa 5MB. Chỉ áp dụng cho chế độ "Tải file video lên" - chế độ YouTube tự dùng thumbnail riêng của YouTube.</div>
                 @error('video_thumbnail')
                     <p class="field-error">{{ $message }}</p>
                 @enderror

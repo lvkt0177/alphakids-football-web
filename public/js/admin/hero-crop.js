@@ -52,11 +52,11 @@ function initHeroCrop() {
             var data = JSON.parse(el.value);
             if (data && data.width && data.height) {
                 // The server stores these as PHP request values, which are
-                // always strings — json_encode() keeps them as JSON strings
+                // always strings - json_encode() keeps them as JSON strings
                 // ("x":"0"), not numbers ("x":0). Cropper.js's `data` option
                 // silently misbehaves when given numeric strings instead of
                 // real numbers (it lands the crop box at a wrong, uniformly
-                // scaled-down position, no error) — confirmed directly in a
+                // scaled-down position, no error) - confirmed directly in a
                 // real browser. Coerce every field to a number before it
                 // ever reaches Cropper.
                 return {
@@ -80,11 +80,11 @@ function initHeroCrop() {
     // Measured directly in a real browser: building the desktop and mobile
     // instances back-to-back in the same synchronous tick made `data` land
     // wrong (a uniformly scaled-down box, unrelated to either instance's own
-    // aspect ratio). Building them strictly one after another — mobile only
+    // aspect ratio). Building them strictly one after another - mobile only
     // starting inside desktop's own `ready` callback, never in the same
-    // tick — restores both correctly, every time. Do not "fix" this by
+    // tick - restores both correctly, every time. Do not "fix" this by
     // destroying and rebuilding an instance from inside its own `ready`
-    // callback either — that reproduces the same corruption; the fix is
+    // callback either - that reproduces the same corruption; the fix is
     // giving each instance's build its own turn, not retrying it.
     function setupCropper(img, aspectRatio, restoreData, onReady) {
         if (img.cropper) {
@@ -142,7 +142,7 @@ function initHeroCrop() {
     }
 
     // The "Hình ảnh" tab remembers the last tab the admin had open
-    // (localStorage, see setting.js) and may not be the active one on load —
+    // (localStorage, see setting.js) and may not be the active one on load -
     // its panel is `display:none` until then. Cropper.js measures the
     // container to build its canvas, so initializing while hidden yields a
     // zero-size crop box that looks reset no matter what was saved. Only
@@ -188,10 +188,10 @@ function initHeroCrop() {
             initial.desktop = null;
 
             if (mobileHasOwnSource) {
-                // Mobile has its own photo — a new desktop photo doesn't touch it.
+                // Mobile has its own photo - a new desktop photo doesn't touch it.
                 rebuildDesktop(null);
             } else {
-                // Mobile was following the desktop photo — keep it following.
+                // Mobile was following the desktop photo - keep it following.
                 imgMobile.setAttribute('src', e.target.result);
                 initial.mobile = null;
                 setupCropper(imgDesktop, 21 / 9, null, function () {

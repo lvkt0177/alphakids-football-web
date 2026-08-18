@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.image-card input[type=file]').forEach(function (input) {
         // The hero banner's crop widget (hero-crop.js) owns its own preview
-        // via the two Cropper.js frames — it has no `.image-preview` element,
+        // via the two Cropper.js frames - it has no `.image-preview` element,
         // so this generic handler would throw trying to write into a null
         // previewBox. Skip it here, let hero-crop.js handle it.
         if (input.id === 'heroCropSourceInput' || input.id === 'heroCropMobileSourceInput') return;

@@ -1,6 +1,6 @@
 @extends('layouts.client', [
     'headerVariant' => 'transparent',
-    'title' => 'Trang chủ',
+    'title' => 'Alpha Kids Football Club',
     'description' => 'Alpha Kids Football Club - Bóng đá tư duy dành cho trẻ từ 3 tuổi. Đào tạo cầu thủ, đồng hành cùng trẻ phát triển tư duy, nhân cách và sự tự tin.',
 ])
 
@@ -16,10 +16,12 @@
                 @if ($images['home_banner'] ?? null)
                     <picture>
                         @if ($images['home_banner_mobile'] ?? null)
-                            <source media="(max-width: 768px)" srcset="{{ asset('storage/' . $images['home_banner_mobile']) }}">
+                            <source media="(max-width: 768px)"
+                                srcset="{{ asset('storage/' . $images['home_banner_mobile']) }}">
                         @endif
                         <img src="{{ asset('storage/' . ($images['home_banner_desktop'] ?? $images['home_banner'])) }}"
-                            alt="Học viên Alpha Kids Football Club" id="heroPhotoImg">
+                            alt="Học viên Alpha Kids Football Club" id="heroPhotoImg" fetchpriority="high"
+                            decoding="async">
                     </picture>
                 @else
                     <div class="hero__photo-empty" id="heroPhotoImg"></div>
@@ -31,10 +33,10 @@
                 <div class="hero__content">
                     <span class="hero__eyebrow-line" aria-hidden="true"></span>
 
-                    <div class="hero__title-group">
+                    <h1 class="hero__title-group">
                         <span class="hero__title-football">BÓNG ĐÁ</span>
                         <span class="hero__title-thinking">TƯ DUY</span>
-                    </div>
+                    </h1>
                     <p class="hero__subtitle">Dành cho trẻ từ 3 tuổi</p>
 
                     <p class="hero__desc">
@@ -70,7 +72,7 @@
                 <div class="club-intro__frame reveal">
                     @if ($images['home_club_intro'] ?? null)
                         <img src="{{ asset('storage/' . $images['home_club_intro']) }}"
-                            alt="Đội hình Alpha Kids Football Club">
+                            alt="Đội hình Alpha Kids Football Club" loading="lazy" decoding="async">
                     @else
                         <div class="club-intro__frame-empty">
                             <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.4"
@@ -126,8 +128,11 @@
                                 @if ($images['home_video_thumbnail'] ?? null) poster="{{ asset('storage/' . $images['home_video_thumbnail']) }}" @endif>
                                 <source src="{{ asset('storage/' . $videoFile) }}" type="video/mp4">
                             </video>
-                            <button type="button" class="intro-video__play-hint" id="introVideoPlayHint" aria-label="Phát video">
-                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <button type="button" class="intro-video__play-hint" id="introVideoPlayHint"
+                                aria-label="Phát video">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
                             </button>
                         @else
                             <p class="intro-video__empty">Video giới thiệu đang được cập nhật.</p>
@@ -173,14 +178,15 @@
                             <span class="timeline-panel__underline" aria-hidden="true"></span>
                             <p>Lắng nghe và chia sẻ cùng đồng đội trong từng pha bóng, đây là nền tảng để ba tư duy còn lại
                                 phát triển. Mỗi tình huống phối hợp trên sân là một lần trẻ tập gọi tên đồng đội, ra tín
-                                hiệu và phản hồi lại — lặp lại đến khi trở thành phản xạ tự nhiên.</p>
+                                hiệu và phản hồi lại - lặp lại đến khi trở thành phản xạ tự nhiên.</p>
                             <span class="timeline-panel__tag">Củng cố qua nguyên tắc <strong>Ask &amp; Answer</strong>
                                 (C.A.R.E)</span>
                         </div>
                         @if ($images['home_pillar_photo'] ?? null)
                             <div class="timeline-panel__media" aria-hidden="true">
                                 <div class="timeline-panel__visual">
-                                    <img src="{{ asset('storage/' . $images['home_pillar_photo']) }}" alt="">
+                                    <img src="{{ asset('storage/' . $images['home_pillar_photo']) }}" alt=""
+                                        loading="lazy" decoding="async">
                                 </div>
                                 <span class="timeline-panel__folio">01 <strong>/ 04</strong></span>
                             </div>
@@ -209,7 +215,8 @@
                         @if ($images['home_pillar_photo_2'] ?? null)
                             <div class="timeline-panel__media" aria-hidden="true">
                                 <div class="timeline-panel__visual">
-                                    <img src="{{ asset('storage/' . $images['home_pillar_photo_2']) }}" alt="">
+                                    <img src="{{ asset('storage/' . $images['home_pillar_photo_2']) }}" alt=""
+                                        loading="lazy" decoding="async">
                                 </div>
                                 <span class="timeline-panel__folio">02 <strong>/ 04</strong></span>
                             </div>
@@ -238,7 +245,8 @@
                         @if ($images['home_pillar_photo_3'] ?? null)
                             <div class="timeline-panel__media" aria-hidden="true">
                                 <div class="timeline-panel__visual">
-                                    <img src="{{ asset('storage/' . $images['home_pillar_photo_3']) }}" alt="">
+                                    <img src="{{ asset('storage/' . $images['home_pillar_photo_3']) }}" alt=""
+                                        loading="lazy" decoding="async">
                                 </div>
                                 <span class="timeline-panel__folio">03 <strong>/ 04</strong></span>
                             </div>
@@ -267,7 +275,8 @@
                         @if ($images['home_pillar_photo_4'] ?? null)
                             <div class="timeline-panel__media" aria-hidden="true">
                                 <div class="timeline-panel__visual">
-                                    <img src="{{ asset('storage/' . $images['home_pillar_photo_4']) }}" alt="">
+                                    <img src="{{ asset('storage/' . $images['home_pillar_photo_4']) }}" alt=""
+                                        loading="lazy" decoding="async">
                                 </div>
                                 <span class="timeline-panel__folio">04 <strong>/ 04</strong></span>
                             </div>
@@ -322,11 +331,13 @@
                         <div class="care__photos reveal reveal-d2">
                             @if ($images['home_care_photo_1'] ?? null)
                                 <img src="{{ asset('storage/' . $images['home_care_photo_1']) }}"
-                                    alt="Buổi tập theo phương pháp C.A.R.E tại Alpha Kids">
+                                    alt="Buổi tập theo phương pháp C.A.R.E tại Alpha Kids" loading="lazy"
+                                    decoding="async">
                             @endif
                             @if ($images['home_care_photo_2'] ?? null)
                                 <img src="{{ asset('storage/' . $images['home_care_photo_2']) }}"
-                                    alt="Buổi tập theo phương pháp C.A.R.E tại Alpha Kids">
+                                    alt="Buổi tập theo phương pháp C.A.R.E tại Alpha Kids" loading="lazy"
+                                    decoding="async">
                             @endif
                         </div>
                     @endif
@@ -368,7 +379,7 @@
                         [
                             'key' => 'home_class_teen',
                             'age' => '11-14 tuổi',
-                            'name' => 'Thiếu niên',
+                            'name' => 'Cấp 2',
                             'focus' => [
                                 'Chiến thuật thi đấu nâng cao',
                                 'Phát triển tư duy lãnh đạo đội nhóm',
@@ -383,7 +394,7 @@
                         <div class="tier-card__media">
                             @if ($images[$tier['key']] ?? null)
                                 <img src="{{ asset('storage/' . $images[$tier['key']]) }}"
-                                    alt="Lớp {{ $tier['name'] }}">
+                                    alt="Lớp {{ $tier['name'] }}" loading="lazy" decoding="async">
                             @else
                                 <div class="tier-card__media-empty">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.4"
@@ -450,7 +461,8 @@
                             <div class="proof-spotlight__dots" id="proofSpotDots"></div>
                         </div>
 
-                        <button type="button" class="proof-peek is-next" id="proofPeekNext" aria-label="Xem câu tiếp theo">
+                        <button type="button" class="proof-peek is-next" id="proofPeekNext"
+                            aria-label="Xem câu tiếp theo">
                             <p class="proof-peek__quote" id="proofPeekNextQuote" aria-hidden="true"></p>
                             <span class="proof-peek__author" id="proofPeekNextAuthor" aria-hidden="true"></span>
                         </button>
@@ -529,7 +541,8 @@
                     @foreach ($featuredActivities as $i => $activity)
                         <div class="activity-card reveal reveal-d{{ ($i % 4) + 1 }}">
                             @if ($activity->image)
-                                <img src="{{ asset('storage/' . $activity->image) }}" alt="{{ $activity->name }}">
+                                <img src="{{ asset('storage/' . $activity->image) }}" alt="{{ $activity->name }}"
+                                    loading="lazy" decoding="async">
                             @else
                                 <div class="activity-card__media-empty">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.4"
@@ -573,13 +586,13 @@
         <section class="closing-cta" data-reveal-group>
             @if ($images['home_closing_cta_photo'] ?? null)
                 <img class="closing-cta__photo" src="{{ asset('storage/' . $images['home_closing_cta_photo']) }}"
-                    alt="">
+                    alt="" loading="lazy" decoding="async">
             @endif
             <div class="closing-cta__scrim" aria-hidden="true"></div>
 
             <div class="container closing-cta__inner reveal">
                 <h2>Đăng ký buổi học thử <span class="text-accent-free">miễn phí</span></h2>
-                <p class="closing-cta__note">Học thử miễn phí — đội ngũ Alpha Kids sẽ liên hệ xác nhận lịch trong thời gian
+                <p class="closing-cta__note">Học thử miễn phí - đội ngũ Alpha Kids sẽ liên hệ xác nhận lịch trong thời gian
                     sớm nhất.</p>
                 <a href="{{ route('registration.create') }}" class="btn btn--accent">Đăng ký ngay</a>
             </div>

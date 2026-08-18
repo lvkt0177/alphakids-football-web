@@ -14,13 +14,25 @@
         </div>
 
         <div class="table-scroll">
-            <table>
+            <table class="table--fixed">
+                <colgroup>
+                    <col style="width:15%">
+                    <col style="width:15%">
+                    <col style="width:8%">
+                    <col style="width:11%">
+                    <col style="width:11%">
+                    <col style="width:20%">
+                    <col style="width:10%">
+                    <col style="width:10%">
+                </colgroup>
                 <thead>
                     <tr>
                         <th>Tên bé</th>
+                        <th>Cơ sở</th>
                         <th>Năm sinh</th>
                         <th>SĐT</th>
                         <th>Ngày trải nghiệm</th>
+                        <th>Ghi chú</th>
                         <th>Trạng thái</th>
                         <th></th>
                     </tr>
@@ -28,10 +40,29 @@
                 <tbody>
                     @forelse ($registrations as $registration)
                         <tr>
-                            <td class="cell-name">{{ $registration->child_name }}</td>
+                            <td class="cell-name">
+                                <span class="cell-truncate" title="{{ $registration->child_name }}">{{ $registration->child_name }}</span>
+                            </td>
+                            <td>
+                                @if ($registration->branches->isNotEmpty())
+                                    <span class="cell-truncate"
+                                        title="{{ $registration->branches->map(fn ($b) => $b->displayLocation() ?? $b->name)->implode(', ') }}">
+                                        {{ $registration->branches->map(fn ($b) => \Illuminate\Support\Str::title($b->displayLocation() ?? $b->name))->implode(', ') }}
+                                    </span>
+                                @else
+                                    <span class="cell-empty">&mdash;</span>
+                                @endif
+                            </td>
                             <td>{{ $registration->birth_year }}</td>
                             <td class="cell-mono">{{ $registration->phone }}</td>
                             <td class="cell-mono">{{ $registration->trial_date?->format('d/m/Y') }}</td>
+                            <td>
+                                @if ($registration->note)
+                                    <span class="cell-truncate" title="{{ $registration->note }}">{{ $registration->note }}</span>
+                                @else
+                                    <span class="cell-empty">&mdash;</span>
+                                @endif
+                            </td>
                             <td>
                                 <span class="badge badge-{{ $registration->status->getBadge() }}">
                                     {{ $registration->status->getLabel() }}
@@ -44,7 +75,7 @@
                         </tr>
                     @empty
                         <tr class="empty-row">
-                            <td colspan="6">
+                            <td colspan="8">
                                 <div class="empty-state">
                                     <div class="empty-state-icon">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M7.5 9h9M7.5 13h9M7.5 17h5"/></svg>

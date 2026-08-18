@@ -36,4 +36,16 @@ class Faq extends Model
     {
         return $query->orderBy('sort_order');
     }
+
+    public function questionData(): array
+    {
+        return [
+            '@type' => 'Question',
+            'name' => $this->question,
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text' => $this->answer,
+            ],
+        ];
+    }
 }

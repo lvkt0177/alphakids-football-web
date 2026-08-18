@@ -15,7 +15,6 @@ class MethodController extends Controller
             'method_care_ask_answer' => Setting::get('method_care_ask_answer'),
             'method_care_repetition' => Setting::get('method_care_repetition'),
             'method_care_enjoy_strict' => Setting::get('method_care_enjoy_strict'),
-            'method_heart_banner' => Setting::get('method_heart_banner'),
             'method_closing_cta_photo' => Setting::get('method_closing_cta_photo'),
         ];
 

@@ -9,7 +9,9 @@
         action="{{ $activity->exists ? route('admin.activity.update', $activity) : route('admin.activity.store') }}"
         enctype="multipart/form-data">
         @csrf
-        @if ($activity->exists) @method('PUT') @endif
+        @if ($activity->exists)
+            @method('PUT')
+        @endif
 
         <div class="card-header">
             <div>
@@ -22,25 +24,24 @@
             <div class="field">
                 <label for="name">Tên hoạt động</label>
                 <input type="text" id="name" name="name" value="{{ old('name', $activity->name) }}">
-                @error('name') <p class="field-error">{{ $message }}</p> @enderror
-            </div>
-
-            <div class="field">
-                <label for="slug">Slug (đường dẫn)</label>
-                <input type="text" id="slug" name="slug" value="{{ old('slug', $activity->slug) }}">
-                @error('slug') <p class="field-error">{{ $message }}</p> @enderror
+                @error('name')
+                    <p class="field-error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="field">
                 <label for="category">Danh mục</label>
                 <select id="category" name="category">
                     @foreach (\App\Enums\ActivityCategory::cases() as $cat)
-                        <option value="{{ $cat->value }}" {{ old('category', $activity->category?->value) == $cat->value ? 'selected' : '' }}>
+                        <option value="{{ $cat->value }}"
+                            {{ old('category', $activity->category?->value) == $cat->value ? 'selected' : '' }}>
                             {{ $cat->getLabel() }}
                         </option>
                     @endforeach
                 </select>
-                @error('category') <p class="field-error">{{ $message }}</p> @enderror
+                @error('category')
+                    <p class="field-error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="field">
@@ -49,26 +50,36 @@
                 @if ($activity->image)
                     <div class="field-hint">Ảnh hiện tại: {{ $activity->image }}</div>
                 @endif
-                @error('image') <p class="field-error">{{ $message }}</p> @enderror
+                @error('image')
+                    <p class="field-error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="field">
                 <label for="sort_order">Thứ tự hiển thị</label>
-                <input type="number" id="sort_order" name="sort_order" value="{{ old('sort_order', $activity->sort_order) }}">
-                @error('sort_order') <p class="field-error">{{ $message }}</p> @enderror
+                <input type="number" id="sort_order" name="sort_order"
+                    value="{{ old('sort_order', $activity->sort_order) }}">
+                @error('sort_order')
+                    <p class="field-error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="field">
                 <label for="featured_order">Thứ tự nổi bật (nếu có)</label>
-                <input type="number" id="featured_order" name="featured_order" value="{{ old('featured_order', $activity->featured_order) }}">
-                @error('featured_order') <p class="field-error">{{ $message }}</p> @enderror
+                <input type="number" id="featured_order" name="featured_order"
+                    value="{{ old('featured_order', $activity->featured_order) }}">
+                @error('featured_order')
+                    <p class="field-error">{{ $message }}</p>
+                @enderror
             </div>
         </div>
 
         <div class="field">
             <label for="description">Mô tả ngắn</label>
             <textarea id="description" name="description" rows="4">{{ old('description', $activity->description) }}</textarea>
-            @error('description') <p class="field-error">{{ $message }}</p> @enderror
+            @error('description')
+                <p class="field-error">{{ $message }}</p>
+            @enderror
         </div>
 
         <hr class="divider">
@@ -94,7 +105,10 @@
         <div class="form-actions">
             <a href="{{ route('admin.activity.index') }}" class="btn btn-secondary">Hủy</a>
             <button type="submit" class="btn btn-primary">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M5 13l4 4L19 7" />
+                </svg>
                 {{ $activity->exists ? 'Lưu thay đổi' : 'Thêm hoạt động' }}
             </button>
         </div>

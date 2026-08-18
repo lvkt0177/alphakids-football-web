@@ -1,7 +1,7 @@
 .care-detail-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
 }
 
 .care-detail-card {
@@ -13,13 +13,13 @@
 }
 
 .care-detail-card__body {
-    padding: 26px 22px 22px;
+    padding: 32px 30px 28px;
     flex: 1 1 auto;
 }
 
 .care-detail-card__letter {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: var(--accent);
     color: var(--ink);
@@ -28,33 +28,76 @@
     justify-content: center;
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: 17px;
-    margin-bottom: 16px;
+    font-size: 19px;
+    margin-bottom: 18px;
 }
 
-.care-detail-card h4 {
+.care-detail-card h3 {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 15.5px;
-    letter-spacing: .03em;
-    margin: 0 0 3px;
+    font-size: 18px;
+    letter-spacing: .02em;
+    margin: 0 0 4px;
 }
 
 .care-detail-card__subtitle {
     display: block;
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 700;
-    letter-spacing: .04em;
+    letter-spacing: .05em;
     color: var(--accent-text);
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 
-.care-detail-card p {
-    font-size: 13.5px;
+.care-detail-card__lead {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--ink);
     line-height: 1.6;
+    margin: 0 0 12px;
+}
+
+.care-detail-card__text {
+    font-size: 14px;
+    line-height: 1.7;
     color: var(--ink-soft);
+    margin: 0 0 16px;
+}
+
+.care-detail-card__list {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+}
+
+.care-detail-card__list li {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-style: italic;
+    padding: 10px 0;
+    border-top: 1px solid var(--ink-faint);
+}
+
+.care-detail-card__punch-rule {
+    width: 32px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 4px 0 10px;
+}
+
+.care-detail-card__punch {
+    color: var(--ink);
+    font-size: 14.5px;
+    line-height: 1.6;
+    font-weight: 700;
     margin: 0;
+}
+
+.care-detail-card__punch span {
+    display: block;
 }
 
 .care-detail-card__media {
@@ -97,225 +140,9 @@
     font-weight: 600;
 }
 
-@media (max-width: 900px) {
-    .care-detail-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
 @media (max-width: 700px) {
     .care-detail-grid {
         grid-template-columns: 1fr;
     }
 }
 
-.pillar-bento {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.pillar-bento__line {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.pillar-bento__line path {
-    fill: none;
-    stroke: var(--accent-text);
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.pillar-bento__line circle {
-    fill: var(--accent);
-    opacity: .25;
-    transform-origin: center;
-    transform: scale(.6);
-    transition: opacity .35s ease, transform .35s ease;
-}
-
-.pillar-bento__line circle.is-active {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.pillar-card {
-    position: relative;
-    z-index: 2;
-    background: var(--paper);
-    border: 1px solid var(--ink-faint);
-    border-radius: var(--radius-lg);
-    padding: 28px 26px 26px;
-    overflow: hidden;
-    transition: border-color .35s ease;
-}
-
-.pillar-card:hover,
-.pillar-card.is-active {
-    border-color: var(--accent);
-}
-
-.pillar-card__ghost {
-    position: absolute;
-    top: 8px;
-    right: 16px;
-    font-family: var(--font-display);
-    font-weight: 900;
-    font-size: 72px;
-    line-height: 1;
-    color: var(--ink);
-    opacity: .05;
-    pointer-events: none;
-    transition: opacity .35s ease, color .35s ease;
-}
-
-.pillar-card.is-active .pillar-card__ghost {
-    color: var(--accent-text);
-    opacity: .14;
-}
-
-.pillar-card__icon {
-    position: relative;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: var(--accent-soft);
-    color: var(--accent-text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 18px;
-    transition: background .35s ease, color .35s ease;
-}
-
-.pillar-card__icon svg {
-    width: 22px;
-    height: 22px;
-}
-
-.pillar-card:hover .pillar-card__icon,
-.pillar-card.is-active .pillar-card__icon {
-    background: var(--accent);
-    color: var(--ink);
-}
-
-.pillar-card h4 {
-    position: relative;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 16.5px;
-    letter-spacing: .01em;
-    margin: 0 0 8px;
-}
-
-.pillar-card p {
-    position: relative;
-    font-size: 13.5px;
-    line-height: 1.65;
-    color: var(--ink-soft);
-    margin: 0;
-}
-
-@media (max-width: 700px) {
-    .pillar-bento {
-        grid-template-columns: 1fr;
-    }
-}
-
-.heart-banner {
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    position: relative;
-    background: var(--ink);
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    min-height: 420px;
-}
-
-.heart-banner__hl {
-    color: var(--accent);
-}
-
-.heart-banner__text {
-    padding: 56px 52px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.heart-banner__text h2 {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(1.5rem, 2.4vw, 1.9rem);
-    line-height: 1.2;
-    color: var(--white);
-    margin: 0 0 14px;
-}
-
-.heart-banner__text p {
-    color: rgba(255, 255, 255, .7);
-    font-size: 14.5px;
-    line-height: 1.7;
-    margin: 0 0 28px;
-    max-width: 42ch;
-}
-
-.heart-banner__values {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 22px 26px;
-}
-
-.heart-banner__value {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.heart-banner__value svg {
-    width: 18px;
-    height: 18px;
-    stroke: var(--accent);
-    flex-shrink: 0;
-}
-
-.heart-banner__value span {
-    font-size: 12.5px;
-    font-weight: 700;
-    letter-spacing: .02em;
-    color: rgba(255, 255, 255, .85);
-}
-
-.heart-banner__media {
-    position: relative;
-    background: var(--ink-soft);
-}
-
-.heart-banner__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-@media (max-width: 900px) {
-    .heart-banner {
-        grid-template-columns: 1fr;
-    }
-
-    .heart-banner__media {
-        min-height: 220px;
-        order: -1;
-    }
-
-    .heart-banner__text {
-        padding: 40px 28px;
-    }
-}

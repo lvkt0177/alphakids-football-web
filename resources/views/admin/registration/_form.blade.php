@@ -36,6 +36,22 @@
             </div>
 
             <div class="field">
+                <label for="gender">Giới tính</label>
+                <select id="gender" name="gender">
+                    <option value="">-- Chưa chọn --</option>
+                    @foreach (\App\Enums\Gender::cases() as $gender)
+                        <option value="{{ $gender->value }}"
+                            {{ old('gender', $registration->gender?->value) == $gender->value ? 'selected' : '' }}>
+                            {{ $gender->getLabel() }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('gender')
+                    <p class="field-error">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="field">
                 <label for="phone">Số điện thoại</label>
                 <input type="text" id="phone" name="phone" value="{{ old('phone', $registration->phone) }}">
                 @error('phone')

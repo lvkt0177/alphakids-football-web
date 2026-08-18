@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Gender;
 use App\Enums\RegistrationStatus;
 use App\Traits\SearchableUnaccented;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,7 @@ class Registration extends Model
     protected $fillable = [
         'child_name',
         'birth_year',
+        'gender',
         'phone',
         'trial_date',
         'status',
@@ -25,6 +27,7 @@ class Registration extends Model
 
     protected $casts = [
         'status' => RegistrationStatus::class,
+        'gender' => Gender::class,
         'trial_date' => 'date',
     ];
 

@@ -26,6 +26,8 @@ class ProgramController extends Controller
             'program_closing_cta_photo' => Setting::get('program_closing_cta_photo'),
         ];
 
-        return view('client.program', compact('images'));
+        $ogImage = $images['program_banner'] ? asset('storage/' . $images['program_banner']) : null;
+
+        return view('client.program', compact('images', 'ogImage'));
     }
 }

@@ -11,7 +11,7 @@ class RegistrationController extends Controller
 {
     public function index()
     {
-        $query = Registration::query()->latest();
+        $query = Registration::query()->with('branches')->latest();
 
         if ($search = request('search')) {
             $query->where(function ($q) use ($search) {

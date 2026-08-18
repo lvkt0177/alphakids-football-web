@@ -751,6 +751,7 @@ img {
 .field input[type=tel],
 .field input[type=url],
 .field input[type=date],
+.field input[type=time],
 .field input[type=number],
 .field input[type=file],
 .field textarea,
@@ -795,6 +796,77 @@ img {
     font-size: 11.5px;
     color: var(--text-muted);
     margin-top: 5px;
+}
+
+.schedule-box {
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    background: var(--neutral-bg);
+}
+
+.schedule-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.schedule-rows:not(:empty) {
+    margin-bottom: 12px;
+}
+
+.schedule-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.schedule-row select {
+    flex: 1 1 150px;
+}
+
+.schedule-row input[type=time] {
+    flex: 1 1 110px;
+}
+
+.schedule-row__sep {
+    color: var(--text-muted);
+    flex: 0 0 auto;
+}
+
+.schedule-row__remove {
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-muted);
+    transition: background .15s var(--ease), color .15s var(--ease), border-color .15s var(--ease);
+}
+
+.schedule-row__remove:hover {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border-color: var(--danger-bg);
+}
+
+.schedule-row__remove svg {
+    width: 15px;
+    height: 15px;
+}
+
+@media (max-width: 560px) {
+    .schedule-row {
+        flex-wrap: wrap;
+    }
+
+    .schedule-row select {
+        flex-basis: 100%;
+    }
 }
 
 .field-error {
@@ -1000,6 +1072,15 @@ table {
     min-width: 760px;
 }
 
+.table--fixed {
+    table-layout: fixed;
+    min-width: 980px;
+}
+
+.table--fixed thead th {
+    white-space: normal;
+}
+
 thead th {
     text-align: left;
     font-size: 11px;
@@ -1047,6 +1128,17 @@ tbody tr:hover {
     font-family: var(--font-mono);
     font-size: 12.5px;
     color: var(--text-secondary);
+}
+
+.cell-truncate {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cell-empty {
+    color: var(--text-muted);
 }
 
 .cell-actions {

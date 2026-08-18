@@ -132,7 +132,7 @@ class HeroCropTest extends TestCase
             'images' => ['home_banner' => UploadedFile::fake()->image('new-banner.jpg', 1600, 900)],
         ])->assertRedirect();
 
-        // Mobile has its own source photo — a new desktop photo must not touch it.
+        // Mobile has its own source photo - a new desktop photo must not touch it.
         $this->assertSame('settings/existing_mobile_derivative.jpg', Setting::get('home_banner_mobile'));
         $this->assertSame(
             ['x' => 1, 'y' => 2, 'width' => 3, 'height' => 4],
@@ -155,7 +155,7 @@ class HeroCropTest extends TestCase
             'images' => ['home_banner' => UploadedFile::fake()->image('new-banner.jpg', 1600, 900)],
         ])->assertRedirect();
 
-        // Mobile was following the desktop photo — its stale crop must clear too.
+        // Mobile was following the desktop photo - its stale crop must clear too.
         $this->assertNull(Setting::get('home_banner_mobile'));
         $this->assertNull(Setting::get('home_banner_crop_mobile'));
     }

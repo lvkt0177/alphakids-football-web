@@ -31,9 +31,18 @@
                 <tbody>
                     @forelse ($branches as $branch)
                         <tr>
-                            <td class="cell-name">{{ $branch->name }}</td>
+                            <td class="cell-name">
+                                {{ $branch->name }}
+                                <div class="cell-sub">{{ $branch->location ?: 'Chưa có địa điểm cơ sở' }}</div>
+                            </td>
                             <td>{{ $branch->address }}</td>
-                            <td class="cell-mono">{{ $branch->schedule_weekday }} / {{ $branch->schedule_weekend }}</td>
+                            <td>
+                                @forelse ($branch->schedule ?? [] as $row)
+                                    <div class="cell-mono">{{ $row['day'] ?? '' }} {{ $row['start'] ?? '' }}–{{ $row['end'] ?? '' }}</div>
+                                @empty
+                                    <span class="cell-sub">Chưa có lịch</span>
+                                @endforelse
+                            </td>
                             <td>
                                 <span class="badge badge-{{ $branch->is_active ? 'green' : 'gray' }}">
                                     {{ $branch->is_active ? 'Đang hoạt động' : 'Tạm ẩn' }}

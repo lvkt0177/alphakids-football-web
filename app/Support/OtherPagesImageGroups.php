@@ -32,9 +32,6 @@ class OtherPagesImageGroups
                     'method_care_repetition' => 'Ảnh minh họa Repetition',
                     'method_care_enjoy_strict' => 'Ảnh minh họa Enjoy & Strict',
                 ],
-                'Banner "Giáo dục bằng trái tim"' => [
-                    'method_heart_banner' => 'Ảnh banner cuối trang',
-                ],
                 'CTA cuối trang' => [
                     'method_closing_cta_photo' => 'Ảnh nền full-bleed cho khối CTA cuối trang (tùy chọn)',
                 ],
@@ -63,7 +60,7 @@ class OtherPagesImageGroups
                 'Chương trình theo độ tuổi' => [
                     'program_age_toddler' => 'Ảnh Mầm non (3-6 tuổi)',
                     'program_age_primary' => 'Ảnh Tiểu học (7-10 tuổi)',
-                    'program_age_teen' => 'Ảnh Thiếu niên (11-14 tuổi)',
+                    'program_age_teen' => 'Ảnh Cấp 2 (11-14 tuổi)',
                 ],
                 'CTA cuối trang' => [
                     'program_closing_cta_photo' => 'Ảnh nền full-bleed cho khối CTA cuối trang (tùy chọn)',
@@ -77,6 +74,9 @@ class OtherPagesImageGroups
                 'Banner trang' => [
                     'activity_banner' => 'Ảnh banner trang Hoạt động & Sự kiện',
                 ],
+                'CTA cuối trang' => [
+                    'activity_closing_cta_photo' => 'Ảnh nền full-bleed cho khối CTA cuối trang (tùy chọn)',
+                ],
             ],
         ],
 
@@ -85,6 +85,9 @@ class OtherPagesImageGroups
             'groups' => [
                 'Banner trang' => [
                     'branch_banner' => 'Ảnh banner trang Hệ thống cơ sở',
+                ],
+                'CTA cuối trang' => [
+                    'branch_closing_cta_photo' => 'Ảnh nền full-bleed cho khối CTA cuối trang (tùy chọn)',
                 ],
             ],
         ],
@@ -98,11 +101,14 @@ class OtherPagesImageGroups
             ],
         ],
 
-        'registration' => [
-            'label' => 'Liên hệ & Đăng ký học thử',
+        'faq' => [
+            'label' => 'Câu hỏi thường gặp',
             'groups' => [
                 'Banner trang' => [
-                    'registration_banner' => 'Ảnh banner trang Liên hệ & Đăng ký học thử',
+                    'faq_banner' => 'Ảnh banner trang Câu hỏi thường gặp',
+                ],
+                'CTA cuối trang' => [
+                    'faq_closing_cta_photo' => 'Ảnh nền full-bleed cho khối CTA cuối trang (tùy chọn)',
                 ],
             ],
         ],
