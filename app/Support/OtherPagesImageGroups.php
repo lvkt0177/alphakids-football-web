@@ -13,6 +13,8 @@ class OtherPagesImageGroups
                 ],
                 'Đôi lời tâm sự' => [
                     'about_letter_photo' => 'Ảnh chân dung người chia sẻ',
+                    'about_letter_photo_2' => 'Ảnh phụ 1 - hiệu ứng bung phía sau (tùy chọn, mặc định dùng lại ảnh chân dung)',
+                    'about_letter_photo_3' => 'Ảnh phụ 2 - hiệu ứng bung phía sau (tùy chọn, mặc định dùng lại ảnh chân dung)',
                 ],
                 'CTA cuối trang' => [
                     'about_closing_cta_photo' => 'Ảnh nền full-bleed cho khối CTA cuối trang (tùy chọn)',

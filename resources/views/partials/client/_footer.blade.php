@@ -42,9 +42,8 @@
             <ul class="site-footer__links">
                 <li><a href="{{ route('method') }}">Phương pháp giáo dục</a></li>
                 <li><a href="{{ route('program') }}">Chương trình dạy</a></li>
-                <li><a href="{{ route('about') }}">Tầm nhìn &amp; Sứ mệnh</a></li>
-                <li><a href="{{ route('about') }}">Phương châm giáo dục</a></li>
-                <li><a href="{{ route('about') }}">Giá trị cốt lõi</a></li>
+                <li><a href="{{ route('about') }}#visionMission">Tầm nhìn &amp; Sứ mệnh</a></li>
+                <li><a href="{{ route('about') }}#pillarBento">Mô hình 4 tư duy</a></li>
             </ul>
         </div>
 

@@ -1,6 +1,7 @@
 @extends('layouts.client', [
     'title' => 'Về CLB',
     'description' => 'Tầm nhìn, sứ mệnh và mô hình 4 tư duy phát triển toàn diện của Alpha Kids Football Club, câu lạc bộ bóng đá tư duy dành cho trẻ từ 3 tuổi.',
+    'ogImage' => $ogImage,
 ])
 
 @push('styles')
@@ -27,7 +28,7 @@
         </div>
     </section>
 
-    <section class="section section--alt" data-reveal-group>
+    <section id="visionMission" class="section section--alt" data-reveal-group>
         <div class="container">
             <div class="section-head section-head--center reveal">
                 <h2>Giới thiệu <span class="hl">Alpha Kids Football Club</span></h2>
@@ -136,21 +137,29 @@
                 <p>Không phải con số, mà là tấm lòng của những người trực tiếp đồng hành cùng các con mỗi ngày.</p>
             </div>
 
+            @php
+                $letterGhostPhoto1 = $images['about_letter_photo_2'] ?? $images['about_letter_photo'] ?? null;
+                $letterGhostPhoto2 = $images['about_letter_photo_3'] ?? $images['about_letter_photo'] ?? null;
+            @endphp
             @if (filled($letter['message']))
                 <div class="letter-block reveal reveal-d2">
-                    <div>
-                        <div class="letter-portrait__frame" aria-hidden="true">
+                    <div class="letter-visual" data-letter-fan>
+                        <div class="letter-visual__stack">
                             @if ($images['about_letter_photo'] ?? null)
-                                <img src="{{ asset('storage/' . $images['about_letter_photo']) }}"
-                                    alt="{{ $letter['name'] ?: 'Đại diện CLB' }}{{ $letter['role'] ? ', ' . $letter['role'] : '' }} - Alpha Kids Football Club"
-                                    loading="lazy">
+                                <div class="letter-visual__ghost letter-visual__ghost--a" aria-hidden="true">
+                                    <img src="{{ asset('storage/' . $letterGhostPhoto1) }}" alt="" loading="lazy">
+                                </div>
+                                <div class="letter-visual__ghost letter-visual__ghost--b" aria-hidden="true">
+                                    <img src="{{ asset('storage/' . $letterGhostPhoto2) }}" alt="" loading="lazy">
+                                </div>
                             @endif
-                        </div>
-                        <div class="letter-portrait__caption">
-                            <span class="letter-portrait__name">{{ $letter['name'] ?: 'Đại diện CLB' }}</span>
-                            @if ($letter['role'])
-                                <span class="letter-portrait__role">{{ $letter['role'] }}</span>
-                            @endif
+                            <div class="letter-visual__frame">
+                                @if ($images['about_letter_photo'] ?? null)
+                                    <img src="{{ asset('storage/' . $images['about_letter_photo']) }}"
+                                        alt="{{ $letter['name'] ?: 'Đại diện CLB' }}{{ $letter['role'] ? ', ' . $letter['role'] : '' }} - Alpha Kids Football Club"
+                                        loading="lazy">
+                                @endif
+                            </div>
                         </div>
                     </div>
 
@@ -162,6 +171,12 @@
                             @endforeach
                         </div>
                         <div class="letter-body__rule" aria-hidden="true"></div>
+                        <div class="letter-body__signature">
+                            <span class="letter-body__signature-name">{{ $letter['name'] ?: 'Đại diện CLB' }}</span>
+                            @if ($letter['role'])
+                                <span class="letter-body__signature-role">{{ $letter['role'] }}</span>
+                            @endif
+                        </div>
                     </div>
                 </div>
             @else

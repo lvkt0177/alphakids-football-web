@@ -12,6 +12,8 @@ class AboutController extends Controller
         $images = [
             'about_banner' => Setting::get('about_banner'),
             'about_letter_photo' => Setting::get('about_letter_photo'),
+            'about_letter_photo_2' => Setting::get('about_letter_photo_2'),
+            'about_letter_photo_3' => Setting::get('about_letter_photo_3'),
             'about_closing_cta_photo' => Setting::get('about_closing_cta_photo'),
         ];
 
@@ -21,6 +23,8 @@ class AboutController extends Controller
             'message' => Setting::get('about_letter_message'),
         ];
 
-        return view('client.about', compact('images', 'letter'));
+        $ogImage = $images['about_banner'] ? asset('storage/' . $images['about_banner']) : null;
+
+        return view('client.about', compact('images', 'letter', 'ogImage'));
     }
 }

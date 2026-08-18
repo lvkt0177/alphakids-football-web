@@ -1,6 +1,31 @@
 document.addEventListener('DOMContentLoaded', function () {
     initPillarBento();
+    initLetterFan();
 });
+
+function initLetterFan() {
+    var el = document.querySelector('[data-letter-fan]');
+
+    if (!el) {
+        return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+        el.classList.add('is-inview');
+        return;
+    }
+
+    // Toggles both ways, not a one-shot reveal: fans out on scrolling into
+    // the section, gathers back the moment it scrolls out of view again -
+    // in either direction, not just downward past it.
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            entry.target.classList.toggle('is-inview', entry.isIntersecting);
+        });
+    }, { threshold: 0.4 });
+
+    observer.observe(el);
+}
 
 function initPillarBento() {
     var wrap = document.getElementById('pillarBento');

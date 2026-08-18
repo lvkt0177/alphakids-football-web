@@ -167,7 +167,13 @@
     color: var(--color-primary);
 }
 
-@media (max-width: 992px) {
+/* 992px left a squeeze zone (~993-1229px) where the full nav no longer hid
+   behind the hamburger but didn't have room for its own labels either - each
+   multi-word item (e.g. "HOẠT ĐỘNG & SỰ KIỆN") wrapped to two lines instead,
+   making the header visibly taller and cramped. Measured the real wrap point
+   via a width sweep rather than guessing: labels stay on one line again only
+   at 1230px+, so the hamburger threshold now covers the whole gap. */
+@media (max-width: 1240px) {
     .site-header__nav {
         display: none;
     }
