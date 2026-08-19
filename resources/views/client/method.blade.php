@@ -24,43 +24,6 @@
             </div>
         </section>
 
-        <section class="section section--alt" data-reveal-group>
-            <div class="container">
-                <div class="section-head section-head--center reveal">
-                    <h2>Nền tảng phương pháp giáo dục của <span class="hl">Alpha Kids</span></h2>
-                    <p>Mọi buổi học tại Alpha Kids Football Club được xây dựng trên 2 nền tảng cốt lõi nhằm phát triển trẻ
-                        một cách toàn diện và bền vững.</p>
-                </div>
-                <div class="value-pair">
-                    <div class="value-pair__card reveal reveal-d1">
-                        <div class="icon-roundel">
-                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="8" cy="12" r="4" />
-                                <circle cx="16" cy="12" r="4" />
-                            </svg>
-                        </div>
-                        <h3>Phương pháp C.A.R.E</h3>
-                        <div class="value-pair__rule"></div>
-                        <p>Phương pháp huấn luyện xoay quanh 4 chữ C.A.R.E: khích lệ đúng lúc, đặt câu hỏi gợi mở, lặp lại
-                            có chủ đích, và giữ kỷ luật đi cùng niềm vui trong từng buổi tập trên sân cỏ.</p>
-                    </div>
-                    <div class="value-pair__card reveal reveal-d2">
-                        <div class="icon-roundel">
-                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M9 18h6M10 21h4M12 3a6 6 0 0 0-6 6c0 2.5 1.5 4 2.5 5s1.5 1.5 1.5 3h4c0-1.5.5-2 1.5-3s2.5-2.5 2.5-5a6 6 0 0 0-6-6z" />
-                            </svg>
-                        </div>
-                        <h3>Mô hình 4 tư duy</h3>
-                        <div class="value-pair__rule"></div>
-                        <p>4 nhóm tư duy giao tiếp, đánh giá, ứng xử và lãnh đạo được lồng ghép trong mọi buổi tập, giúp
-                            trẻ hình thành kỹ năng sống và khả năng thích nghi. <a href="{{ route('about') }}#pillarBento"
-                                class="inline-link">Xem chi tiết tại trang Về CLB</a>.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="section" data-reveal-group>
             <div class="container">
                 <div class="section-head section-head--center reveal">

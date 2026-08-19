@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Branch;
 
+use App\Enums\ScheduleLevel;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class BranchRequest extends FormRequest
 {
@@ -32,6 +34,7 @@ class BranchRequest extends FormRequest
             'schedule.*.day' => ['required', 'string', 'max:50'],
             'schedule.*.start' => ['required', 'date_format:H:i'],
             'schedule.*.end' => ['required', 'date_format:H:i', 'after:schedule.*.start'],
+            'schedule.*.level' => ['nullable', Rule::enum(ScheduleLevel::class)],
             'map_embed_url' => ['nullable', 'string'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['boolean'],

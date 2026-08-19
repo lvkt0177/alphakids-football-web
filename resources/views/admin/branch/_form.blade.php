@@ -71,7 +71,6 @@
         <div class="field">
             <label for="description">Mô tả ngắn (tùy chọn)</label>
             <textarea id="description" name="description" rows="3">{{ old('description', $branch->description) }}</textarea>
-            <div class="field-hint">Hiện ở trang Hệ thống cơ sở, giúp phân biệt cơ sở này với cơ sở khác (vd: "Sân bãi mới cải tạo 2026").</div>
             @error('description')
                 <p class="field-error">{{ $message }}</p>
             @enderror
@@ -83,7 +82,7 @@
                 <div class="schedule-rows" id="scheduleRows">
                     @foreach ($scheduleRows as $i => $row)
                         <div class="schedule-row">
-                            <select name="schedule[{{ $i }}][day]">
+                            <select name="schedule[{{ $i }}][day]" class="schedule-row__day">
                                 @foreach ($scheduleDays as $day)
                                     <option value="{{ $day }}"
                                         {{ ($row['day'] ?? '') === $day ? 'selected' : '' }}>{{ $day }}</option>
@@ -94,6 +93,13 @@
                             <span class="schedule-row__sep">–</span>
                             <input type="time" name="schedule[{{ $i }}][end]"
                                 value="{{ $row['end'] ?? '' }}">
+                            <select name="schedule[{{ $i }}][level]" class="schedule-row__level">
+                                <option value="">-- Cấp học --</option>
+                                @foreach (\App\Enums\ScheduleLevel::cases() as $level)
+                                    <option value="{{ $level->value }}"
+                                        {{ ($row['level'] ?? '') === $level->value ? 'selected' : '' }}>{{ $level->getLabel() }}</option>
+                                @endforeach
+                            </select>
                             <button type="button" class="schedule-row__remove" aria-label="Xóa khung giờ này">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round">
@@ -122,7 +128,7 @@
 
         <template id="scheduleRowTemplate">
             <div class="schedule-row">
-                <select name="">
+                <select name="" class="schedule-row__day">
                     @foreach ($scheduleDays as $day)
                         <option value="{{ $day }}">{{ $day }}</option>
                     @endforeach
@@ -130,6 +136,12 @@
                 <input type="time" name="">
                 <span class="schedule-row__sep">–</span>
                 <input type="time" name="">
+                <select name="" class="schedule-row__level">
+                    <option value="">-- Cấp học --</option>
+                    @foreach (\App\Enums\ScheduleLevel::cases() as $level)
+                        <option value="{{ $level->value }}">{{ $level->getLabel() }}</option>
+                    @endforeach
+                </select>
                 <button type="button" class="schedule-row__remove" aria-label="Xóa khung giờ này">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                         <path d="M18 6L6 18M6 6l12 12" />

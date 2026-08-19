@@ -11,6 +11,53 @@ class RegistrationController extends Controller
 {
     public function index()
     {
+        $registrations = $this->filteredQuery()->paginate(20)->withQueryString();
+
+        return view('admin.registration.index', compact('registrations'));
+    }
+
+    public function export()
+    {
+        $registrations = $this->filteredQuery()->get();
+
+        $filename = 'dang-ky-hoc-thu-'.now()->format('Y-m-d-His').'.csv';
+
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ];
+
+        $callback = function () use ($registrations) {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF");
+
+            fputcsv($handle, [
+                'Tên bé', 'Cơ sở', 'Năm sinh', 'Giới tính', 'SĐT',
+                'Ngày trải nghiệm', 'Ghi chú', 'Trạng thái', 'Ngày đăng ký',
+            ]);
+
+            foreach ($registrations as $registration) {
+                fputcsv($handle, [
+                    $registration->child_name,
+                    $registration->branches->map(fn ($b) => $b->displayLocation() ?? $b->name)->implode(', '),
+                    $registration->birth_year,
+                    $registration->gender?->getLabel(),
+                    $registration->phone,
+                    $registration->trial_date?->format('d/m/Y'),
+                    $registration->note,
+                    $registration->status->getLabel(),
+                    $registration->created_at->format('d/m/Y H:i'),
+                ]);
+            }
+
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    protected function filteredQuery()
+    {
         $query = Registration::query()->with('branches')->latest();
 
         if ($search = request('search')) {
@@ -32,9 +79,7 @@ class RegistrationController extends Controller
             $query->whereDate('trial_date', '<=', $to);
         }
 
-        $registrations = $query->paginate(20)->withQueryString();
-
-        return view('admin.registration.index', compact('registrations'));
+        return $query;
     }
 
     public function edit(Registration $registration)

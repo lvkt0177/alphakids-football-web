@@ -110,7 +110,12 @@
                                                     <div class="schedule-chip__day">{{ $entry['day'] }}</div>
                                                     <div class="schedule-chip__time">
                                                         @foreach ($entry['times'] as $time)
-                                                            {{ $time['start'] }}–{{ $time['end'] }}@if (!$loop->last)<br>@endif
+                                                            <div class="schedule-chip__slot">
+                                                                {{ $time['start'] }}–{{ $time['end'] }}
+                                                                @if ($time['level'])
+                                                                    <span class="schedule-chip__level">({{ $time['level'] }})</span>
+                                                                @endif
+                                                            </div>
                                                         @endforeach
                                                     </div>
                                                 </div>

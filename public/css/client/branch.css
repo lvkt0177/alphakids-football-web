@@ -132,7 +132,7 @@
 .schedule-chip {
     border: 1px solid var(--ink-faint);
     border-radius: var(--radius-md);
-    padding: 8px 12px;
+    padding: 10px 12px;
     background: var(--paper);
     min-width: 108px;
 }
@@ -141,13 +141,22 @@
     font-size: 12px;
     font-weight: 700;
     color: var(--ink);
-    margin-bottom: 2px;
+    margin-bottom: 6px;
 }
 
 .schedule-chip__time {
     font-size: 11.5px;
     color: var(--ink-soft);
     line-height: 1.5;
+}
+
+.schedule-chip__slot:not(:last-child) {
+    margin-bottom: 5px;
+}
+
+.schedule-chip__level {
+    white-space: nowrap;
+    margin-left: 3px;
 }
 
 .branch-row__actions {

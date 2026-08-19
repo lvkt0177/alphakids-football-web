@@ -11,6 +11,10 @@
                 <div class="card-title">Danh sách đăng ký</div>
                 <div class="card-subtitle">{{ $registrations->total() }} kết quả</div>
             </div>
+            <a href="{{ route('admin.registration.export', request()->query()) }}" class="btn btn-secondary btn-sm">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+                Xuất Excel
+            </a>
         </div>
 
         <div class="table-scroll">

@@ -14,11 +14,13 @@ function initScheduleRepeater() {
     function reindexRows() {
         var rows = rowsContainer.querySelectorAll('.schedule-row');
         rows.forEach(function (row, index) {
-            var select = row.querySelector('select');
+            var daySelect = row.querySelector('.schedule-row__day');
+            var levelSelect = row.querySelector('.schedule-row__level');
             var timeInputs = row.querySelectorAll('input[type="time"]');
-            select.name = 'schedule[' + index + '][day]';
+            daySelect.name = 'schedule[' + index + '][day]';
             timeInputs[0].name = 'schedule[' + index + '][start]';
             timeInputs[1].name = 'schedule[' + index + '][end]';
+            levelSelect.name = 'schedule[' + index + '][level]';
         });
     }
 
