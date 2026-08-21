@@ -306,6 +306,14 @@ img {
     display: flex;
     align-items: center;
     gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: background .15s ease;
+}
+
+.sidebar-footer:hover,
+.sidebar-footer.active {
+    background: var(--sidebar-active-bg);
 }
 
 .sidebar-footer-avatar {
@@ -753,17 +761,29 @@ img {
 .field input[type=date],
 .field input[type=time],
 .field input[type=number],
+.field input[type=password],
 .field input[type=file],
 .field textarea,
 .field select {
     width: 100%;
-    padding: 10px 13px;
+    padding: 11px 14px;
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-sm);
     background: var(--surface);
     font-size: 13.5px;
+    line-height: 1.4;
     color: var(--text);
     transition: border-color .15s var(--ease), box-shadow .15s var(--ease);
+}
+
+.field select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 36px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238C8C8C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 15px;
 }
 
 .field input:hover,
@@ -775,9 +795,9 @@ img {
 .field input:focus,
 .field textarea:focus,
 .field select:focus {
-    border-color: var(--navy-700);
+    border-color: var(--accent-400);
     outline: none;
-    box-shadow: 0 0 0 3px var(--navy-100);
+    box-shadow: var(--shadow-focus);
 }
 
 .field input[type=checkbox] {

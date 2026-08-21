@@ -2,7 +2,6 @@
 
 @section('title', 'Câu hỏi thường gặp')
 @section('page-title', 'Câu hỏi thường gặp (FAQ)')
-@section('page-desc', 'Quản lý danh sách câu hỏi hiển thị ở trang "Câu hỏi thường gặp" và khối Q&A trên Trang chủ. Bật "Hiển thị ở Trang chủ" cho câu hỏi nào bạn muốn xuất hiện trong khối Q&A cuối phần Hành trình phát triển 4 tư duy.')
 
 @section('content')
     <div class="card">

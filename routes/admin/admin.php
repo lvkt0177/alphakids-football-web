@@ -12,4 +12,5 @@ Route::middleware('auth')->group(function () {
     include 'setting.php';
     include 'proof-point.php';
     include 'faq.php';
+    include 'account.php';
 });

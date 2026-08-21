@@ -14,8 +14,8 @@
 
 <body>
 
-    <div class="login-page">
-        <div class="login-card">
+    <div class="login-shell">
+        <div class="login-form">
             <div class="brand">
                 <div class="brand-badge">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
@@ -25,9 +25,11 @@
                         <path d="M22 9v6" />
                     </svg>
                 </div>
-                <h1 class="brand-name">Alpha Kids Football</h1>
-                <p class="brand-subtitle">Trang quản trị nội bộ</p>
+                <span class="brand-name">Alpha Kids Football</span>
             </div>
+
+            <h1>Chào mừng trở lại!</h1>
+            <p class="lead">Đăng nhập để quản lý hệ thống Alpha Kids Football</p>
 
             <form method="POST" action="{{ route('login') }}" novalidate>
                 @csrf
@@ -35,11 +37,6 @@
                 <div class="field-group {{ $errors->has('username') ? 'error' : '' }}">
                     <label for="username">Tên đăng nhập</label>
                     <div class="input-wrap">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="8" r="3.6" />
-                            <path d="M5 20c0-3.6 3.1-6.2 7-6.2s7 2.6 7 6.2" />
-                        </svg>
                         <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập"
                             value="{{ old('username') }}" autocomplete="off" autofocus>
                     </div>
@@ -51,11 +48,6 @@
                 <div class="field-group {{ $errors->has('password') ? 'error' : '' }}">
                     <label for="password">Mật khẩu</label>
                     <div class="input-wrap">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="4.5" y="10.5" width="15" height="9.5" rx="2" />
-                            <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" />
-                        </svg>
                         <input type="password" id="password" name="password" placeholder="Nhập mật khẩu"
                             autocomplete="current-password">
                         <button type="button" class="toggle-password" id="togglePassword" aria-label="Hiện mật khẩu">
@@ -75,6 +67,11 @@
                     <span id="submitLabel">Đăng nhập</span>
                 </button>
             </form>
+        </div>
+
+        <div class="login-photo">
+            <img src="{{ asset('images/auth/login-hero.jpg') }}" alt="">
+            <div class="tagline">Alpha Kids Football</div>
         </div>
     </div>
 

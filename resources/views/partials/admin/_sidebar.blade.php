@@ -79,11 +79,12 @@
         </a>
     </nav>
 
-    <div class="sidebar-footer">
+    <a href="{{ route('admin.account.edit') }}" class="sidebar-footer {{ request()->routeIs('admin.account.*') ? 'active' : '' }}">
         <div class="sidebar-footer-avatar">{{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}</div>
         <div class="sidebar-footer-text">
             <div class="sidebar-footer-name">{{ auth()->user()->name ?? 'Quản trị viên' }}</div>
             <div class="sidebar-footer-email">{{ auth()->user()->email ?? 'admin@alphakidsfootball.vn' }}</div>
         </div>
-    </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" style="flex-shrink:0;color:var(--text-muted);"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+    </a>
 </aside>
