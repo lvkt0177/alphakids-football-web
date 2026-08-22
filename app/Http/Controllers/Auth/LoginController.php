@@ -10,7 +10,13 @@ class LoginController extends Controller
 {
     public function showForm()
     {
-        return view('auth.login');
+        // Prevent browser/proxy/CDN from caching the login page — a cached page
+        // embeds a stale CSRF token that no longer matches a fresh session,
+        // causing a 419 on submit (e.g. via back button after logout).
+        return response()
+            ->view('auth.login')
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache');
     }
 
     public function login(LoginRequest $request)

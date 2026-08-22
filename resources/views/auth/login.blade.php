@@ -31,6 +31,10 @@
             <h1>Chào mừng trở lại!</h1>
             <p class="lead">Đăng nhập để quản lý hệ thống Alpha Kids Football</p>
 
+            @if (session('status'))
+                <p class="status-banner">{{ session('status') }}</p>
+            @endif
+
             <form method="POST" action="{{ route('login') }}" novalidate>
                 @csrf
 

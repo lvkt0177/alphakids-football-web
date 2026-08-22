@@ -263,6 +263,17 @@ input {
     font-weight: 500;
 }
 
+.status-banner {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent-600);
+    background: var(--accent-50);
+    border: 1px solid var(--accent-100);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    margin-bottom: 18px;
+}
+
 .field-group.error .input-wrap {
     background: var(--danger-bg);
     border-color: var(--danger);
@@ -347,7 +358,7 @@ input {
         width: 100%;
         max-width: none;
         height: auto;
-        min-height: 78vh;
+        min-height: 87vh;
         max-height: none;
         border: none;
         border-radius: 28px 28px 0 0;
