@@ -104,6 +104,7 @@
             </div>
         </section>
 
+        @if (($videoMode === 'youtube' && $videoYoutubeUrl) || ($videoMode === 'upload' && $videoFile))
         <section class="hp-section intro-video-section" data-reveal-group id="introVideoSection">
             <span class="intro-video-section__dark-bg" id="introVideoBgSplit" aria-hidden="true"></span>
 
@@ -123,7 +124,7 @@
                                 title="Video giới thiệu Alpha Kids Football Club"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen></iframe>
-                        @elseif ($videoMode === 'upload' && $videoFile)
+                        @else
                             <video controls id="introVideoEl"
                                 @if ($images['home_video_thumbnail'] ?? null) poster="{{ asset('storage/' . $images['home_video_thumbnail']) }}" @endif>
                                 <source src="{{ asset('storage/' . $videoFile) }}" type="video/mp4">
@@ -134,14 +135,13 @@
                                     <path d="M8 5v14l11-7z" />
                                 </svg>
                             </button>
-                        @else
-                            <p class="intro-video__empty">Video giới thiệu đang được cập nhật.</p>
                         @endif
                     </div>
                     <span class="intro-video__caption">Triết lý xuyên suốt mọi buổi tập tại Alpha Kids</span>
                 </div>
             </div>
         </section>
+        @endif
 
         <section class="hp-section timeline-section" data-reveal-group>
             <div class="container">

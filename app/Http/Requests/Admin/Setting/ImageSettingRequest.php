@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Setting;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ImageSettingRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class ImageSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'images.*' => ['nullable', 'image', 'max:7168'],
+            'images.*' => ['nullable', 'image', 'max:30720', Rule::dimensions()->maxWidth(8000)->maxHeight(8000)],
 
             'crop_desktop' => ['nullable', 'array'],
             'crop_desktop.x' => ['required_with:crop_desktop', 'numeric', 'min:0'],
@@ -34,7 +35,8 @@ class ImageSettingRequest extends FormRequest
     {
         return [
             'images.*.image' => 'File tải lên phải là hình ảnh.',
-            'images.*.max' => 'Ảnh không được vượt quá 7MB.',
+            'images.*.max' => 'Ảnh không được vượt quá 30MB.',
+            'images.*.dimensions' => 'Ảnh có độ phân giải quá lớn (tối đa 8000x8000px). Vui lòng dùng ảnh nhỏ hơn.',
         ];
     }
 }

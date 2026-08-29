@@ -220,6 +220,16 @@
                 @endif
             </div>
         </form>
+
+        @if ($videoFile)
+            <form method="POST" action="{{ route('admin.setting.home.video.delete') }}"
+                data-confirm="Xóa video đã tải lên? Mục video trên trang chủ sẽ tự ẩn đi cho đến khi bạn tải video khác."
+                data-confirm-title="Xóa video" style="margin-top:12px;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm">Xóa video đã tải lên</button>
+            </form>
+        @endif
     </div>
 
     <div class="tab-panel" id="tab-activities">

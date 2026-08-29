@@ -7,6 +7,7 @@ Route::prefix('setting')->name('setting.')->group(function () {
     Route::get('/home', [SettingController::class, 'home'])->name('home');
     Route::post('/home/images', [SettingController::class, 'updateImages'])->name('home.images.update');
     Route::post('/home/video', [SettingController::class, 'updateVideo'])->name('home.video.update');
+    Route::delete('/home/video', [SettingController::class, 'deleteVideo'])->name('home.video.delete');
     Route::post('/home/activities', [SettingController::class, 'updateFeaturedActivities'])->name('home.activities.update');
 
     Route::get('/other-pages', [SettingController::class, 'otherPages'])->name('other-pages');

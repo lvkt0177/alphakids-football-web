@@ -85,7 +85,7 @@ class SettingController extends Controller
                 Storage::disk('public')->delete($old);
             }
 
-            $path = $file->store('settings', 'public');
+            $path = $this->storeOptimizedImage($file);
             Setting::set($key, $path);
 
             if ($key === 'home_banner') {
@@ -157,6 +157,51 @@ class SettingController extends Controller
     }
 
     /**
+     * Every image Admin uploads (home banner, C.A.R.E photos, other-pages
+     * photos, video thumbnail) went straight to disk at whatever size/format
+     * the browser sent - phone photos routinely landed at 2-3MB, hurting LCP
+     * on every page that shows them. Downscale to a sane max width (no
+     * upscaling of already-small images) and re-encode as JPEG 85, matching
+     * the quality already used for the hero crop derivatives below.
+     */
+    protected function storeOptimizedImage($file, string $directory = 'settings'): string
+    {
+        // GD decompresses the source into an uncompressed RGBA bitmap to work
+        // with it - a 24MP phone photo alone needs ~90MB for that, before the
+        // resize/encode buffers on top. On a host with a low default
+        // memory_limit (128-256M is a common shared-hosting default), that
+        // can exhaust it and fatal mid-upload. Raise the ceiling for just
+        // this request - never lower it if the server already grants more,
+        // and leave an already-unlimited ("-1") setting alone.
+        $current = ini_get('memory_limit');
+        if ($current !== '-1' && $this->toBytes($current) < $this->toBytes('512M')) {
+            ini_set('memory_limit', '512M');
+        }
+
+        $image = ImageManager::gd()->read($file->getRealPath());
+        $image->scaleDown(width: 1920);
+
+        $filename = $directory.'/'.uniqid('img_').'.jpg';
+        Storage::disk('public')->put($filename, (string) $image->toJpeg(85));
+
+        return $filename;
+    }
+
+    protected function toBytes(string $iniValue): int
+    {
+        $iniValue = trim($iniValue);
+        $unit = strtolower(substr($iniValue, -1));
+        $value = (int) $iniValue;
+
+        return match ($unit) {
+            'g' => $value * 1024 * 1024 * 1024,
+            'm' => $value * 1024 * 1024,
+            'k' => $value * 1024,
+            default => $value,
+        };
+    }
+
+    /**
      * A freshly uploaded source photo invalidates the matching derivative's
      * crop (its coordinates belonged to the old photo) - clear it so the
      * client falls back to the new original until Admin re-crops it.
@@ -194,11 +239,22 @@ class SettingController extends Controller
             if ($oldThumbnail) {
                 Storage::disk('public')->delete($oldThumbnail);
             }
-            $thumbnailPath = $request->file('video_thumbnail')->store('settings/video', 'public');
+            $thumbnailPath = $this->storeOptimizedImage($request->file('video_thumbnail'), 'settings/video');
             Setting::set('home_video_thumbnail', $thumbnailPath);
         }
 
         return redirect()->route('admin.setting.home')->with('success', 'Đã lưu video.');
+    }
+
+    public function deleteVideo()
+    {
+        $videoFile = Setting::get('video_file');
+        if ($videoFile) {
+            Storage::disk('public')->delete($videoFile);
+        }
+        Setting::set('video_file', null);
+
+        return redirect()->route('admin.setting.home')->with('success', 'Đã xóa video.');
     }
 
     public function updateFeaturedActivities(FeaturedActivityRequest $request)
