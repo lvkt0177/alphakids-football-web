@@ -1,7 +1,7 @@
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
         <div class="sidebar-logo">
-            <img src="{{ asset('images/logo/logo.jpg') }}" alt="Alpha Kids Football">
+            <img src="{{ asset('images/logo/logo-website.png') }}" alt="Alpha Kids Football">
         </div>
         <div>
             <div class="sidebar-title">Alpha Kids Football</div>

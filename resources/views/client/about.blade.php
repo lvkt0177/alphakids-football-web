@@ -210,7 +210,7 @@
             '@type' => 'SportsActivityLocation',
             'name' => 'Alpha Kids Football Club',
             'url' => route('about'),
-            'logo' => asset('images/logo/logo.jpg'),
+            'logo' => asset('images/logo/logo-website.png'),
             'description' => 'Tầm nhìn, sứ mệnh và mô hình 4 tư duy phát triển toàn diện của Alpha Kids Football Club, câu lạc bộ bóng đá tư duy dành cho trẻ từ 3 tuổi.',
             'sport' => 'Soccer',
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}

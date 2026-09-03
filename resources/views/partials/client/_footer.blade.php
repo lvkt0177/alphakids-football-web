@@ -6,7 +6,7 @@
     <div class="site-footer__top container">
         <div class="site-footer__col">
             <a href="{{ route('home') }}" class="site-footer__logo">
-                <img src="{{ asset('images/logo/logo.jpg') }}" alt="Alpha Kids Football Club">
+                <img src="{{ asset('images/logo/logo-website.png') }}" alt="Alpha Kids Football Club">
                 <span>
                     <strong>ALPHA KIDS</strong>
                     <small>FOOTBALL CLUB</small>

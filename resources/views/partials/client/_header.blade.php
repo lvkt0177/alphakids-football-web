@@ -13,7 +13,7 @@
 <header class="site-header site-header--{{ $variant }}" id="siteHeader">
     <div class="site-header__inner container">
         <a href="{{ route('home') }}" class="site-header__brand">
-            <img src="{{ asset('images/logo/logo.jpg') }}" alt="Alpha Kids Football Club" class="site-header__logo">
+            <img src="{{ asset('images/logo/logo-website.png') }}" alt="Alpha Kids Football Club" class="site-header__logo">
             <span class="site-header__brand-text">
                 <strong>ALPHA KIDS</strong>
                 <small>FOOTBALL CLUB</small>

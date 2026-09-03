@@ -17,13 +17,13 @@
     <meta property="og:title" content="{{ $title ?? 'Alpha Kids Football Club' }} - Bóng đá tư duy cho trẻ từ 3 tuổi">
     <meta property="og:description"
         content="{{ $description ?? 'Alpha Kids Football Club - CLB bóng đá tư duy dành cho trẻ từ 3 tuổi, phát triển thể chất, tư duy và nhân cách qua từng buổi tập.' }}">
-    <meta property="og:image" content="{{ $ogImage ?? asset('images/logo/logo.jpg') }}">
+    <meta property="og:image" content="{{ $ogImage ?? asset('images/logo/logo-website.png') }}">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $title ?? 'Alpha Kids Football Club' }} - Bóng đá tư duy cho trẻ từ 3 tuổi">
     <meta name="twitter:description"
         content="{{ $description ?? 'Alpha Kids Football Club - CLB bóng đá tư duy dành cho trẻ từ 3 tuổi, phát triển thể chất, tư duy và nhân cách qua từng buổi tập.' }}">
-    <meta name="twitter:image" content="{{ $ogImage ?? asset('images/logo/logo.jpg') }}">
+    <meta name="twitter:image" content="{{ $ogImage ?? asset('images/logo/logo-website.png') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
