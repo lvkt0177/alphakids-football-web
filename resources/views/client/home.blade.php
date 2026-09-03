@@ -432,16 +432,16 @@
             </div>
         </section>
 
-        <section class="hp-section proof" data-reveal-group>
-            <div class="container">
-                <div class="section-head section-head--center" style="margin-inline:auto;">
-                    <h2>Vì sao phụ huynh chọn <span class="hl">Alpha Kids</span></h2>
-                    <p style="margin-inline:auto;">Những chia sẻ thật từ phụ huynh đang đồng hành cùng con tại Alpha
-                        Kids.</p>
+        @if ($proofPoints->isNotEmpty())
+            <section class="hp-section proof" data-reveal-group>
+                <div class="container">
+                    <div class="section-head section-head--center" style="margin-inline:auto;">
+                        <h2>Vì sao phụ huynh chọn <span class="hl">Alpha Kids</span></h2>
+                        <p style="margin-inline:auto;">Những chia sẻ thật từ phụ huynh đang đồng hành cùng con tại
+                            Alpha Kids.</p>
+                    </div>
                 </div>
-            </div>
 
-            @if ($proofPoints->isNotEmpty())
                 <div class="proof-shell reveal reveal-d2 {{ $proofPoints->count() < 3 ? 'proof-shell--no-peek' : '' }}"
                     role="region" aria-roledescription="carousel" aria-label="Cảm nhận của phụ huynh">
                     <span class="proof-edge-fade left" aria-hidden="true"></span>
@@ -470,20 +470,10 @@
                 </div>
 
                 <script type="application/json" id="proofQuotesData">{!! $proofPoints->map(fn($p) => ['quote' => $p->description, 'author' => $p->author_name])->values()->toJson() !!}</script>
-            @else
-                <div class="container">
-                    <div class="testimonial-feature reveal">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"
-                            aria-hidden="true">
-                            <path d="M7 8h10M7 12h6M4 4h16v11H9l-5 4V4z" />
-                        </svg>
-                        <p>Nội dung đang được cập nhật.</p>
-                    </div>
-                </div>
-            @endif
-        </section>
+            </section>
+        @endif
 
-        <section class="hp-section hp-section--alt" data-reveal-group>
+        <section class="hp-section hp-section--alt hp-section--padding-block-80" data-reveal-group>
             <div class="container">
                 <div class="faq-section">
                     <div class="faq-section__head reveal">

@@ -18,6 +18,10 @@
     padding-block: 100px;
 }
 
+.hp-section--padding-block-80 {
+    padding-block: var(--section-gap-80);
+}
+
 .hp-section--ink {
     background: var(--ink);
     color: rgba(255, 255, 255, .88);
@@ -1175,28 +1179,6 @@
 .proof-spotlight__dot.is-active {
     background: var(--accent);
     transform: scale(1.4);
-}
-
-.testimonial-feature {
-    max-width: 580px;
-    margin-inline: auto;
-    text-align: center;
-    padding: 64px 28px;
-    border: 1.5px dashed var(--ink-faint);
-    border-radius: var(--radius-xl);
-    color: var(--ink-soft);
-}
-
-.testimonial-feature svg {
-    width: 42px;
-    height: 42px;
-    margin-bottom: 18px;
-    opacity: .4;
-}
-
-.testimonial-feature p {
-    margin: 0;
-    font-size: 15.5px;
 }
 
 .faq-section {
