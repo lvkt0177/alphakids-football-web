@@ -1,0 +1,396 @@
+.care-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.care-detail-card {
+    border: 1px solid var(--ink-faint);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.care-detail-card__body {
+    padding: 32px 30px 28px;
+    flex: 1 1 auto;
+}
+
+.care-detail-card__letter {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+.care-detail-card h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: .02em;
+    margin: 0 0 4px;
+}
+
+.care-detail-card__subtitle {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    color: var(--accent-text);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.care-detail-card__lead {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.6;
+    margin: 0 0 12px;
+}
+
+.care-detail-card__text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+}
+
+.care-detail-card__list {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+}
+
+.care-detail-card__list li {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-style: italic;
+    padding: 10px 0;
+    border-top: 1px solid var(--ink-faint);
+}
+
+.care-detail-card__punch-rule {
+    width: 32px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 4px 0 10px;
+}
+
+.care-detail-card__punch {
+    color: var(--ink);
+    font-size: 14.5px;
+    line-height: 1.6;
+    font-weight: 700;
+    margin: 0;
+}
+
+.care-detail-card__punch span {
+    display: block;
+}
+
+.care-detail-card__media {
+    aspect-ratio: 4 / 3;
+    background: var(--paper-alt);
+    flex: 0 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.care-detail-card__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.care-detail-card__media-empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-top: 1px dashed var(--ink-faint);
+    color: var(--ink-soft);
+    opacity: .55;
+}
+
+.care-detail-card__media-empty svg {
+    width: 26px;
+    height: 26px;
+}
+
+.care-detail-card__media-empty span {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+@media (max-width: 700px) {
+    .care-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Weekly memo: "Thẻ ghi nhớ" — icon + statement + tilted sticky-note ----------
+   Deliberately NOT gated behind prefers-reduced-motion anywhere below — site-wide
+   rule (project memory): this project always animates regardless of the visitor's
+   OS-level reduce-motion setting. Do not add a reduced-motion query here.
+   The sticky-note decoration below uses 3 new tints local to this component
+   (cream backing, off-white card face, warm-brown label) — all still gold-family,
+   not a second accent hue; kept local rather than promoted to base.css tokens
+   since nothing else on the site uses this "note card" material yet. */
+.memo-rows {
+    max-width: 1220px;
+    margin: 64px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.memo-row {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) 300px;
+    column-gap: 28px;
+    align-items: start;
+    padding: 36px 40px;
+    background: var(--paper);
+    border: 1px solid var(--ink-faint);
+    border-radius: var(--radius-lg);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .6s cubic-bezier(.16, 1, .3, 1) var(--memo-delay, 0s), transform .6s cubic-bezier(.16, 1, .3, 1) var(--memo-delay, 0s);
+}
+
+.memo-row.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --memo-delay staggers rows that enter/leave together, matching the site's
+   own .reveal-d1..d4 rhythm (base.css) exactly, so this section reads as
+   one calm entrance rather than a busy sequence of separate tricks. */
+.memo-row:nth-child(1) {
+    --memo-delay: .06s;
+}
+
+.memo-row:nth-child(2) {
+    --memo-delay: .14s;
+}
+
+.memo-row:nth-child(3) {
+    --memo-delay: .22s;
+}
+
+.memo-row:nth-child(4) {
+    --memo-delay: .3s;
+}
+
+.memo-row__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    color: var(--ink);
+}
+
+.memo-row__body {
+    min-width: 0;
+}
+
+.memo-row__title {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    margin: 0;
+}
+
+.memo-row__mantra {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.4rem, 1.1rem + 1.4vw, 1.875rem);
+    line-height: 1.3;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    margin: 12px 0 0;
+}
+
+.memo-row__rule {
+    width: 36px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--accent);
+    margin: 18px 0;
+}
+
+.memo-row__text {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 60ch;
+    margin: 0;
+}
+
+/* ---- tilted sticky-note decoration (3rd column) ---- */
+.memo-row__note {
+    position: relative;
+    height: 200px;
+    align-self: center;
+}
+
+.memo-row__note-card--back {
+    position: absolute;
+    top: 16px;
+    width: 198px;
+    height: 148px;
+    background: #F1E7C8;
+    border-radius: 10px;
+}
+
+.memo-row__note-card--front {
+    position: absolute;
+    top: 0;
+    width: 216px;
+    height: 156px;
+    background: #FFFDF6;
+    border: 1px solid rgba(16, 16, 16, .10);
+    border-radius: 10px;
+    box-shadow: 0 14px 22px -14px rgba(16, 16, 16, .22), 0 3px 8px rgba(16, 16, 16, .06);
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.memo-row__note--a .memo-row__note-card--back {
+    left: 36px;
+    transform: rotate(3deg);
+}
+
+.memo-row__note--a .memo-row__note-card--front {
+    left: 22px;
+    transform: rotate(-3deg);
+}
+
+.memo-row__note--b .memo-row__note-card--back {
+    left: 8px;
+    transform: rotate(-3deg);
+}
+
+.memo-row__note--b .memo-row__note-card--front {
+    left: 24px;
+    transform: rotate(3deg);
+}
+
+.memo-row__note-week {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #8A6400;
+}
+
+.memo-row__note-mantra {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 1.35;
+    color: var(--ink);
+}
+
+.memo-row__note-rule {
+    display: block;
+    width: 20px;
+    height: 3px;
+    background: var(--accent);
+}
+
+@media (max-width: 960px) {
+    /* A full-height icon column (dead empty space below a small icon) and a
+       float (icon+title line 1 wraps correctly, but line 2 "escapes" the
+       float and snaps back to the far-left edge, misaligned under line 1)
+       were both tried and both wrong for this content shape. Real fix: the
+       icon only ever sits beside the short one-line title — never beside
+       the multi-line mantra/paragraph. `display:contents` promotes body's
+       children to direct grid items (no markup change needed) so mantra/
+       rule/text can each span the full row width below the icon+title line,
+       completely clear of it — no wrap, no stray indent, no dead column. */
+    .memo-row {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        grid-template-areas:
+            "icon  title"
+            "mantra mantra"
+            "rule  rule"
+            "text  text";
+        column-gap: 14px;
+        padding: 30px 32px;
+    }
+
+    .memo-row__body {
+        display: contents;
+    }
+
+    .memo-row__icon {
+        grid-area: icon;
+        align-self: center;
+        width: 40px;
+        height: 40px;
+    }
+
+    .memo-row__icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .memo-row__title {
+        grid-area: title;
+        align-self: center;
+    }
+
+    .memo-row__mantra {
+        grid-area: mantra;
+        margin-top: 14px;
+    }
+
+    .memo-row__rule {
+        grid-area: rule;
+    }
+
+    .memo-row__text {
+        grid-area: text;
+    }
+
+    .memo-row__note {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .memo-row {
+        padding: 26px 22px;
+    }
+}
+
