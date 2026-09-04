@@ -28,8 +28,8 @@
                 <span class="brand-name">Alpha Kids Football</span>
             </div>
 
-            <h1>Chào mừng trở lại!</h1>
-            <p class="lead">Đăng nhập để quản lý hệ thống Alpha Kids Football</p>
+            <p class="eyebrow">Chào mừng trở lại!</p>
+            <h1>Đăng nhập</h1>
 
             @if (session('status'))
                 <p class="status-banner">{{ session('status') }}</p>
@@ -69,13 +69,19 @@
 
                 <button type="submit" class="btn-submit">
                     <span id="submitLabel">Đăng nhập</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14" />
+                        <path d="m13 6 6 6-6 6" />
+                    </svg>
                 </button>
             </form>
         </div>
 
-        <div class="login-photo">
-            <img src="{{ asset('images/auth/login-hero.jpg') }}" alt="">
-            <div class="tagline">Alpha Kids Football</div>
+        <div class="login-visual" aria-hidden="true">
+            <div class="login-visual__shape"></div>
+            <img class="login-visual__illustration"
+                src="{{ asset('images/auth/login-illustration.png') }}" alt="">
         </div>
     </div>
 
