@@ -26,15 +26,6 @@
 
     $emptyMediaIcon =
         '<svg viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.4" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="9" cy="10" r="2" /><path d="M3 17l5-4 4 3 4-5 5 6" /></svg>';
-
-    $pillarCopy = [
-        'tournament' =>
-            'Sân chơi lớn nhất trong năm, quy tụ học viên từ mọi cơ sở để thi đấu, kết bạn và tự tin thể hiện những gì đã học.',
-        'meetup' =>
-            'Những trận giao lưu giữa các cơ sở gần nhau, nơi trẻ học cách thích nghi và tôn trọng đối thủ ngoài sân nhà.',
-        'family_day' =>
-            'Một ngày bóng đá không chỉ dành cho trẻ. Ba mẹ cùng chơi, cùng thử thách, cùng tạo nên một kỷ niệm chung.',
-    ];
 @endphp
 
 @section('content')
@@ -51,60 +42,7 @@
         </div>
     </section>
 
-    <section class="section" data-reveal-group>
-        <div class="container">
-            <div class="section-head reveal">
-                <h2>3 trụ cột <span class="hl">hoạt động</span></h2>
-                <p>Mỗi trụ cột là một hành trình lặp lại nhiều kỳ trong năm, nơi những gì trẻ <a
-                        href="{{ route('method') }}" class="inline-link">rèn luyện mỗi tuần</a> được đưa ra sân thật để
-                    thi đấu, giao lưu và trưởng thành.</p>
-            </div>
-
-            <div class="pillar-grid">
-                @foreach ($pillars as $i => $pillar)
-                    @php
-                        $category = $pillar['category'];
-                        $value = $category->value;
-                        $highlight = $pillar['highlight'];
-                    @endphp
-                    <div
-                        class="pillar-card @if ($highlight) pillar-card--live @endif reveal reveal-d{{ $i + 1 }}">
-                        <div class="icon-roundel">{!! $categoryIcons[$value] !!}</div>
-                        <h3>{{ $value === 'family_day' ? 'Alpha Together' : $category->getLabel() . ' Alpha Kids' }}</h3>
-                        <p>{{ $pillarCopy[$value] }}</p>
-
-                        @if ($highlight)
-                            <div class="pillar-card__media">
-                                @if ($highlight->image)
-                                    <img src="{{ asset('storage/' . $highlight->image) }}" alt="{{ $highlight->name }}"
-                                        loading="lazy">
-                                @endif
-                            </div>
-                            <div class="pillar-card__foot">
-                                <button type="button" class="pillar-card__link" data-goto-category="{{ $value }}"
-                                    data-goto-label="{{ $category->getLabel() }}">
-                                    Xem các kỳ đã qua
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
-                                        <path d="M5 12h14M13 6l6 6-6 6" />
-                                    </svg>
-                                </button>
-                            </div>
-                        @else
-                            <span class="badge-soon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="9" />
-                                    <path d="M12 7v5l3 3" />
-                                </svg>
-                                Sắp ra mắt
-                            </span>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    <section class="section section--alt" id="archive" data-reveal-group>
+    <section class="section" id="archive" data-reveal-group>
         <div class="container">
             <div class="archive-toolbar reveal">
                 <div class="section-head" style="margin-bottom:0">
@@ -131,7 +69,8 @@
             @if ($activities->isNotEmpty())
                 <div class="activity-grid reveal reveal-d1">
                     @foreach ($activities as $activity)
-                        <div class="activity-card" data-category="{{ $activity->category->value }}">
+                        <a class="activity-card" href="{{ route('activity.show', $activity) }}"
+                            data-category="{{ $activity->category->value }}">
                             @if ($activity->image)
                                 <img src="{{ asset('storage/' . $activity->image) }}" alt="{{ $activity->name }}"
                                     loading="lazy">
@@ -146,7 +85,7 @@
                                         {{ \Illuminate\Support\Str::limit($activity->description, 90) }}</p>
                                 @endif
                             </div>
-                        </div>
+                        </a>
                     @endforeach
 
                     <div class="activities__empty archive-empty" id="archiveEmpty">

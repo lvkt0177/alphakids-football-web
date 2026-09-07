@@ -1,125 +1,3 @@
-/* ---------- pillar spotlight ---------- */
-.pillar-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-@media (max-width: 940px) {
-    .pillar-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.pillar-card {
-    border: 1px solid var(--ink-faint);
-    border-radius: var(--radius-lg);
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    background: var(--paper);
-    transition: border-color .25s ease;
-}
-
-.pillar-card--live {
-    background: var(--white);
-}
-
-.pillar-card .icon-roundel {
-    margin-bottom: 0;
-    border: 1.5px solid var(--accent-text);
-}
-
-.pillar-card h3 {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 19px;
-    letter-spacing: .02em;
-    margin: 0;
-}
-
-.pillar-card p {
-    font-size: 14.5px;
-    line-height: 1.6;
-    color: var(--ink-soft);
-    margin: 0;
-    min-height: calc(14.5px * 1.6 * 2);
-}
-
-.pillar-card__media {
-    position: relative;
-    border-radius: var(--radius-md);
-    aspect-ratio: 16 / 10;
-    overflow: hidden;
-    background: var(--paper-alt);
-}
-
-.pillar-card__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.pillar-card__foot {
-    margin-top: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.pillar-card__link {
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--accent-text);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: none;
-    border: none;
-    padding: 2px 0;
-}
-
-.pillar-card__link svg {
-    width: 14px;
-    height: 14px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2.4;
-    transition: transform .2s ease;
-}
-
-.pillar-card__link:hover svg {
-    transform: translateX(3px);
-}
-
-.badge-soon {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: auto;
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    border: 1px solid var(--ink-faint);
-    border-radius: var(--radius-pill);
-    padding: 6px 12px;
-    width: fit-content;
-}
-
-.badge-soon svg {
-    width: 11px;
-    height: 11px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2;
-}
-
 /* ---------- archive toolbar + filter (co-located with the grid it controls) ---------- */
 .archive-toolbar {
     display: flex;
@@ -204,6 +82,25 @@
 
 .archive-filter-chip.is-active span {
     color: var(--white);
+}
+
+@media (max-width: 768px) {
+    .archive-filter-bar {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+    }
+
+    .archive-filter-bar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .archive-filter-chip {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        white-space: nowrap;
+    }
 }
 
 /* ---------- archive grid ---------- */

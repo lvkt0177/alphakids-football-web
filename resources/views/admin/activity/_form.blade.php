@@ -4,6 +4,11 @@
 @section('page-title', $activity->exists ? 'Sửa hoạt động' : 'Thêm hoạt động')
 @section('page-desc', 'Thông tin hoạt động hiển thị ở trang Hoạt động & Sự kiện.')
 
+@push('styles')
+    <link rel="stylesheet"
+        href="{{ asset('css/admin/activity-gallery.css') }}?v={{ filemtime(public_path('css/admin/activity-gallery.css')) }}">
+@endpush
+
 @section('content')
     <form class="card" method="POST"
         action="{{ $activity->exists ? route('admin.activity.update', $activity) : route('admin.activity.store') }}"
@@ -102,6 +107,66 @@
             </label>
         </div>
 
+        @if ($activity->exists)
+            <hr class="divider">
+
+            <div class="card-header">
+                <div>
+                    <div class="card-title">Thư viện ảnh</div>
+                    <div class="card-subtitle">Ảnh hiển thị trong gallery ở trang chi tiết &ldquo;{{ $activity->name }}&rdquo;.
+                        Ảnh đầu tiên trong danh sách hiển thị đầu tiên trên trang.</div>
+                </div>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid"
+                data-temp-upload-url="{{ route('admin.activity.images.temp-upload', $activity) }}">
+                @forelse ($activity->images as $image)
+                    <div class="gallery-tile" data-id="{{ $image->id }}">
+                        <div class="gallery-tile__media">
+                            <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $image->alt_text }}">
+                            <span class="gallery-tile__order"></span>
+                            <div class="gallery-tile__actions">
+                                <div class="gallery-order-btns">
+                                    <button type="button" class="gallery-icon-btn gallery-move-up" title="Lên trước">
+                                        <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
+                                    </button>
+                                    <button type="button" class="gallery-icon-btn gallery-move-down" title="Xuống sau">
+                                        <svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
+                                    </button>
+                                </div>
+                                <button type="button" class="gallery-icon-btn gallery-icon-btn--danger gallery-mark-delete"
+                                    title="Xóa ảnh">
+                                    <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-tile__undo">
+                            <span>Sẽ xóa khi lưu</span>
+                            <button type="button" class="gallery-undo">Hoàn tác</button>
+                        </div>
+                    </div>
+                @empty
+                @endforelse
+
+                <label class="gallery-dropzone" id="galleryDropzone">
+                    <svg viewBox="0 0 24 24"><path d="M12 4v12M6 10l6-6 6 6" /><path d="M4 18h16" /></svg>
+                    <span>Thêm ảnh</span>
+                    <input type="file" accept="image/*" multiple id="galleryFileInput">
+                </label>
+            </div>
+
+            <input type="hidden" name="gallery_state" id="galleryState" value="[]">
+            <p class="a-hint" style="font-size:12px;color:var(--text-muted);margin:0 0 4px;">Ảnh được tải lên ngay để
+                xem trước, nhưng <b>chỉ thật sự thêm/xóa/sắp xếp lại khi bạn bấm &ldquo;Lưu thay đổi&rdquo;</b> bên dưới
+                &ndash; giống các trường khác của form này.</p>
+            <div id="galleryWarnings"></div>
+            <span class="gallery-upload-status" id="galleryUploadStatus"></span>
+        @else
+            <hr class="divider">
+            <p class="a-hint" style="font-size:12.5px;color:var(--text-muted);">Lưu hoạt động này trước, sau đó quay lại
+                để thêm ảnh vào thư viện.</p>
+        @endif
+
         <div class="form-actions">
             <a href="{{ route('admin.activity.index') }}" class="btn btn-secondary">Hủy</a>
             <button type="submit" class="btn btn-primary">
@@ -114,3 +179,7 @@
         </div>
     </form>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/admin/activity-gallery.js') }}?v={{ filemtime(public_path('js/admin/activity-gallery.js')) }}"></script>
+@endpush

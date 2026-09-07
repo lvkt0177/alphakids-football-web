@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Enums\ActivityCategory;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Setting;
@@ -18,26 +17,24 @@ class ActivityController extends Controller
 
         $activities = Activity::active()->ordered()->get();
 
-        $pillarCategories = [
-            ActivityCategory::TOURNAMENT,
-            ActivityCategory::MEETUP,
-            ActivityCategory::FAMILY_DAY,
-        ];
-
-        $pillars = collect($pillarCategories)->map(function (ActivityCategory $category) use ($activities) {
-            $items = $activities->where('category', $category);
-
-            return [
-                'category' => $category,
-                'highlight' => $items->first(),
-                'count' => $items->count(),
-            ];
-        });
-
         $ogImage = $images['activity_banner']
             ?? $activities->first(fn (Activity $activity) => $activity->image)?->image;
         $ogImage = $ogImage ? asset('storage/' . $ogImage) : null;
 
-        return view('client.activity.index', compact('images', 'activities', 'pillars', 'ogImage'));
+        return view('client.activity.index', compact('images', 'activities', 'ogImage'));
+    }
+
+    public function show(Activity $activity)
+    {
+        abort_unless($activity->is_active, 404);
+
+        $activity->load('images');
+
+        $ogImage = $activity->image ?? optional($activity->images->first())->image;
+        $ogImage = $ogImage ? asset('storage/' . $ogImage) : null;
+
+        $closingCtaPhoto = Setting::get('activity_closing_cta_photo');
+
+        return view('client.activity.show', compact('activity', 'ogImage', 'closingCtaPhoto'));
     }
 }
