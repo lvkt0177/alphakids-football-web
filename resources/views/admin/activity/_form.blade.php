@@ -156,9 +156,6 @@
             </div>
 
             <input type="hidden" name="gallery_state" id="galleryState" value="[]">
-            <p class="a-hint" style="font-size:12px;color:var(--text-muted);margin:0 0 4px;">Ảnh được tải lên ngay để
-                xem trước, nhưng <b>chỉ thật sự thêm/xóa/sắp xếp lại khi bạn bấm &ldquo;Lưu thay đổi&rdquo;</b> bên dưới
-                &ndash; giống các trường khác của form này.</p>
             <div id="galleryWarnings"></div>
             <span class="gallery-upload-status" id="galleryUploadStatus"></span>
         @else
