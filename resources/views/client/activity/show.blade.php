@@ -24,7 +24,7 @@
         '<svg viewBox="0 0 24 24" fill="none" stroke="var(--ink-soft)" stroke-width="1.2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="9" cy="10" r="2" /><path d="M3 17l5-4 4 3 4-5 5 6" /></svg>';
 
     $heroTeaser = $activity->description
-        ? \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($activity->description))), 130)
+        ? trim(preg_replace('/\s+/', ' ', strip_tags($activity->description)))
         : null;
 @endphp
 
@@ -41,20 +41,22 @@
             <span class="show-hero__tag">{!! $categoryIcons[$activity->category->value] !!} {{ $activity->category->getLabel() }}</span>
             <h1>{{ $activity->name }}</h1>
             @if ($heroTeaser)
-                <p class="show-hero__desc">{{ $heroTeaser }}</p>
+                <p class="show-hero__desc show-hero__desc--panel">{{ $heroTeaser }}</p>
             @endif
             @if ($activity->images->isNotEmpty())
                 <div class="show-hero__meta">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="8.5" cy="10" r="1.5" /><path d="M21 15l-5-5-4 4-2-2-5 5" /></svg>
-                    <span>{{ $activity->images->count() }} ảnh</span>
+                    {{-- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="8.5" cy="10" r="1.5" /><path d="M21 15l-5-5-4 4-2-2-5 5" /></svg> --}}
                 </div>
             @endif
         </div>
     </section>
 
-    <section class="show-gallery-section" data-reveal-group>
+    <section class="show-gallery-section">
         <div class="container">
-            <div class="show-gallery-head reveal">
+            @if ($heroTeaser)
+                <p class="show-teaser">{{ $heroTeaser }}</p>
+            @endif
+            <div class="show-gallery-head">
                 <h2>Khoảnh khắc</h2>
                 <span>{{ $activity->images->count() }} ảnh</span>
             </div>

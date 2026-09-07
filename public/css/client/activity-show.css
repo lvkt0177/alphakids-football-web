@@ -10,9 +10,17 @@
 
 .show-hero__media {
     position: relative;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 5 / 5;
     overflow: hidden;
     background: var(--paper-alt);
+}
+
+.show-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(16, 16, 16, .9) 0%, rgba(16, 16, 16, .32) 45%, rgba(16, 16, 16, 0) 70%);
+    pointer-events: none;
 }
 
 .show-hero__media img {
@@ -36,11 +44,16 @@
 }
 
 .show-hero__info {
-    padding: 28px 20px 36px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    padding: 64px 20px 24px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
+    gap: 12px;
 }
 
 .show-hero__tag {
@@ -72,7 +85,7 @@
     font-weight: 800;
     line-height: 1.15;
     text-transform: uppercase;
-    color: var(--ink);
+    color: var(--white);
     margin: 0;
     text-wrap: balance;
 }
@@ -80,8 +93,20 @@
 .show-hero__desc {
     font-size: 14.5px;
     line-height: 1.7;
-    color: var(--ink-soft);
+    color: rgba(255, 255, 255, .72);
     margin: 0;
+    max-width: 60ch;
+}
+
+.show-hero__desc--panel {
+    display: none;
+}
+
+.show-teaser {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
     max-width: 60ch;
 }
 
@@ -90,7 +115,7 @@
     align-items: center;
     gap: 6px;
     font-size: 12.5px;
-    color: var(--ink-soft);
+    color: rgba(255, 255, 255, .64);
 }
 
 .show-hero__meta svg {
@@ -104,7 +129,7 @@
 
 /* ---------- gallery ---------- */
 .show-gallery-section {
-    padding-block: 48px var(--section-gap-mobile);
+    padding-block: 25px var(--section-gap-mobile);
 }
 
 .show-gallery-head {
@@ -246,7 +271,12 @@
         aspect-ratio: auto;
     }
 
+    .show-hero__media::after {
+        content: none;
+    }
+
     .show-hero__info {
+        position: static;
         flex: 1;
         justify-content: center;
         background: var(--ink);
@@ -261,6 +291,14 @@
 
     .show-hero__desc {
         color: rgba(255, 255, 255, .68);
+    }
+
+    .show-hero__desc--panel {
+        display: block;
+    }
+
+    .show-teaser {
+        display: none;
     }
 
     .show-hero__meta {
