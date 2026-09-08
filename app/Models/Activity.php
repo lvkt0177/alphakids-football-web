@@ -44,4 +44,9 @@ class Activity extends Model
     {
         return $query->orderBy('sort_order');
     }
+
+    public function images()
+    {
+        return $this->hasMany(ActivityImage::class)->orderBy('sort_order');
+    }
 }

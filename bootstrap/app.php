@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Exceptions\PostTooLargeException;
 use Illuminate\Http\Request;
 use Illuminate\Session\TokenMismatchException;
 
@@ -33,5 +34,13 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (TokenMismatchException $e, Request $request) {
             return redirect()->route('login')
                 ->with('status', 'Phiên làm việc đã hết hạn, vui lòng đăng nhập lại.');
+        });
+
+        // PHP rejects an over-limit request (post_max_size) before Laravel can
+        // run per-field validation, so the normal "ảnh không được vượt quá..."
+        // messages never fire. Catch it here and send the admin back with a
+        // plain-language reason instead of the framework's raw error page.
+        $exceptions->render(function (PostTooLargeException $e, Request $request) {
+            return back()->with('error', 'Tổng dung lượng ảnh tải lên quá lớn. Hãy chọn ít ảnh hơn hoặc nén nhỏ lại rồi thử lưu lại.');
         });
     })->create();

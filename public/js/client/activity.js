@@ -8,7 +8,6 @@ function initActivityFilters() {
     var emptyState = document.getElementById('archiveEmpty');
     var filterLabel = document.getElementById('filterLabel');
     var filterCount = document.getElementById('filterCount');
-    var archiveSection = document.getElementById('archive');
     var QUERY_KEY = 'danh-muc';
     var TRANSITION_MS = 320;
     var STAGGER_STEP_MS = 35;
@@ -107,18 +106,6 @@ function initActivityFilters() {
             var category = chip.getAttribute('data-category');
             var label = chip.querySelector('span') ? chip.querySelector('span').textContent : category;
             applyFilter(category, label);
-        });
-    });
-
-    var gotoButtons = document.querySelectorAll('[data-goto-category]');
-    gotoButtons.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            var category = btn.getAttribute('data-goto-category');
-            var label = btn.getAttribute('data-goto-label') || category;
-            applyFilter(category, label);
-            if (archiveSection) {
-                archiveSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
         });
     });
 

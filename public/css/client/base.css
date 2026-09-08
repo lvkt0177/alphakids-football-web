@@ -1013,6 +1013,8 @@ textarea:focus-visible {
     overflow: hidden;
     aspect-ratio: 4 / 3;
     background: var(--paper-alt);
+    text-decoration: none;
+    color: inherit;
 }
 
 .activity-card img {

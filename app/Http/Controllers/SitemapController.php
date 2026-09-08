@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use Illuminate\Http\Response;
 
 class SitemapController extends Controller
@@ -18,6 +19,14 @@ class SitemapController extends Controller
             ['name' => 'faq', 'priority' => '0.6', 'changefreq' => 'monthly'],
             ['name' => 'registration.create', 'priority' => '0.9', 'changefreq' => 'yearly'],
         ];
+
+        foreach (Activity::active()->get() as $activity) {
+            $routes[] = [
+                'url' => route('activity.show', $activity),
+                'priority' => '0.6',
+                'changefreq' => 'monthly',
+            ];
+        }
 
         $xml = view('sitemap', compact('routes'))->render();
 
