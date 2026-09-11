@@ -3,7 +3,10 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function initGalleryLightbox() {
-    var figures = Array.prototype.slice.call(document.querySelectorAll('#showGallery figure'));
+    // Only photo figures drive the lightbox - video figures carry native
+    // <video controls> and are excluded so render()'s `img` lookup below
+    // never hits a video figure and breaks.
+    var figures = Array.prototype.slice.call(document.querySelectorAll('#showGallery .show-gallery__photo'));
     var lightbox = document.getElementById('showLightbox');
 
     if (!figures.length || !lightbox) {

@@ -21,11 +21,27 @@
     background: var(--border);
 }
 
-.gallery-tile__media img {
+.gallery-tile__media img,
+.gallery-tile__media video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+.gallery-tile__badge {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    background: rgba(20, 20, 20, .72);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: .03em;
 }
 
 .gallery-tile__order {
@@ -120,7 +136,8 @@
     animation: gallery-pulse 1.1s ease-in-out infinite;
 }
 
-.gallery-tile--uploading .gallery-tile__media img {
+.gallery-tile--uploading .gallery-tile__media img,
+.gallery-tile--uploading .gallery-tile__media video {
     opacity: .45;
 }
 
@@ -149,6 +166,28 @@
 
 @keyframes gallery-spin {
     to { transform: rotate(360deg); }
+}
+
+/* Upload progress - mainly for videos, where a bare spinner gives no sense
+   of whether a multi-hundred-MB upload is actually moving. */
+.gallery-tile__progress {
+    position: absolute;
+    inset-inline: 8px;
+    bottom: 8px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .35);
+    overflow: hidden;
+    z-index: 2;
+}
+
+.gallery-tile__progress-bar {
+    width: 100%;
+    height: 100%;
+    background: var(--accent-400, #fff);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .15s linear;
 }
 
 .gallery-tile__undo {
