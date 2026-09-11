@@ -172,6 +172,16 @@
     display: block;
 }
 
+.show-gallery figure.show-gallery__video {
+    cursor: default;
+}
+
+.show-gallery__video video {
+    width: 100%;
+    display: block;
+    background: #000;
+}
+
 .show-gallery-empty {
     padding: 40px 20px;
     text-align: center;

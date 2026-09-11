@@ -64,10 +64,16 @@
             @if ($activity->images->isNotEmpty())
                 <div class="show-gallery" id="showGallery">
                     @foreach ($activity->images as $i => $image)
-                        <figure>
-                            <img loading="lazy" src="{{ asset('storage/' . $image->image) }}"
-                                alt="{{ $image->alt_text ?: $activity->name . ' - ảnh ' . ($i + 1) }}">
-                        </figure>
+                        @if ($image->isVideo())
+                            <figure class="show-gallery__video">
+                                <video src="{{ asset('storage/' . $image->image) }}" controls preload="metadata" playsinline></video>
+                            </figure>
+                        @else
+                            <figure class="show-gallery__photo">
+                                <img loading="lazy" src="{{ asset('storage/' . $image->image) }}"
+                                    alt="{{ $image->alt_text ?: $activity->name . ' - ảnh ' . ($i + 1) }}">
+                            </figure>
+                        @endif
                     @endforeach
                 </div>
             @else

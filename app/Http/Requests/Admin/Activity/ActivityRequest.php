@@ -13,6 +13,20 @@ class ActivityRequest extends FormRequest
         return true;
     }
 
+    /**
+     * `sort_order` is NOT NULL DEFAULT 0 in the DB (unlike `featured_order`,
+     * which really is nullable) - leaving the field empty must fall back to
+     * 0 before validation runs, otherwise `validated()` carries a literal
+     * null through to Activity::create()/update(), which inserts NULL and
+     * trips the NOT NULL constraint instead of letting the DB default apply.
+     */
+    protected function prepareForValidation(): void
+    {
+        if ($this->sort_order === null || $this->sort_order === '') {
+            $this->merge(['sort_order' => 0]);
+        }
+    }
+
     public function rules(): array
     {
         return [

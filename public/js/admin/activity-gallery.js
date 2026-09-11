@@ -8,8 +8,20 @@ function initActivityGalleryManager() {
         return;
     }
 
-    // Kept in sync with Admin\ActivityController::uploadTempImage()'s rule.
-    var MAX_FILE_BYTES = 30 * 1024 * 1024;
+    // Kept in sync with Admin\ActivityController::uploadTempMedia()'s rules.
+    // Client-side checks here are UX only (fail fast, no wasted upload) -
+    // the server re-validates size, extension and real content regardless.
+    var MAX_IMAGE_BYTES = 30 * 1024 * 1024;
+    var MAX_VIDEO_BYTES = 500 * 1024 * 1024;
+    var VIDEO_EXTENSIONS = ['mp4', 'mov', 'webm', 'm4v'];
+
+    function isVideoFile(file) {
+        if (file.type && file.type.indexOf('video/') === 0) {
+            return true;
+        }
+        var ext = (file.name.split('.').pop() || '').toLowerCase();
+        return VIDEO_EXTENSIONS.indexOf(ext) !== -1;
+    }
 
     var form = grid.closest('form');
     var dropzone = document.getElementById('galleryDropzone');
@@ -86,10 +98,15 @@ function initActivityGalleryManager() {
         }
     });
 
-    function buildTileMarkup(imgSrc, isNew) {
+    function buildTileMarkup(mediaSrc, isNew, isVideo) {
+        var media = isVideo
+            ? '<video src="' + mediaSrc + '" muted playsinline preload="metadata"></video>'
+            : '<img src="' + mediaSrc + '" alt="">';
+
         return (
             '<div class="gallery-tile__media">' +
-                '<img src="' + imgSrc + '" alt="">' +
+                media +
+                (isVideo ? '<span class="gallery-tile__badge gallery-tile__badge--video">Video</span>' : '') +
                 '<span class="gallery-tile__order"></span>' +
                 (isNew ? '<span class="gallery-tile__new">Mới</span>' : '') +
                 '<div class="gallery-tile__actions">' +
@@ -97,66 +114,101 @@ function initActivityGalleryManager() {
                         '<button type="button" class="gallery-icon-btn gallery-move-up" title="Lên trước"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>' +
                         '<button type="button" class="gallery-icon-btn gallery-move-down" title="Xuống sau"><svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></button>' +
                     '</div>' +
-                    '<button type="button" class="gallery-icon-btn gallery-icon-btn--danger gallery-mark-delete" title="Xóa ảnh"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+                    '<button type="button" class="gallery-icon-btn gallery-icon-btn--danger gallery-mark-delete" title="Xóa"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
                 '</div>' +
             '</div>' +
             '<div class="gallery-tile__undo"><span>Sẽ xóa khi lưu</span><button type="button" class="gallery-undo">Hoàn tác</button></div>'
         );
     }
 
+    // XMLHttpRequest (not fetch) specifically so a large video reports real
+    // upload progress - without it a 300MB+ upload just sits there for
+    // minutes with no feedback, which reads as "frozen" and invites the
+    // admin to reload the page mid-upload.
     function uploadFile(file) {
+        var isVideo = isVideoFile(file);
         var previewUrl = URL.createObjectURL(file);
         var tile = document.createElement('div');
         tile.className = 'gallery-tile gallery-tile--uploading';
+        var mediaEl = isVideo
+            ? '<video src="' + previewUrl + '" muted playsinline preload="metadata"></video>'
+            : '<img src="' + previewUrl + '" alt="">';
         tile.innerHTML =
             '<div class="gallery-tile__media">' +
-                '<img src="' + previewUrl + '" alt="">' +
+                mediaEl +
                 '<div class="gallery-tile__spinner"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9"/></svg></div>' +
+                '<div class="gallery-tile__progress"><div class="gallery-tile__progress-bar"></div></div>' +
             '</div>';
         grid.insertBefore(tile, dropzone);
 
+        var progressBar = tile.querySelector('.gallery-tile__progress-bar');
+
         var formData = new FormData();
-        formData.append('image', file);
+        formData.append('file', file);
 
         uploadsInFlight++;
 
-        return fetch(tempUploadUrl, {
-            method: 'POST',
-            headers: { 'X-CSRF-TOKEN': csrfToken, Accept: 'application/json' },
-            body: formData,
-        })
-            .then(function (res) {
-                if (!res.ok) {
-                    return res.json().catch(function () {
-                        return {};
-                    }).then(function (data) {
-                        throw new Error((data && data.message) || 'Tải lên thất bại');
+        return new Promise(function (resolve) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', tempUploadUrl, true);
+            xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+            xhr.setRequestHeader('Accept', 'application/json');
+
+            xhr.upload.addEventListener('progress', function (e) {
+                if (e.lengthComputable && progressBar) {
+                    progressBar.style.transform = 'scaleX(' + (e.loaded / e.total) + ')';
+                }
+            });
+
+            xhr.onload = function () {
+                var data = {};
+                try {
+                    data = JSON.parse(xhr.responseText);
+                } catch (err) {
+                    data = {};
+                }
+
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    tile.className = 'gallery-tile';
+                    tile.setAttribute('data-temp-path', data.temp_path);
+                    tile.innerHTML = buildTileMarkup(data.url, true, data.type === 'video');
+                    renumber();
+                } else {
+                    tile.className = 'gallery-tile gallery-tile--failed';
+                    tile.innerHTML =
+                        '<div class="gallery-tile__media">' +
+                            mediaEl +
+                            '<div class="gallery-tile__retry"><span>' + (data.message || 'Tải lên thất bại') + '</span>' +
+                                '<button type="button" class="gallery-tile__dismiss">Bỏ mục này</button>' +
+                            '</div>' +
+                        '</div>';
+                    tile.querySelector('.gallery-tile__dismiss').addEventListener('click', function () {
+                        tile.remove();
                     });
                 }
-                return res.json();
-            })
-            .then(function (data) {
-                tile.className = 'gallery-tile';
-                tile.setAttribute('data-temp-path', data.temp_path);
-                tile.innerHTML = buildTileMarkup(data.url, true);
-                renumber();
-            })
-            .catch(function (err) {
+
+                uploadsInFlight--;
+                resolve();
+            };
+
+            xhr.onerror = function () {
                 tile.className = 'gallery-tile gallery-tile--failed';
                 tile.innerHTML =
                     '<div class="gallery-tile__media">' +
-                        '<img src="' + previewUrl + '" alt="">' +
-                        '<div class="gallery-tile__retry"><span>' + (err.message || 'Tải lên thất bại') + '</span>' +
-                            '<button type="button" class="gallery-tile__dismiss">Bỏ ảnh này</button>' +
+                        mediaEl +
+                        '<div class="gallery-tile__retry"><span>Mất kết nối khi tải lên.</span>' +
+                            '<button type="button" class="gallery-tile__dismiss">Bỏ mục này</button>' +
                         '</div>' +
                     '</div>';
                 tile.querySelector('.gallery-tile__dismiss').addEventListener('click', function () {
                     tile.remove();
                 });
-            })
-            .then(function () {
                 uploadsInFlight--;
-            });
+                resolve();
+            };
+
+            xhr.send(formData);
+        });
     }
 
     if (dropzone && fileInput) {
@@ -166,8 +218,10 @@ function initActivityGalleryManager() {
             var toUpload = [];
 
             incoming.forEach(function (file) {
-                if (file.size > MAX_FILE_BYTES) {
-                    warnings.push('"' + file.name + '" nặng ' + formatMB(file.size) + ', vượt quá 30MB nên đã bỏ qua.');
+                var isVideo = isVideoFile(file);
+                var cap = isVideo ? MAX_VIDEO_BYTES : MAX_IMAGE_BYTES;
+                if (file.size > cap) {
+                    warnings.push('"' + file.name + '" nặng ' + formatMB(file.size) + ', vượt quá ' + formatMB(cap) + ' nên đã bỏ qua.');
                     return;
                 }
                 toUpload.push(file);
@@ -190,7 +244,7 @@ function initActivityGalleryManager() {
                     return;
                 }
                 uploadStatus.classList.add('is-visible');
-                uploadStatus.textContent = 'Đang tải ảnh ' + (done + 1) + '/' + total + '...';
+                uploadStatus.textContent = 'Đang tải ' + (done + 1) + '/' + total + '...';
                 uploadFile(toUpload[done]).then(function () {
                     done++;
                     uploadNext();
@@ -206,7 +260,7 @@ function initActivityGalleryManager() {
             if (uploadsInFlight > 0) {
                 e.preventDefault();
                 if (window.AdminToast) {
-                    window.AdminToast.show('Đang tải ảnh lên, vui lòng đợi rồi bấm Lưu lại.', 'error');
+                    window.AdminToast.show('Đang tải lên, vui lòng đợi rồi bấm Lưu lại.', 'error');
                 }
                 return;
             }

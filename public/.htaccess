@@ -1,3 +1,15 @@
+<IfModule mod_php.c>
+    # Fallback for Apache+mod_php setups, where .user.ini (used by
+    # PHP-FPM/CGI) is not read. Raises the upload ceiling so the activity
+    # gallery can accept videos over 300MB - see public/.user.ini for the
+    # full explanation and the app-level cap in Admin\ActivityController.
+    php_value upload_max_filesize 520M
+    php_value post_max_size 520M
+    php_value max_execution_time 600
+    php_value max_input_time 600
+    php_value memory_limit 512M
+</IfModule>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
