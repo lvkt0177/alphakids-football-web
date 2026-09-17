@@ -23,12 +23,15 @@ class Registration extends Model
         'trial_date',
         'status',
         'note',
+        'referral_sources',
+        'referral_school',
     ];
 
     protected $casts = [
         'status' => RegistrationStatus::class,
         'gender' => Gender::class,
         'trial_date' => 'date',
+        'referral_sources' => 'array',
     ];
 
     public function branches(): BelongsToMany

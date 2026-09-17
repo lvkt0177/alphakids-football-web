@@ -39,16 +39,18 @@
                                     {{ $proofPoint->is_active ? 'Hiển thị' : 'Tạm ẩn' }}
                                 </span>
                             </td>
-                            <td class="cell-actions">
-                                <a href="{{ route('admin.proof-point.edit', $proofPoint) }}"
-                                    class="btn btn-secondary btn-sm">Sửa</a>
-                                <form method="POST" action="{{ route('admin.proof-point.destroy', $proofPoint) }}"
-                                    data-confirm="Bạn chắc chắn muốn xóa trích dẫn của &quot;{{ $proofPoint->author_name }}&quot;? Hành động này không thể hoàn tác."
-                                    data-confirm-title="Xóa nội dung" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                                </form>
+                            <td>
+                                <div class="cell-actions">
+                                    <a href="{{ route('admin.proof-point.edit', $proofPoint) }}"
+                                        class="btn btn-secondary btn-sm">Sửa</a>
+                                    <form method="POST" action="{{ route('admin.proof-point.destroy', $proofPoint) }}"
+                                        data-confirm="Bạn chắc chắn muốn xóa trích dẫn của &quot;{{ $proofPoint->author_name }}&quot;? Hành động này không thể hoàn tác."
+                                        data-confirm-title="Xóa nội dung" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty

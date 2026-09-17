@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initRevealOnScroll();
     initContactFab();
     initCustomSelects();
+    initReferralSchoolToggle();
 });
 
 function initSuccessModal() {
@@ -166,6 +167,40 @@ function initMobileMenu() {
             closeMenu();
         }
     });
+}
+
+// Hides the "school name" field until a parent ticks "school flyer" as their
+// referral source: keeps the form short by default, no-JS fallback leaves it
+// visible so it still works if this script fails to run.
+function initReferralSchoolToggle() {
+    var field = document.querySelector('[data-referral-school-field]');
+
+    if (!field) {
+        return;
+    }
+
+    var flyerValue = field.getAttribute('data-referral-school-field');
+    var flyerCheckbox = document.querySelector('[data-referral-flyer-check]') ||
+        document.querySelector('input[name="referral_sources[]"][value="' + flyerValue + '"]');
+
+    if (!flyerCheckbox) {
+        return;
+    }
+
+    var schoolInput = field.querySelector('input');
+
+    function sync() {
+        var hidden = !flyerCheckbox.checked;
+        field.classList.toggle('is-hidden', hidden);
+        field.setAttribute('aria-hidden', hidden ? 'true' : 'false');
+
+        if (schoolInput) {
+            schoolInput.tabIndex = hidden ? -1 : 0;
+        }
+    }
+
+    flyerCheckbox.addEventListener('change', sync);
+    sync();
 }
 
 function initAccordions() {

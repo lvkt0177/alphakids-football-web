@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Registration;
 
 use App\Enums\Gender;
+use App\Enums\ReferralSource;
 use App\Enums\RegistrationStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -26,6 +27,9 @@ class RegistrationRequest extends FormRequest
             'note' => ['nullable', 'string'],
             'branches' => ['nullable', 'array'],
             'branches.*' => ['exists:branches,id'],
+            'referral_sources' => ['nullable', 'array'],
+            'referral_sources.*' => [Rule::enum(ReferralSource::class)],
+            'referral_school' => ['nullable', 'string', 'max:255'],
         ];
     }
 

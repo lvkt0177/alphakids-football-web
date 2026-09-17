@@ -363,6 +363,34 @@
     outline-offset: 2px;
 }
 
+.field-hint {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin-top: 5px;
+}
+
+/* ---------- conditional field (school name, shown only when "school flyer" is ticked) ----------
+   Collapses via grid-template-rows (not max-height/height) so the transition
+   only ever animates a track size, not a layout property that would force a
+   reflow up the tree. */
+.field--conditional {
+    display: grid;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+    transition: grid-template-rows var(--transition-base), opacity var(--transition-base);
+}
+
+.field--conditional-inner {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.field--conditional.is-hidden {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    pointer-events: none;
+}
+
 .form-card .btn {
     margin-top: 8px;
 }

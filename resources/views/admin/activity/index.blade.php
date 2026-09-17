@@ -45,16 +45,18 @@
                                     {{ $activity->is_active ? 'Hoạt động' : 'Tạm ẩn' }}
                                 </span>
                             </td>
-                            <td class="cell-actions">
-                                <a href="{{ route('admin.activity.edit', $activity) }}"
-                                    class="btn btn-secondary btn-sm">Sửa</a>
-                                <form method="POST" action="{{ route('admin.activity.destroy', $activity) }}"
-                                    data-confirm="Bạn chắc chắn muốn xóa hoạt động &quot;{{ $activity->name }}&quot;? Hành động này không thể hoàn tác."
-                                    data-confirm-title="Xóa hoạt động" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                                </form>
+                            <td>
+                                <div class="cell-actions">
+                                    <a href="{{ route('admin.activity.edit', $activity) }}"
+                                        class="btn btn-secondary btn-sm">Sửa</a>
+                                    <form method="POST" action="{{ route('admin.activity.destroy', $activity) }}"
+                                        data-confirm="Bạn chắc chắn muốn xóa hoạt động &quot;{{ $activity->name }}&quot;? Hành động này không thể hoàn tác."
+                                        data-confirm-title="Xóa hoạt động" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty

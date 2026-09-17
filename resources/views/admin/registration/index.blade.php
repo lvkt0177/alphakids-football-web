@@ -20,12 +20,13 @@
         <div class="table-scroll">
             <table class="table--fixed">
                 <colgroup>
-                    <col style="width:15%">
-                    <col style="width:15%">
-                    <col style="width:8%">
-                    <col style="width:11%">
-                    <col style="width:11%">
-                    <col style="width:20%">
+                    <col style="width:13%">
+                    <col style="width:13%">
+                    <col style="width:7%">
+                    <col style="width:10%">
+                    <col style="width:10%">
+                    <col style="width:13%">
+                    <col style="width:14%">
                     <col style="width:10%">
                     <col style="width:10%">
                 </colgroup>
@@ -36,6 +37,7 @@
                         <th>Năm sinh</th>
                         <th>SĐT</th>
                         <th>Ngày trải nghiệm</th>
+                        <th>Biết đến qua</th>
                         <th>Ghi chú</th>
                         <th>Trạng thái</th>
                         <th></th>
@@ -61,6 +63,20 @@
                             <td class="cell-mono">{{ $registration->phone }}</td>
                             <td class="cell-mono">{{ $registration->trial_date?->format('d/m/Y') }}</td>
                             <td>
+                                @if (!empty($registration->referral_sources))
+                                    <ul class="cell-list">
+                                        @foreach ($registration->referral_sources as $source)
+                                            <li>{{ \App\Enums\ReferralSource::from($source)->getLabel() }}</li>
+                                        @endforeach
+                                    </ul>
+                                    @if ($registration->referral_school)
+                                        <div class="cell-sub">{{ $registration->referral_school }}</div>
+                                    @endif
+                                @else
+                                    <span class="cell-empty">&mdash;</span>
+                                @endif
+                            </td>
+                            <td>
                                 @if ($registration->note)
                                     <span class="cell-truncate" title="{{ $registration->note }}">{{ $registration->note }}</span>
                                 @else
@@ -72,14 +88,16 @@
                                     {{ $registration->status->getLabel() }}
                                 </span>
                             </td>
-                            <td class="cell-actions">
-                                <a href="{{ route('admin.registration.edit', $registration) }}"
-                                    class="btn btn-secondary btn-sm">Sửa</a>
+                            <td>
+                                <div class="cell-actions">
+                                    <a href="{{ route('admin.registration.edit', $registration) }}"
+                                        class="btn btn-secondary btn-sm">Sửa</a>
+                                </div>
                             </td>
                         </tr>
                     @empty
                         <tr class="empty-row">
-                            <td colspan="8">
+                            <td colspan="9">
                                 <div class="empty-state">
                                     <div class="empty-state-icon">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M7.5 9h9M7.5 13h9M7.5 17h5"/></svg>
