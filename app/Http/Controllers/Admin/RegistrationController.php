@@ -33,7 +33,8 @@ class RegistrationController extends Controller
 
             fputcsv($handle, [
                 'Tên bé', 'Cơ sở', 'Năm sinh', 'Giới tính', 'SĐT',
-                'Ngày trải nghiệm', 'Ghi chú', 'Trạng thái', 'Ngày đăng ký',
+                'Ngày trải nghiệm', 'Biết đến CLB qua', 'Tên trường nhận tờ rơi',
+                'Ghi chú', 'Trạng thái', 'Ngày đăng ký',
             ]);
 
             foreach ($registrations as $registration) {
@@ -44,6 +45,10 @@ class RegistrationController extends Controller
                     $registration->gender?->getLabel(),
                     $registration->phone,
                     $registration->trial_date?->format('d/m/Y'),
+                    collect($registration->referral_sources ?? [])
+                        ->map(fn ($s) => \App\Enums\ReferralSource::from($s)->getLabel())
+                        ->implode(', '),
+                    $registration->referral_school,
                     $registration->note,
                     $registration->status->getLabel(),
                     $registration->created_at->format('d/m/Y H:i'),

@@ -126,6 +126,47 @@
                                 </div>
                             </div>
 
+                            <div class="form-group form-group--divider reveal reveal-d3">
+                                <span class="form-group__label">Ba mẹ biết đến CLB qua đâu?</span>
+
+                                <div class="field">
+                                    <div class="check-grid">
+                                        @foreach (\App\Enums\ReferralSource::cases() as $source)
+                                            <label class="check">
+                                                <input type="checkbox" name="referral_sources[]"
+                                                    value="{{ $source->value }}"
+                                                    {{ in_array($source->value, old('referral_sources', [])) ? 'checked' : '' }}
+                                                    @if ($source === \App\Enums\ReferralSource::SCHOOL_FLYER) data-referral-flyer-check @endif>
+                                                <span class="check__box">
+                                                    <svg class="check__tick" viewBox="0 0 16 16" fill="none"
+                                                        stroke="currentColor" stroke-width="2.3" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path d="M3.5 8.5l3 3 6-7" />
+                                                    </svg>
+                                                </span>
+                                                {{ $source->getLabel() }}
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                    @error('referral_sources')
+                                        <p class="field-error">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="field field--conditional"
+                                    data-referral-school-field="{{ \App\Enums\ReferralSource::SCHOOL_FLYER->value }}">
+                                    <div class="field--conditional-inner">
+                                        <label for="referral_school">Tên trường bé nhận tờ rơi</label>
+                                        <input type="text" id="referral_school" name="referral_school"
+                                            value="{{ old('referral_school') }}"
+                                            placeholder="VD: Trường Tiểu học Lý Tự Trọng">
+                                        @error('referral_school')
+                                            <p class="field-error">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
                             <button type="submit" class="btn btn--accent btn--block">
                                 Đăng ký ngay
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"

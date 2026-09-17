@@ -1129,7 +1129,11 @@ tbody td {
     padding: 13px 14px;
     border-bottom: 1px solid var(--border);
     font-size: 13.25px;
-    vertical-align: middle;
+    /* top, not middle: rows with variable-height content (e.g. the stacked
+       referral-source list) would otherwise center single-line cells at a
+       different offset per row, making the row divider look uneven as you
+       scan down the table. */
+    vertical-align: top;
 }
 
 tbody tr:last-child td {
@@ -1155,6 +1159,21 @@ tbody tr:hover {
     margin-top: 2px;
 }
 
+.cell-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.cell-list li {
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.4;
+}
+
 .cell-mono {
     font-family: var(--font-mono);
     font-size: 12.5px;
@@ -1172,6 +1191,11 @@ tbody tr:hover {
     color: var(--text-muted);
 }
 
+/* A wrapping <div>, not the <td> itself: display:flex on a <td> overrides
+   its table-cell display, which pulls it out of the row-height stretch
+   model, so its border-bottom lands at its own content height instead of
+   the row's real bottom (visible as a stray divider when a sibling cell
+   in the row is taller). */
 .cell-actions {
     display: flex;
     gap: 6px;

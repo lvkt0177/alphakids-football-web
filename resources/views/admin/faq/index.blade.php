@@ -42,15 +42,17 @@
                                     {{ $faq->is_active ? 'Hiển thị' : 'Tạm ẩn' }}
                                 </span>
                             </td>
-                            <td class="cell-actions">
-                                <a href="{{ route('admin.faq.edit', $faq) }}" class="btn btn-secondary btn-sm">Sửa</a>
-                                <form method="POST" action="{{ route('admin.faq.destroy', $faq) }}"
-                                    data-confirm="Bạn chắc chắn muốn xóa câu hỏi &quot;{{ $faq->question }}&quot;? Hành động này không thể hoàn tác."
-                                    data-confirm-title="Xóa câu hỏi" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                                </form>
+                            <td>
+                                <div class="cell-actions">
+                                    <a href="{{ route('admin.faq.edit', $faq) }}" class="btn btn-secondary btn-sm">Sửa</a>
+                                    <form method="POST" action="{{ route('admin.faq.destroy', $faq) }}"
+                                        data-confirm="Bạn chắc chắn muốn xóa câu hỏi &quot;{{ $faq->question }}&quot;? Hành động này không thể hoàn tác."
+                                        data-confirm-title="Xóa câu hỏi" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty

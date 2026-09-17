@@ -105,6 +105,31 @@
             @enderror
         </div>
 
+        <hr class="divider">
+
+        <div class="field">
+            <label>Ba mẹ biết đến CLB qua đâu?</label>
+            @foreach (\App\Enums\ReferralSource::cases() as $source)
+                <label class="field-check-label" style="margin-bottom:8px;">
+                    <input type="checkbox" name="referral_sources[]" value="{{ $source->value }}"
+                        {{ in_array($source->value, old('referral_sources', $registration->referral_sources ?? [])) ? 'checked' : '' }}>
+                    {{ $source->getLabel() }}
+                </label>
+            @endforeach
+            @error('referral_sources')
+                <p class="field-error">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="field">
+            <label for="referral_school">Tên trường nhận tờ rơi</label>
+            <input type="text" id="referral_school" name="referral_school"
+                value="{{ old('referral_school', $registration->referral_school) }}">
+            @error('referral_school')
+                <p class="field-error">{{ $message }}</p>
+            @enderror
+        </div>
+
         <div class="form-actions">
             <a href="{{ route('admin.registration.index') }}" class="btn btn-secondary">Hủy</a>
             <button type="submit" class="btn btn-primary">
