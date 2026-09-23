@@ -511,6 +511,19 @@
     height: 16px;
 }
 
+.site-footer__quick-note {
+    margin: 2px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, .5);
+}
+
+.site-footer__quick-note a {
+    color: rgba(255, 255, 255, .75);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
 .site-footer__bottom {
     border-top: 1px solid rgba(255, 255, 255, .12);
 }

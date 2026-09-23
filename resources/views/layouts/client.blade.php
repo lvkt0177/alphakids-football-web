@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Alpha Kids Football Club' }} - Bóng đá tư duy cho trẻ từ 3 tuổi</title>
+    @php
+        $pageTitle = $titleFull ?? (($title ?? 'Alpha Kids Football Club') . ' - Bóng đá tư duy cho trẻ từ 3 tuổi');
+    @endphp
+    <title>{{ $pageTitle }}</title>
     <meta name="description"
         content="{{ $description ?? 'Alpha Kids Football Club - CLB bóng đá tư duy dành cho trẻ từ 3 tuổi, phát triển thể chất, tư duy và nhân cách qua từng buổi tập.' }}">
     <link rel="canonical" href="{{ url()->current() }}">
@@ -14,13 +17,13 @@
     <meta property="og:site_name" content="Alpha Kids Football Club">
     <meta property="og:locale" content="vi_VN">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="{{ $title ?? 'Alpha Kids Football Club' }} - Bóng đá tư duy cho trẻ từ 3 tuổi">
+    <meta property="og:title" content="{{ $pageTitle }}">
     <meta property="og:description"
         content="{{ $description ?? 'Alpha Kids Football Club - CLB bóng đá tư duy dành cho trẻ từ 3 tuổi, phát triển thể chất, tư duy và nhân cách qua từng buổi tập.' }}">
     <meta property="og:image" content="{{ $ogImage ?? asset('images/logo/logo-website.png') }}">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $title ?? 'Alpha Kids Football Club' }} - Bóng đá tư duy cho trẻ từ 3 tuổi">
+    <meta name="twitter:title" content="{{ $pageTitle }}">
     <meta name="twitter:description"
         content="{{ $description ?? 'Alpha Kids Football Club - CLB bóng đá tư duy dành cho trẻ từ 3 tuổi, phát triển thể chất, tư duy và nhân cách qua từng buổi tập.' }}">
     <meta name="twitter:image" content="{{ $ogImage ?? asset('images/logo/logo-website.png') }}">

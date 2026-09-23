@@ -1,0 +1,221 @@
+.policy-shell {
+    padding-block: calc(70px) var(--section-gap-80);
+}
+
+@media (max-width: 768px) {
+    .policy-shell {
+        padding-block: calc(20px) var(--section-gap-mobile);
+    }
+}
+
+.policy-header {
+    margin-bottom: 48px;
+}
+
+.policy-header h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    margin-bottom: 12px;
+}
+
+.policy-header p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+.policy-layout {
+    display: grid;
+    grid-template-columns: 275px 1fr;
+    gap: 56px;
+    align-items: start;
+}
+
+.policy-toc {
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+    padding: 22px 24px;
+    background: var(--paper-alt);
+    border-radius: var(--radius-lg);
+}
+
+.policy-toc__label {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+}
+
+.policy-toc__label::before {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--accent);
+    margin-bottom: 10px;
+}
+
+.policy-toc ol {
+    list-style: decimal;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.policy-toc ol li::marker {
+    color: var(--accent-text);
+    font-weight: 700;
+}
+
+.policy-toc a {
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    transition: color var(--transition-base);
+}
+
+.policy-toc a:hover {
+    color: var(--accent-text);
+}
+
+.policy-toc a:focus-visible,
+.policy-content a:focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.policy-content {
+    /* max-width: 680px; */
+    margin-bottom: 48px;
+}
+
+.policy-updated {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--accent-soft);
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 24px;
+}
+
+.policy-updated strong {
+    color: var(--ink);
+}
+
+.policy-content h2 {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    margin-top: 44px;
+    scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+.policy-content h2:first-of-type {
+    margin-top: 0;
+}
+
+.policy-content h3 {
+    font-size: 1.05rem;
+    margin-top: 24px;
+    scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+.policy-num {
+    display: inline-flex;
+    align-items: center;
+    font-size: .62em;
+    font-weight: 800;
+    color: var(--ink);
+    background: var(--accent);
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    margin-right: 8px;
+    vertical-align: middle;
+    transform: translateY(-2px);
+}
+
+.policy-num--sub {
+    background: var(--accent-soft);
+    font-size: .68em;
+}
+
+.policy-content p {
+    font-size: 15.5px;
+    line-height: 1.75;
+}
+
+.policy-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.policy-content ul li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+}
+
+.policy-content ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-text);
+}
+
+.policy-content a {
+    color: var(--accent-text);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* Plain "label: value" contact block, no card background - matches the
+   reference privacy-policy layout the client asked to mirror. */
+.policy-contact {
+    margin: 20px 0 28px;
+    padding-top: 20px;
+    border-top: 2px solid var(--accent);
+}
+
+.policy-contact p {
+    margin: 0 0 8px;
+}
+
+.policy-contact__name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 15.5px;
+    color: var(--ink);
+    letter-spacing: .01em;
+    margin-bottom: 12px !important;
+}
+
+@media (max-width: 900px) {
+    .policy-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .policy-toc {
+        position: static;
+    }
+}

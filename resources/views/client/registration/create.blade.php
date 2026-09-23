@@ -174,6 +174,11 @@
                                     <path d="M5 12h14M13 6l6 6-6 6" />
                                 </svg>
                             </button>
+
+                            <p class="form-privacy-note">
+                                Bằng việc đăng ký, bạn đồng ý cho Alpha Kids thu thập và sử dụng thông tin theo
+                                <a href="{{ route('policy.privacy') }}">Chính sách bảo mật và bảo vệ dữ liệu cá nhân</a> của chúng tôi.
+                            </p>
                         </form>
                     </div>
 
