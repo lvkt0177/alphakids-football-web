@@ -20,13 +20,14 @@
         <div class="table-scroll">
             <table class="table--fixed">
                 <colgroup>
-                    <col style="width:13%">
-                    <col style="width:13%">
-                    <col style="width:7%">
-                    <col style="width:10%">
-                    <col style="width:10%">
-                    <col style="width:13%">
-                    <col style="width:14%">
+                    <col style="width:12%">
+                    <col style="width:12%">
+                    <col style="width:6%">
+                    <col style="width:9%">
+                    <col style="width:9%">
+                    <col style="width:12%">
+                    <col style="width:12%">
+                    <col style="width:8%">
                     <col style="width:10%">
                     <col style="width:10%">
                 </colgroup>
@@ -40,6 +41,7 @@
                         <th>Biết đến qua</th>
                         <th>Ghi chú</th>
                         <th>Trạng thái</th>
+                        <th>Thời gian đăng ký</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -88,6 +90,7 @@
                                     {{ $registration->status->getLabel() }}
                                 </span>
                             </td>
+                            <td class="cell-mono">{{ $registration->created_at?->format('d/m/Y H:i') }}</td>
                             <td>
                                 <div class="cell-actions">
                                     <a href="{{ route('admin.registration.edit', $registration) }}"
@@ -97,7 +100,7 @@
                         </tr>
                     @empty
                         <tr class="empty-row">
-                            <td colspan="9">
+                            <td colspan="10">
                                 <div class="empty-state">
                                     <div class="empty-state-icon">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M7.5 9h9M7.5 13h9M7.5 17h5"/></svg>

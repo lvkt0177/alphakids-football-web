@@ -399,3 +399,17 @@
     width: 16px;
     height: 16px;
 }
+
+.form-privacy-note {
+    margin: 14px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    text-align: center;
+}
+
+.form-privacy-note a {
+    color: var(--accent-text);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}

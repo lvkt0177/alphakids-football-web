@@ -18,6 +18,7 @@ class SitemapController extends Controller
             ['name' => 'branch.index', 'priority' => '0.7', 'changefreq' => 'monthly'],
             ['name' => 'faq', 'priority' => '0.6', 'changefreq' => 'monthly'],
             ['name' => 'registration.create', 'priority' => '0.9', 'changefreq' => 'yearly'],
+            ['name' => 'policy.privacy', 'priority' => '0.3', 'changefreq' => 'yearly'],
         ];
 
         foreach (Activity::active()->get() as $activity) {
